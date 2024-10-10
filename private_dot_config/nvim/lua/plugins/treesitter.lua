@@ -8,8 +8,13 @@ local M = {
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
-            ensure_installed = {"lua", "vim", "vimdoc", "bash", "gitignore", "json", "python", "tcl", "cpp", "c"},
-            sync_install = false,
+            ensure_installed = {
+                "lua", "luadoc", "vim", "vimdoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
+                "json", "jsonc", "markdown", "markdown_inline", "latex", "powershell", "regex", "csv",
+                "python", "tcl", "cpp", "c", "make", "cmake", "comment", "tmux",
+                "html", "javascript", "typescript", "css", "dockerfile",
+            },
+            sync_install = true,
             highlight = {
                 enable = true,
                 disable = function()
