@@ -1,13 +1,12 @@
 {{ $email := promptString "email" -}}
 
 [cd]
-{{ if eq .chezmoi.os "windows" }}
-    command = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-{{ end }}
+    {{ if eq .chezmoi.os "windows" }}command = "C:/Program Files/PowerShell/7/pwsh.exe"{{ end }}
 
 [data]
     email = {{ $email | quote }}
 
 [keepassxc]
-    database = "{{ .chezmoi.homeDir }}/Documents/Keyboards.kdbx"
-    args = ["--key-file", "{{ .chezmoi.homeDir }}/.mspaint.key"]
+    database = "{{ .chezmoi.homeDir }}/Documents/Chezmoi.kdbx"
+    args = ["--no-password", "--key-file", "{{ .chezmoi.homeDir }}/.chezmoi.keyx"]
+    prompt = false
