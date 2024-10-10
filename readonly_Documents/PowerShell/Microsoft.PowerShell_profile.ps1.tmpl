@@ -1,0 +1,61 @@
+oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
+
+Remove-Alias -Name ls
+Remove-Alias -Name cat
+
+function eza-ls { eza --icons=auto --classify=auto $args }
+function eza-ll { eza --long --header --icons=auto --classify=auto --git --smart-group $args }
+function eza-la { eza --long --all --header --icons=auto --classify=auto --git --smart-group $args }
+function eza-ltree { eza --tree --header --long --icons=auto --classify=auto --git --smart-group $args }
+function eza-tree { eza --tree --icons=auto --classify=auto $args }
+function cd-dl { cd "~/Downloads" }
+function cd-zz { cd "--" }
+function fzf-nvim { fzf --preview='bat --color=always -- {}' --bind 'enter:become(nvim {})' }
+function fzf-bat { fzf --preview='bat --color=always -- {}' --bind 'enter:become(bat -- {})' }
+function edit-nvim { nvim "${HOME}/.config/nvim" }
+function bin-bat { bat --nonprintable-notation caret --show-all $args }
+
+$env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
+
+New-Alias -Name vi -Value nvim
+New-Alias -Name nvimrc -Value edit-nvim
+New-Alias -Name fvim -Value fzf-nvim
+New-Alias -Name fbat -Value fzf-bat
+
+New-Alias -Name dl -Value cd-dl
+New-Alias -Name zz -Value cd-zz
+
+New-Alias -Name ls -Value eza-ls
+New-Alias -Name ll -Value eza-ll
+New-Alias -Name la -Value eza-la
+New-Alias -Name ltree -Value eza-ltree
+New-Alias -Name tree -Value eza-tree
+
+New-Alias -Name lg -Value lazygit.exe
+
+New-Alias -Name cat -Value bat
+New-Alias -Name binbat -Value bin-bat
+
+
+New-Alias -Name more less.exe
+$env:PAGER = 'less.exe'
+$env:EDITOR= 'nvim'
+
+Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
+Invoke-Expression (& { (chezmoi completion powershell | Out-String) })
+
+#f45873b3-b655-43a6-b217-97c00aa0db58 PowerToys CommandNotFound module
+
+Import-Module -Name Microsoft.WinGet.CommandNotFound
+#f45873b3-b655-43a6-b217-97c00aa0db58
+
+# Import the Chocolatey Profile that contains the necessary code to enable
+# tab-completions to function for `choco`.
+# Be aware that if you are missing these lines from your profile, tab completion
+# for `choco` will not function.
+# See https://ch0.co/tab-completion for details.
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
+
