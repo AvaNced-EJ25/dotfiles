@@ -6,7 +6,8 @@ alias fvim="fzf --preview='bat --color=always {}' --bind 'enter:become(nvim {})'
 alias fbat="fzf --preview='bat --color=always {}' --bind 'enter:become(bat {})'"
 
 alias sreload="exec '$SHELL'"
-alias nvimrc="$EDITOR $HOME/.config/nvim"
+alias chezrc="chezmoi edit"
+alias nvimrc="chezmoi edit $HOME/.config/nvim"
 alias zz="cd -"
 alias dl="cd ~/Downloads"
 alias fd="fdfind"
