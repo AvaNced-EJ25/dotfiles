@@ -11,7 +11,13 @@ local M = {
             ensure_installed = {"lua", "vim", "vimdoc", "bash", "gitignore", "json", "python", "tcl", "cpp", "c"},
             sync_install = false,
             highlight = {
-                enable = true
+                enable = true,
+                disable = function()
+                    -- check if 'filetype' option includes 'chezmoitmpl'
+                    if string.find(vim.bo.filetype, 'chezmoitmpl') then
+                        return true
+                    end
+                end,
             },
             indent = {
                 enable = true
