@@ -38,8 +38,8 @@ New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
 
-New-Alias -Name more less.exe
-$env:PAGER = 'less.exe'
+#New-Alias -Name more less.exe
+#$env:PAGER = 'less.exe'
 $env:EDITOR= 'nvim'
 
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
