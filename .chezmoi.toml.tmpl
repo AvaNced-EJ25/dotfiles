@@ -1,10 +1,12 @@
 {{ $email := promptString "email" -}}
+{{ $work := promptBool "Work System" }}
 
 [cd]
     {{ if eq .chezmoi.os "windows" }}command = "C:/Program Files/PowerShell/7/pwsh.exe"{{ end }}
 
 [data]
     email = {{ $email | quote }}
+    work = {{ $work }}
 
 [keepassxc]
     database = "{{ .chezmoi.homeDir }}/Documents/Chezmoi.kdbx"
