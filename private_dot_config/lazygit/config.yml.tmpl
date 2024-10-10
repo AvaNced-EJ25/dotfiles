@@ -1,0 +1,31 @@
+gui:
+  authorColors:
+    '*': '#b7bdf8'
+    '*svc*': '#cad3f5'
+    'Andrew Koman': '#7dc4e4'
+{{ if .work }}    'Matt Hunter': '#eed49f' {{ end }}
+
+  branchColors:
+    'bugfix': '#f5a97f'
+    'feature': '#ee99a0'
+    'master': '#c6a0f6'
+  nerdFontsVersion: 3
+  scrollOffMargin: 4
+  scrollOffBehavior: margin
+  expandFocusedSidePanel: true
+
+services:
+{{ if .work }}    'bitbucket.wdc.com': 'bitbucketServer:bitbucket.wdc.com'
+{{ else }}    'github.com': 'github:gitservicework.com'{{ end }}
+git:
+  paging:
+    colorArg: always
+    pager: "delta --paging=never"
+{{ if .work }}    branchPrefix: "koman/"{{ end }}
+    parseEmoji: true
+os:
+  editPreset: 'nvim'
+
+# to skip without creating a new repo
+notARepository: 'prompt'
+confirmOnQuit: true
