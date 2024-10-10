@@ -22,7 +22,7 @@ template = {{ "'{{.Weather}} ({{.Temperature}}{{.UnitIcon}})'" }}
 api_key = '{{ keepassxcAttribute "OpenWeather" "API_KEY" }}'
 location = 'Houghton,MI,US'
 units = 'imperial'
-http_timeout = 2500
+http_timeout = 100
 cache_timeout = 20
 
 [[blocks.segments]]
@@ -35,9 +35,9 @@ template = {{ "'{{ if ne .Status \"stopped\" }} {{ .Icon }}{{ .Full }}{{ end }}'
 min_width = 50
 
 [blocks.segments.properties]
-api_key = '{{ keepassxcAttribute "Last.fm" "omp_api" }}'
+api_key = '{{ keepassxcAttribute "Last.fm" "API_KEY" }}'
 username = 'K0M4N'
-http_timeout = 20_000
+http_timeout = 1000
 cache_timeout = 1
 playing_icon = ' '
 
