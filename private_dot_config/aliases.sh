@@ -6,7 +6,7 @@ alias fvim="fzf --preview='bat --color=always {}' --bind 'enter:become(nvim {})'
 alias fbat="fzf --preview='bat --color=always {}' --bind 'enter:become(bat {})'"
 
 alias sreload="exec '$SHELL'"
-alias nvimrc="$EDITOR ${HOME}/.config/nvim"
+alias nvimrc="$EDITOR $HOME/.config/nvim"
 alias zz="cd -"
 alias dl="cd ~/Downloads"
 alias fd="fdfind"
@@ -33,11 +33,12 @@ export EDITOR='nvim'
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/pink.yml"
 
 if [[ "$(tty)" == *tty* ]]; then
-    export OH_MY_POSH_CONFIG="${HOME}/.config/oh-my-posh/tty.omp.toml"
+    export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/tty.omp.toml"
 else
-    export OH_MY_POSH_CONFIG="${HOME}/.config/oh-my-posh/catppuccin.omp.toml"
+    export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/catppuccin.omp.toml"
 fi
 
 alias bathelp='bat --plain --language=help'
