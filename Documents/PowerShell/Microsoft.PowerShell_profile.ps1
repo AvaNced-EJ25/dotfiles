@@ -1,5 +1,3 @@
-oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
-
 Remove-Alias -Name ls
 Remove-Alias -Name cat
 
@@ -16,7 +14,7 @@ function edit-nvim { nvim "${HOME}/.config/nvim" }
 function bin-bat { bat --nonprintable-notation caret --show-all $args }
 
 $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
-$env:LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/pink.yml"
+$env:LG_CONFIG_FILE="$HOME\.config\lazygit\config.yml,$HOME\.config\lazygit\pink.yml"
 
 New-Alias -Name vi -Value nvim
 New-Alias -Name nvimrc -Value edit-nvim
@@ -37,13 +35,46 @@ New-Alias -Name lg -Value lazygit.exe
 New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
+New-Alias -Name chezrc -Value 'chezmoi edit'
 
 #New-Alias -Name more less.exe
 #$env:PAGER = 'less.exe'
 $env:EDITOR= 'nvim'
 
-Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
-Invoke-Expression (& { (chezmoi completion powershell | Out-String) })
+if (Get-Command oh-my-posh -errorAction SilentlyContinue) {
+    oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
+}
+
+if (Get-Command zoxide -errorAction SilentlyContinue) {
+    Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
+}
+
+if (Get-Command chezmoi -errorAction SilentlyContinue) {
+    . "$PWD\completions\chezmoi.ps1"
+}
+
+if (Get-Command pip -errorAction SilentlyContinue) {
+    if ((Test-Path Function:\TabExpansion) -and -not `
+        (Test-Path Function:\_pip_completeBackup)) {
+        Rename-Item Function:\TabExpansion _pip_completeBackup
+    }
+    function TabExpansion($line, $lastWord) {
+        $lastBlock = [regex]::Split($line, '[|;]')[-1].TrimStart()
+        if ($lastBlock.StartsWith("pip ")) {
+            $Env:COMP_WORDS=$lastBlock
+            $Env:COMP_CWORD=$lastBlock.Split().Length - 1
+            $Env:PIP_AUTO_COMPLETE=1
+            (& pip).Split()
+            Remove-Item Env:COMP_WORDS
+            Remove-Item Env:COMP_CWORD
+            Remove-Item Env:PIP_AUTO_COMPLETE
+        }
+        elseif (Test-Path Function:\_pip_completeBackup) {
+            # Fall back on existing tab expansion
+            _pip_completeBackup $line $lastWord
+        }
+    }
+}
 
 #f45873b3-b655-43a6-b217-97c00aa0db58 PowerToys CommandNotFound module
 
