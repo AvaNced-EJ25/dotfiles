@@ -9,8 +9,8 @@ import = [
 ]
 
 [shell]
-    {{ if eq .chezmoi.os "linux" }}program = "/usr/bin/env zsh"
-    {{ else if eq .chezmoi.os "windows" }}program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+    {{ if eq .chezmoi.os "linux" }}program = "/usr/bin/env"
+    args = ["zsh"]{{ else if eq .chezmoi.os "windows" }}program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
     args = ["-WorkingDirectory", "~"]{{ end }}
 
 [window]
