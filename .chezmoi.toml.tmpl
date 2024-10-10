@@ -1,5 +1,10 @@
 {{ $email := promptString "email" -}}
 
+[cd]
+{{ if eq .chezmoi.os "windows" }}
+    command = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+{{ end }}
+
 [data]
     email = {{ $email | quote }}
 
