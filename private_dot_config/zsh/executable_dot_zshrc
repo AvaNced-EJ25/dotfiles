@@ -1,5 +1,4 @@
 export ZDOTDIR="${HOME}/.config/zsh"
-export EDITOR='nvim'
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -30,9 +29,6 @@ fi
 fpath+=${ZDOTDIR:-~}/zsh_functions
 
 
-# Load aliases file
-source "${HOME}/.config/aliases.sh"
-
 # Add brew to the shell
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -40,6 +36,9 @@ test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/bre
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
+
+# Load aliases file (need brew in the path first)
+source "${HOME}/.config/aliases.sh"
 
 # Add lesspipe
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
