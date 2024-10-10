@@ -1,0 +1,12 @@
+frame = "none"
+neovim-bin = "/home/linuxbrew/.linuxbrew/bin/nvim"
+title-hidden = true
+
+[font]
+    normal = "FiraCode Nerd Font Mono Ret"
+    size = 9.0
+    edging = "antialias"
+
+[font.features]
+    "FiraCode Nerd Font Mono Ret" = [ "+cv02", "+cv05", "+cv09", "+cv14", "+ss04", "+cv16", "+cv31", "+cv25", "+cv26", "+cv32", "+cv28", "+ss10", "+zero", "+onum"]
+

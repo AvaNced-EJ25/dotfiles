@@ -1,0 +1,8 @@
+{{ $email := promptString "email" -}}
+
+[data]
+    email = {{ $email | quote }}
+
+[keepassxc]
+    database = "{{ .chezmoi.homeDir }}/Documents/Keyboards.kdbx"
+    args = ["--key-file", "{{ .chezmoi.homeDir }}/.mspaint.key"]

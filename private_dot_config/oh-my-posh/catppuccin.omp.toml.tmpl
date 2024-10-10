@@ -1,0 +1,240 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version = 2
+final_space = true
+console_title_template = {{ "'{{.HostName}} :: {{.Shell}}{{if .Root}}[root]{{end}} :: {{.PWD}}'" }}
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+overflow = 'hide'
+
+[[blocks.segments]]
+type = 'owm'
+leading_powerline_symbol = ''
+powerline_symbol = ''
+style = 'powerline'
+foreground = 'p:text'
+background = 'p:lavender'
+template = {{ "'{{.Weather}} ({{.Temperature}}{{.UnitIcon}})'" }}
+
+[blocks.segments.properties]
+api_key = '{{ keepassxcAttribute "OpenWeather" "API_KEY" }}'
+location = 'Houghton,MI,US'
+units = 'imperial'
+http_timeout = 2500
+cache_timeout = 20
+
+[[blocks.segments]]
+type = 'lastfm'
+background = 'p:red'
+foreground = 'p:text'
+powerline_symbol = ''
+style = 'powerline'
+template = {{ "'{{ if ne .Status \"stopped\" }} {{ .Icon }}{{ .Full }}{{ end }}'" }}
+min_width = 50
+
+[blocks.segments.properties]
+api_key = '{{ keepassxcAttribute "Last.fm" "omp_api" }}'
+username = 'K0M4N'
+http_timeout = 20_000
+cache_timeout = 1
+playing_icon = ' '
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+type = 'os'
+style = 'diamond'
+powerline_symbol = ''
+leading_diamond = ''
+template = {{ "'{{ if .WSL }} WSL {{ end }}{{.Icon}}'" }}
+background = 'p:blue'
+foreground = 'p:text'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[[blocks.segments]]
+type = 'session'
+style = 'powerline'
+powerline_symbol = ''
+template = {{ "' {{ .UserName }}@{{ .HostName }} [{{ .Shell }}]'" }}
+background = 'p:pink'
+foreground = 'p:text'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[[blocks.segments]]
+type = 'root'
+style = 'powerline'
+template = ' '
+powerline_symbol = ''
+foreground = 'p:text'
+background = 'p:white'
+
+[[blocks.segments]]
+type = 'battery'
+style = 'powerline'
+powerline_symbol = ''
+foreground = 'p:text'
+background = 'p:bg'
+background_templates = [
+  {{ "'{{if eq \"Charging\" .State.String}}p:mauve{{end}}'," }}
+  {{ "'{{if eq \"Discharging\" .State.String}}p:peach{{end}}'," }}
+  {{ "'{{if eq \"Full\" .State.String}}p:green{{end}}'" }}
+]
+template = {{ "' {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}'" }}
+
+[blocks.segments.properties]
+discharging_icon = '󰂍 '
+charging_icon = '󰢟 '
+charged_icon = '󰂅 '
+
+[[blocks.segments]]
+type = 'path'
+style = 'powerline'
+powerline_symbol = ''
+template = {{ "' {{ .Path }}'" }}
+background = 'p:blue'
+foreground = 'p:text'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[blocks.segments.properties]
+folder_icon = '....'
+home_icon = '~'
+style = 'agnoster_short'
+
+[[blocks.segments]]
+type = 'git'
+style = 'powerline'
+powerline_symbol = ''
+background_templates = [
+  {{ "'{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}'," }}
+  {{ "'{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:peach{{ end }}'," }}
+  {{ "'{{ if gt .Ahead 0 }}p:mauve{{ end }}'," }}
+  {{ "'{{ if gt .Behind 0 }}p:mauve{{ end }}'" }}
+]
+template = {{ "' {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}'" }}
+background = 'p:lavender'
+foreground = 'p:text'
+Text = ''
+Duration = 0
+NameLength = 0
+min_width = 100
+
+[blocks.segments.properties]
+source = 'cli'
+branch_icon = ' '
+branch_max_length = 35
+truncate_symbol = '󰇘'
+cherry_pick_icon = ' '
+commit_icon = ' '
+fetch_status = true
+fetch_upstream_icon = true
+merge_icon = ' '
+no_commits_icon = ' '
+rebase_icon = ' '
+revert_icon = ' '
+tag_icon = ' '
+
+[[blocks]]
+type = 'prompt'
+alignment = 'right'
+overflow = 'hide'
+
+[[blocks.segments]]
+type = 'status'
+style = 'plain'
+foreground_templates = {{ "['{{ if gt .Code 0 }}p:red{{ end }}']" }}
+template = {{ "' x{{ reason .Code }}'" }}
+alias = 'Err'
+background = ''
+foreground = 'p:green'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[[blocks.segments]]
+type = 'executiontime'
+style = 'diamond'
+leading_diamond = ' '
+background_templates = {{ "['{{ if gt .Code 0 }}p:red{{ end }}']" }}
+template = {{ "' {{ .FormattedMs }} '" }}
+background = 'p:green'
+foreground = 'p:text'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[blocks.segments.properties]
+always_enabled = true
+style = 'roundrock'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+type = 'text'
+style = 'plain'
+template = ':3 󱢇'
+background = ''
+foreground = 'p:green'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[[blocks]]
+type = 'rprompt'
+alignment = 'right'
+overflow = 'hide'
+
+
+[[blocks.segments]]
+type = 'python'
+style = 'diamond'
+leading_diamond = ''
+foreground = 'p:text'
+background = 'p:yellow'
+template = {{ "'  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} '" }}
+
+[blocks.segments.properties]
+fetch_virtual_env = true
+
+
+[transient_prompt]
+template = ':3 󱢇'
+background = 'transparent'
+foreground = 'p:pink'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[secondary_prompt]
+template = ':3  '
+background = 'transparent'
+foreground = 'p:blue'
+Text = ''
+Duration = 0
+NameLength = 0
+
+[palette]
+bg = '#24273A'
+blue = '#8AADF4'
+green = '#A6DA95'
+yellow = '#eed49f'
+mauve = '#c6a0f6'
+peach = '#f5a97f'
+lavender = '#B7BDF8'
+pink = '#F5BDE6'
+red = '#ED8796'
+text = '#494D64'
+white= '#FFFFFF'
