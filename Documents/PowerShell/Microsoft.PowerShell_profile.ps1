@@ -12,6 +12,7 @@ function fzf-nvim { fzf --preview='bat --color=always -- {}' --bind 'enter:becom
 function fzf-bat { fzf --preview='bat --color=always -- {}' --bind 'enter:become(bat -- {})' }
 function edit-nvim { nvim "${HOME}/.config/nvim" }
 function bin-bat { bat --nonprintable-notation caret --show-all $args }
+function chez-edit { chezmoi edit }
 
 $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
 $env:LG_CONFIG_FILE="$HOME\.config\lazygit\config.yml,$HOME\.config\lazygit\pink.yml"
@@ -35,7 +36,7 @@ New-Alias -Name lg -Value lazygit.exe
 New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
-New-Alias -Name chezrc -Value 'chezmoi edit'
+New-Alias -Name chezrc -Value chez-edit
 
 #New-Alias -Name more less.exe
 #$env:PAGER = 'less.exe'
@@ -50,7 +51,7 @@ if (Get-Command zoxide -errorAction SilentlyContinue) {
 }
 
 if (Get-Command chezmoi -errorAction SilentlyContinue) {
-    . "$PWD\completions\chezmoi.ps1"
+    . "$PSScriptRoot\completions\chezmoi.ps1"
 }
 
 if (Get-Command pip -errorAction SilentlyContinue) {
