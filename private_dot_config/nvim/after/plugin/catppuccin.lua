@@ -17,6 +17,10 @@ require("catppuccin").setup({
             scope_color = "sapphire",
             colored_indent_levels = true,
         },
+        dropbar = {
+            enabled = true,
+            color_mode = true,
+        },
     },
 })
 
