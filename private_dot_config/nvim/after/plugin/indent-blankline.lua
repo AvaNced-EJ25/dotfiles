@@ -68,6 +68,10 @@ require("ibl").setup({
     scope = {
         enabled = true,
     },
+    exclude = {
+        filetypes = { 'lspinfo', 'checkhealth', 'help', 'man', 'gitcommit', 'TelescopePrompt', 'TelescopeResults', '', },
+        buftypes = { 'terminal', 'nofile', 'quickfix', 'prompt', '' },
+    }
 })
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
