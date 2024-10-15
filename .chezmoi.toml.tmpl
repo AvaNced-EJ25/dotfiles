@@ -1,6 +1,8 @@
 {{ $email := promptString "email" -}}
 {{ $work := promptBool "Work System" }}
 
+sourceDir = "~/.dotfiles"
+
 [cd]
     {{ if eq .chezmoi.os "windows" }}command = "C:/Program Files/PowerShell/7/pwsh.exe"{{ end }}
 
