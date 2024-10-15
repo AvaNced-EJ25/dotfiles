@@ -47,6 +47,7 @@ $env:EDITOR= 'nvim'
 
 if (Get-Command oh-my-posh -errorAction SilentlyContinue) {
     oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
+    oh-my-posh completion powershell | Invoke-Expression
 }
 
 if (Get-Command zoxide -errorAction SilentlyContinue) {

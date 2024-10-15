@@ -43,11 +43,6 @@ source "${HOME}/.config/aliases.sh"
 # Add lesspipe
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Add oh-my-posh
-if type oh-my-posh &>/dev/null; then
-    eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
-fi
-
 # Add zoxide on cd
 if type zoxide &>/dev/null; then
     eval "$(zoxide init zsh --cmd cd)"
@@ -110,6 +105,12 @@ if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+# Add oh-my-posh
+if type oh-my-posh &>/dev/null; then
+    eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
+    eval "$(oh-my-posh completion zsh)"
 fi
 
 if type npm &>/dev/null; then
