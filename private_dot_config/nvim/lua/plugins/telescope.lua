@@ -20,7 +20,7 @@ return {
                         ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
                     }
                 }
-            }
+            },
         })
 
         telescope.load_extension('fzf');
@@ -35,6 +35,7 @@ return {
         keymap.set('n', '<leader>fh', builtin.help_tags, {desc = "Find help" })
         keymap.set('n', '<leader>fc', builtin.grep_string, {desc = "Find string under cursor in cwd" })
         keymap.set('n', '<leader>fg', builtin.git_files, {desc = "Find git files" })
-        -- keymap.set('n', '<leader>ft', '<cmd>TodoTelescope<cr>', {desc = "Find todos"})
+        keymap.set('n', '<leader>fm', builtin.marks, {desc = "Find marks" })
+        keymap.set('n', '<leader>fl', builtin.man_pages, {desc = "Find man pages" })
     end
 }
