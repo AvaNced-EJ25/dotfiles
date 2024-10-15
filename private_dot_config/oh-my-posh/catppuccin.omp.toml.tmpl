@@ -22,7 +22,7 @@ template = {{ "'{{.Weather}} ({{.Temperature}}{{.UnitIcon}})'" }}
 api_key = '{{ keepassxcAttribute "OpenWeather" "API_KEY" }}'
 location = 'Houghton,MI,US'
 units = 'imperial'
-http_timeout = 100
+http_timeout = 1000
 cache_timeout = 20
 
 [[blocks.segments]]
