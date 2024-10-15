@@ -9,6 +9,7 @@
             "bottom": 40
         }
     },
+    "max_label_width": 300,
     "font_family": "FiraCode Nerd Font Propo",
     "theme": {
         "palette": "Catppuccin",
@@ -20,7 +21,7 @@
             "Komorebi": {
                 "workspaces": {
                     "enable": true,
-                    "hide_empty_workspaces": false
+                    "hide_empty_workspaces": true
                 },
                 "layout": {
                     "enable": true
@@ -41,7 +42,7 @@
         {
             "Storage": {
                 "enable": true,
-                "data_refresh_interval": 60
+                "data_refresh_interval": 600
             }
         },
         {
