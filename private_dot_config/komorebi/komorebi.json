@@ -6,6 +6,7 @@
     "default_workspace_padding": 1,
     "default_container_padding": 1,
     "border": true,
+    "border_implementation": "Komorebi",
     "border_width": 8,
     "border_offset": -1,
     "animation": {
@@ -16,11 +17,11 @@
     "theme": {
         "palette": "Catppuccin",
         "name": "Macchiato",
-        "stack_border": "Lavender",
+        "stack_border": "Sky",
         "unfocused_border": "Surface0",
         "single_border": "Pink",
         "monocle_border": "Maroon",
-        "stackbar_focused_text": "Lavender"
+        "stackbar_focused_text": "Sky"
     },
     "stackbar": {
         "label": "Title",
