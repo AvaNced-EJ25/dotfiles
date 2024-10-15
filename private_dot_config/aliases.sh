@@ -1,9 +1,9 @@
 # Consistent across bash and zsh
 # Exports
 if type nvim &>/dev/null; then
-	export EDITOR='nvim'
+    export EDITOR='nvim'
 else
-	export EDITOR='vim'
+    export EDITOR='vim'
 fi
 
 # colored GCC warnings and errors
