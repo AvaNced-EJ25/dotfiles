@@ -10,7 +10,6 @@ function cd-dl { cd "~/Downloads" }
 function cd-zz { cd "--" }
 function fzf-nvim { fzf --preview='bat --color=always -- {}' --bind 'enter:become(nvim {})' }
 function fzf-bat { fzf --preview='bat --color=always -- {}' --bind 'enter:become(bat -- {})' }
-function edit-nvim { nvim "${HOME}/.config/nvim" }
 function bin-bat { bat --nonprintable-notation caret --show-all $args }
 function dot-rc {
     nvim "$HOME\.dotfiles"
@@ -21,7 +20,6 @@ $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796
 $env:LG_CONFIG_FILE="$HOME\.config\lazygit\config.yml,$HOME\.config\lazygit\pink.yml"
 
 New-Alias -Name vi -Value nvim
-New-Alias -Name nvimrc -Value edit-nvim
 New-Alias -Name fvim -Value fzf-nvim
 New-Alias -Name fbat -Value fzf-bat
 
@@ -47,7 +45,7 @@ $env:EDITOR= 'nvim'
 
 if (Get-Command oh-my-posh -errorAction SilentlyContinue) {
     oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
-    oh-my-posh completion powershell | Invoke-Expression
+    . "$PSScriptRoot\completions\omp.ps1"
 }
 
 if (Get-Command zoxide -errorAction SilentlyContinue) {
