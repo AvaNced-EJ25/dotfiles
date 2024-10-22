@@ -22,7 +22,7 @@ return {
                     {
                         desc = ' dotfiles',
                         group = 'Number',
-                        action = 'Telescope find_files cwd=' .. os.getenv('HOME') .. '/.dotfiles',
+                        action = 'cd ' .. os.getenv('HOME') .. '/.dotfiles | Telescope find_files' ,
                         key = 'd',
                     },
                 },
