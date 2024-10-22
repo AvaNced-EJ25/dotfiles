@@ -11,7 +11,7 @@ local M = {
             ensure_installed = {
                 "lua", "luadoc", "vim", "vimdoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
                 "json", "jsonc", "markdown", "markdown_inline", "latex", "powershell", "regex", "csv",
-                "python", "tcl", "cpp", "c", "make", "cmake", "comment", "tmux",
+                "python", "tcl", "cpp", "c", "make", "cmake", "ninja", "comment", "tmux",
                 "html", "javascript", "typescript", "css", "dockerfile",
             },
             sync_install = true,
