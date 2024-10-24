@@ -16,7 +16,7 @@ else
     export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/catppuccin.omp.toml"
 fi
 
-# Aliases 
+# Aliases
 alias vi="$EDITOR"
 alias n="coproc neovide"
 alias fn="fzf --preview='bat -color=always {}' --bind 'enter:become(neovide {} &)'"
