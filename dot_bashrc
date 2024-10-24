@@ -160,10 +160,6 @@ if [ -d "$HOME/.nvm" ]; then
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
-if type npm &>/dev/null; then
-    eval "$(npm completion)"
-fi
-
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
 fi

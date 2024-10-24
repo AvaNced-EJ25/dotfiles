@@ -51,6 +51,7 @@ fi
 # Plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
+zinit light lukechilds/zsh-better-npm-completion
 
 # Keybinds
 # bindkey '^p' history-search-backward
@@ -111,10 +112,6 @@ fi
 if type oh-my-posh &>/dev/null; then
     eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
     eval "$(oh-my-posh completion zsh)"
-fi
-
-if type npm &>/dev/null; then
-    eval "$(npm completion)"
 fi
 
 if [ -d "$HOME/.pyenv" ]; then
