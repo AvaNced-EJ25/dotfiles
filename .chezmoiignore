@@ -1,0 +1,9 @@
+README.md
+
+{{- if eq .chezmoi.os "windows" }}
+**/*.sh
+**/*.zsh
+{{- else }}
+Documents
+**/*.ps1
+{{ end }}
