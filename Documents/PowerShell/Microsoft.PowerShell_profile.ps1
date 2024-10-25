@@ -16,6 +16,11 @@ function dot-rc {
     chezmoi apply
 }
 
+# Add ~/.local/bin to PATH if it exists
+if ( Test-Path "$env:HOME\.local\bin" ) {
+    $env:PATH += "$env:HOME\.local\bin;"
+}
+
 $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
 $env:LG_CONFIG_FILE="$HOME\.config\lazygit\config.yml,$HOME\.config\lazygit\pink.yml"
 
