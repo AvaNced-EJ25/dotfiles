@@ -18,6 +18,15 @@ if ( -not $admin ) {
     Write-Host "Updating Scoop packages..."
     scoop update
     Write-Host "Done."
+
+    try {
+        where.exe chezmoi.exe | Out-Null
+
+        Write-Host "Updating Chezmoi..."
+        chezmoi update
+        Write-Host "Done."
+    } catch {}
+
 }
 
 # Run Admin Stuff
