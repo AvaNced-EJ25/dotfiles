@@ -52,7 +52,7 @@ fi
 
 if type snap > /dev/null 2>&1; then
     kprintf 'Updating snap applications...'
-    snap refresh -y || sudo snap refresh -y
+    snap refresh || sudo snap refresh
 fi
 
 if type spicetify > /dev/null 2>&1; then
