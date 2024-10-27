@@ -55,6 +55,12 @@ if type snap > /dev/null 2>&1; then
     snap refresh -y || sudo snap refresh -y
 fi
 
+if type spicetify > /dev/null 2>&1; then
+    kprintf 'Updating Spicetify...'
+    spicetify update
+    kprintf 'Done.'
+fi
+
 if type brew > /dev/null 2>&1; then
     kprintf 'Updating brew bottles...'
     brew update

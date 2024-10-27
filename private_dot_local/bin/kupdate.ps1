@@ -27,6 +27,13 @@ if ( -not $admin ) {
         Write-Host "Done."
     } catch {}
 
+    try {
+        where.exe spicetify.exe | Out-Null
+
+        Write-Host "Updating spicetify..."
+        spicetify update
+        Write-Host "Done."
+    } catch {}
 }
 
 # Run Admin Stuff
@@ -85,6 +92,11 @@ try {
     Write-Host "Updating chocolatey packages..."
     winget upgrade --all
     Write-Host "Done."
+} catch {}
+
+try {
+    # Spotify may have been updated, so apply if needed
+    spicetify backup apply
 } catch {}
 
 return
