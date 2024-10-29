@@ -30,6 +30,10 @@ if type oh-my-posh > /dev/null 2>&1; then
 fi
 
 if type chezmoi > /dev/null 2>&1; then
+    kprintf 'Ugrading chezmoi...'
+    chezmoi upgrade
+    kprintf 'Done.'
+
     kprintf 'Updating dotfiles...'
     chezmoi update
     kprintf 'Done.'
