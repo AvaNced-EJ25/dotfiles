@@ -2,10 +2,11 @@ frame = "none"
 # TODO: Make this a template for windows
 neovim-bin = "/usr/bin/env nvim"
 title-hidden = true
+fork = true
 
 [font]
-    normal = "FiraCode Nerd Font Mono Ret"
-    size = 9.0
+    normal = "FiraCode Nerd Font Mono"
+    size = 10.0
     edging = "antialias"
 
 [font.features]
