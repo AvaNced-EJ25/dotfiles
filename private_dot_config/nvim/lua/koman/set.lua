@@ -50,6 +50,10 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animation_length = 0.13
     vim.g.neovide_cursor_trail_size = 0.5
     vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_padding_top=8
+    vim.g.neovide_padding_left=8
+    vim.g.neovide_padding_right=8
+    vim.g.neovide_padding_bottom=8
 end
 
 
