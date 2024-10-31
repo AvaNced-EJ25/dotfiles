@@ -107,8 +107,7 @@ fi
 [ -d ~/.linuxbrew ] && eval "$(~/.linuxbrew/bin/brew shellenv)"
 [ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
     HOMEBREW_PREFIX="$(brew --prefix)"
     if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
     then
