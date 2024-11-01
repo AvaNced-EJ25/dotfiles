@@ -1,4 +1,5 @@
-local python_path = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
+local python3_path = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
+local python2_path = os.getenv("HOME") .. "/.pyenv/versions/neovim2/bin/python"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -63,8 +64,12 @@ elseif os.name() == "Windows" then
     vim.opt.rtp:append("C:\\ProgramData\\chocolatey\\bin\\fzf.exe")
 end
 
-if file_exists(python_path) then
-    vim.g.python3_host_prog = python_path
+if file_exists(python3_path) then
+    vim.g.python3_host_prog = python3_path
+end
+
+if file_exists(python2_path) then
+    vim.g.python_host_prog = python2_path
 end
 
 vim.opt.titlelen = 70
