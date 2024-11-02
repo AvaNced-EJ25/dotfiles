@@ -1,6 +1,8 @@
 -- Keymaps
 local map = vim.keymap
-require("nvim-dap-virtual-text").setup({})
+require("nvim-dap-virtual-text").setup({
+    virt_text_pos = 'eol',
+})
 
 map.set('n', '<F5>', function() require('dap').continue() end, {desc="[DAP] Continue"})
 map.set('n', '<F10>', function() require('dap').step_over() end, {desc="[DAP] Step Over"})
