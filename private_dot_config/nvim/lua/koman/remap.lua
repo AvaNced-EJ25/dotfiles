@@ -11,19 +11,17 @@ local function vim_opt_toggle(opt, on, off, name)
 end
 
 local tree_api = require("nvim-tree.api")
--- local tele_api = require("telescope.builtin")
+local keymap = vim.keymap
 
-vim.keymap.set('n', '<leader>nh', '<cmd>:noh<cr>', {desc = 'No Highlight Search'})
+keymap.set('n', '<leader>nh', '<cmd>:noh<cr>', {desc = 'No Highlight Search'})
 
-vim.keymap.set('n', '<leader>sc', function() vim_opt_toggle("cursorcolumn", true, false, "Cursor Column")end, {desc = 'Toggle Cursor Column'})
--- vim.keymap.set('n', '<leader>sv', '<cmd>:vsplit<cr><c-w>l', {desc = 'Vertical Split'})
--- vim.keymap.set('n', '<leader>sx', '<cmd>:split<cr><c-w>j', {desc = 'Horizontal Split'})
+keymap.set('n', '<leader>sc', function() vim_opt_toggle("cursorcolumn", true, false, "Cursor Column")end, {desc = 'Toggle Cursor Column'})
 
-vim.keymap.set('n', '<leader>wd', '<cmd>:w !diff % - <cr>', {desc = 'View File Diff'})
-vim.keymap.set('n', '<leader>ww', "<cmd>w<cr>", { silent = true})
-vim.keymap.set('n', '<leader>wq', "<cmd>wq<cr>", { silent = true})
+keymap.set('n', '<leader>wd', '<cmd>:w !diff % - <cr>', {desc = 'View File Diff'})
+keymap.set('n', '<leader>ww', "<cmd>w<cr>", { silent = true})
+keymap.set('n', '<leader>wq', "<cmd>wq<cr>", { silent = true})
 
-vim.keymap.set('n', '<leader>qq', "<cmd>q<cr>", {desc = "Quit Buffer"})
-vim.keymap.set('n', '<leader>qa', "<cmd>qall<cr>", {desc = "Quit All Buffers"})
+keymap.set('n', '<leader>qq', "<cmd>q<cr>", {desc = "Quit Buffer"})
+keymap.set('n', '<leader>qa', "<cmd>qall<cr>", {desc = "Quit All Buffers"})
 
-vim.keymap.set('n', '<leader>fe', tree_api.tree.toggle, {desc = 'Toggle Nvim Tree'})
+keymap.set('n', '<leader>fe', tree_api.tree.toggle, {desc = 'Toggle Nvim Tree'})
