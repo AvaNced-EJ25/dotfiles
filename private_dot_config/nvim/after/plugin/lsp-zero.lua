@@ -1,29 +1,27 @@
-local lsp_zero = require('lsp-zero')
+local keymap = vim.keymap
 
 -- note: diagnostics are not exclusive to lsp servers
 -- so these can be global keybindings
-vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>') 
+keymap.set('n', 'gl', function () vim.diagnostic.open_float() end, { desc = 'Open Float Diagnostic'})
+keymap.set('n', '[d', function () vim.diagnostic.jump({count=1, float=true}) end, { desc = 'Go to Next Diagnostic'})
+keymap.set('n', ']d', function () vim.diagnostic.jump({count=-1, float=true}) end, { desc = 'Go to Previous Diagnostic'})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
     callback = function(event)
-        local opts = {buffer = event.buf}
-
         -- these will be buffer-local keybindings
         -- because they only work if you have an active language server
 
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-        vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-        vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-        vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+        vim.keymap.set('n', 'K', function () vim.lsp.buf.hover() end, { buffer = event.buf, desc = 'Lsp Hover' })
+        vim.keymap.set('n', 'gd', function () vim.lsp.buf.definition() end, { buffer = event.buf, desc = 'Lsp go to Definition' })
+        vim.keymap.set('n', 'gD', function () vim.lsp.buf.declaration() end, { buffer = event.buf, desc = 'Lsp go to Declaration' })
+        vim.keymap.set('n', 'gi', function () vim.lsp.buf.implementation() end, { buffer = event.buf, desc = 'Lsp go to Implementation' })
+        vim.keymap.set('n', 'go', function () vim.lsp.buf.type_definition() end, { buffer = event.buf, desc = 'Lsp go to Type Definition' })
+        vim.keymap.set('n', 'gr', function () vim.lsp.buf.references() end, { buffer = event.buf, desc = 'Lsp References' })
+        vim.keymap.set('n', 'gs', function () vim.lsp.buf.signature_help() end, { buffer = event.buf, desc = 'Lsp Signature Help' })
+        vim.keymap.set('n', '<F2>', function () vim.lsp.buf.rename() end, { buffer = event.buf, desc = 'Lsp Rename' })
+        vim.keymap.set({'n', 'x'}, '<F3>', function () vim.lsp.buf.format({async = true}) end, { buffer = event.buf, desc = 'Lsp Format' })
+        vim.keymap.set('n', '<F4>', function () vim.lsp.buf.code_action() end, { buffer = event.buf, desc = 'Lsp Code Action' })
     end
 })
 
@@ -31,66 +29,73 @@ require('lsp-notify').setup({
     notify = require('notify'),
 })
 
---- if you want to know more about lsp-zero and mason.nvim
+--- if you want to know more about mason.nvim
 --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
 require('mason').setup({
     pip = {
         upgrade_pip = true,
     }
 })
-require('mason-lspconfig').setup({
-    handlers = {
-        function(server_name)
-            -- print("Install LSP: " .. server_name)
-            require('lspconfig')[server_name].setup({})
-        end,
-    },
-})
-
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local noop = function() end
 
-local lspconfig = require('lspconfig')
+-- Enable language servers with the additional completion capabilities offered by nvim-cmp
+require('mason-lspconfig').setup({
+    handlers = {
+        function(server_name)
+            -- print("Auto Install LSP: " .. server_name)
+            require('lspconfig')[server_name].setup({ capabilities = capabilities })
+        end,
+        ['clangd'] = function()
+            require('lspconfig')['clangd'].setup({
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "-j=12",
+                    "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
+                    "--clang-tidy",
+                    "--clang-tidy-checks=*",
+                    "--all-scopes-completion",
+                    "--cross-file-rename",
+                    "--completion-style=detailed",
+                    "--header-insertion-decorators",
+                    "--header-insertion=iwyu",
+                    "--pch-storage=memory",
+                }
+            })
+        end,
+        ['bashls'] = function()
+            require("lspconfig")['bashls'].setup({
+                capabilities = capabilities,
+                filetypes = {
+                    "sh",
+                    "zsh",
+                },
+                settings = {
+                    bashIde = {
+                        globPattern = "*@(.sh|.inc|.bash|.command)"
+                    }
+                }
+            })
 
--- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'rust_analyzer', 'pyright', }
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        -- on_attach = my_custom_on_attach,
-        capabilities = capabilities,
-    }
-end
-
-lspconfig['clangd'].setup({
-    capabilities = capabilities,
-    cmd = {
-        "clangd",
-        "--background-index",
-        "-j=12",
-        "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
-        "--clang-tidy",
-        "--clang-tidy-checks=*",
-        "--all-scopes-completion",
-        "--cross-file-rename",
-        "--completion-style=detailed",
-        "--header-insertion-decorators",
-        "--header-insertion=iwyu",
-        "--pch-storage=memory",
-    }
-})
-
-lspconfig['bashls'].setup({
-    capabilities = capabilities,
-    filetypes = {
-        "sh",
-        "zsh",
+        end,
+        ['lua_ls'] = function ()
+            local lspconfig = require("lspconfig")
+            lspconfig.lua_ls.setup {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" }
+                        }
+                    }
+                }
+            }
+        end,
+        ['harper_ls'] = noop,
     },
-    settings = {
-        bashIde = {
-            globPattern = "*@(.sh|.inc|.bash|.command)"
-        }
-    }
 })
 
 local luasnip = require('luasnip')
