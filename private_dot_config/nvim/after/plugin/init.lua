@@ -16,3 +16,6 @@ vim.g.lazygit_config_file_path = {
     (os.getenv("HOME") .. "/.config/lazygit/config.yml"),
     (os.getenv("HOME") .. "/.config/lazygit/pink.yml"),
 }
+
+vim.notify = require('notify')
+

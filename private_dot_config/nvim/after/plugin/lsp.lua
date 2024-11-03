@@ -12,22 +12,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- these will be buffer-local keybindings
         -- because they only work if you have an active language server
 
-        vim.keymap.set('n', 'K', function () vim.lsp.buf.hover() end, { buffer = event.buf, desc = 'Lsp Hover' })
-        vim.keymap.set('n', 'gd', function () vim.lsp.buf.definition() end, { buffer = event.buf, desc = 'Lsp go to Definition' })
-        vim.keymap.set('n', 'gD', function () vim.lsp.buf.declaration() end, { buffer = event.buf, desc = 'Lsp go to Declaration' })
-        vim.keymap.set('n', 'gi', function () vim.lsp.buf.implementation() end, { buffer = event.buf, desc = 'Lsp go to Implementation' })
-        vim.keymap.set('n', 'go', function () vim.lsp.buf.type_definition() end, { buffer = event.buf, desc = 'Lsp go to Type Definition' })
-        vim.keymap.set('n', 'gr', function () vim.lsp.buf.references() end, { buffer = event.buf, desc = 'Lsp References' })
-        vim.keymap.set('n', 'gs', function () vim.lsp.buf.signature_help() end, { buffer = event.buf, desc = 'Lsp Signature Help' })
-        vim.keymap.set('n', '<F2>', function () vim.lsp.buf.rename() end, { buffer = event.buf, desc = 'Lsp Rename' })
-        vim.keymap.set({'n', 'x'}, '<F3>', function () vim.lsp.buf.format({async = true}) end, { buffer = event.buf, desc = 'Lsp Format' })
-        vim.keymap.set('n', '<F4>', function () vim.lsp.buf.code_action() end, { buffer = event.buf, desc = 'Lsp Code Action' })
+        keymap.set('n', 'K', function () vim.lsp.buf.hover() end, { buffer = event.buf, desc = 'Lsp Hover' })
+        keymap.set('n', 'gd', function () vim.lsp.buf.definition() end, { buffer = event.buf, desc = 'Lsp go to Definition' })
+        keymap.set('n', 'gD', function () vim.lsp.buf.declaration() end, { buffer = event.buf, desc = 'Lsp go to Declaration' })
+        keymap.set('n', 'gi', function () vim.lsp.buf.implementation() end, { buffer = event.buf, desc = 'Lsp go to Implementation' })
+        keymap.set('n', 'go', function () vim.lsp.buf.type_definition() end, { buffer = event.buf, desc = 'Lsp go to Type Definition' })
+        keymap.set('n', 'gr', function () vim.lsp.buf.references() end, { buffer = event.buf, desc = 'Lsp References' })
+        keymap.set('n', 'gs', function () vim.lsp.buf.signature_help() end, { buffer = event.buf, desc = 'Lsp Signature Help' })
+        keymap.set('n', '<F2>', function () vim.lsp.buf.rename() end, { buffer = event.buf, desc = 'Lsp Rename' })
+        keymap.set({'n', 'x'}, '<F3>', function () vim.lsp.buf.format({async = true}) end, { buffer = event.buf, desc = 'Lsp Format' })
+        keymap.set('n', '<F4>', function () vim.lsp.buf.code_action() end, { buffer = event.buf, desc = 'Lsp Code Action' })
     end
 })
 
-require('lsp-notify').setup({
-    notify = require('notify'),
-})
+keymap.set('n', '<leader>fn', function () require("telescope").extensions.notify.notify() end, { desc = "Find notifications" })
+
+require('lsp-notify').setup({})
 
 --- if you want to know more about mason.nvim
 --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
@@ -94,9 +94,13 @@ require('mason-lspconfig').setup({
                 }
             }
         end,
-        ['harper_ls'] = noop,
+        ['harper_ls'] = function ()
+            require('lspconfig')['harper_ls'].setup({ capabilities = capabilities, autostart = false })
+        end,
     },
 })
+
+
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')
