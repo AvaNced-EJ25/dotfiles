@@ -1,6 +1,8 @@
 #Requires AutoHotkey v2.0.2
 #SingleInstance Force
 
+home_dir := EnvGet("HOME")
+
 #Include "./custom.ahk"
 
 Komorebic(cmd) {
@@ -17,9 +19,9 @@ RunActivate(cmd) {
 }
 
 
-!t::RunActivate("{{ .chezmoi.homeDir }}/.cargo/bin/alacritty.exe")
+!t::RunActivate(home_dir . "/.cargo/bin/alacritty.exe")
 #+!t:: {
-    Run("*RunAs {{ .chezmoi.homeDir }}/.cargo/bin/alacritty.exe", , , &wpid)
+    Run("*RunAs " . home_dir . "/.cargo/bin/alacritty.exe", , , &wpid)
     WinWaitActive("ahk_pid" wpid,,1)
     if !(WinActive("ahk_pid" wpid)) {
         WinActivate("ahk_pid" wpid)
@@ -27,7 +29,7 @@ RunActivate(cmd) {
     return
 }
 
-#t::RunActivate("{{ .chezmoi.homeDir }}/.cargo/bin/alacritty.exe -e ubuntu.exe")
+#t::RunActivate(home_dir . "/.cargo/bin/alacritty.exe -e ubuntu.exe")
 
 !+o::Komorebic("reload-configuration")
 
