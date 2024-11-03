@@ -89,7 +89,7 @@ try {
 
 try {
     where.exe winget.exe | Out-Null
-    Write-Host "Updating chocolatey packages..."
+    Write-Host "Updating winget packages..."
     winget upgrade --all
     Write-Host "Done."
 } catch {}
