@@ -45,7 +45,7 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
 alias makej="make -j $(nproc)"
-
+alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
 
 alias bathelp='bat --plain --language=help'
 help() {
