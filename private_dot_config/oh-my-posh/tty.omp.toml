@@ -1,115 +1,83 @@
-#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
-version = 2
+version = 3
 final_space = true
 
-[[blocks]]
-type = 'prompt'
-alignment = 'left'
-
-[[blocks.segments]]
-type = 'session'
-style = 'plain'
-powerline_symbol = ''
-template = '{{ .UserName }}@{{ .HostName }} [{{ .Shell }}]'
-background = ''
-foreground = 'p:text'
-Text = ''
-Duration = 0
-NameLength = 0
-
-[[blocks.segments]]
-type = 'path'
-style = 'plain'
-template = ' {{ .Path }}'
-background = ''
-foreground = 'p:text'
-Text = ''
-Duration = 0
-NameLength = 0
-
-[blocks.segments.properties]
-home_icon = '~'
-style = 'agnoster_short'
-
-[[blocks.segments]]
-type = 'git'
-style = 'plain'
-template = ' {{ .HEAD }}'
-background = ''
-foreground = 'p:text'
-Text = ''
-Duration = 0
-NameLength = 0
-
-[blocks.segments.properties]
-branch_max-length = 25.0
-fetch_status = true
-
-[[blocks]]
-type = 'prompt'
-alignment = 'right'
-overflow = 'hide'
-
-[[blocks.segments]]
-type = 'status'
-style = 'plain'
-foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
-template = ' x{{ reason .Code }}'
-alias = 'Err'
-background = ''
-foreground = 'p:green'
-Text = ''
-Duration = 0
-NameLength = 0
-
-[[blocks.segments]]
-type = 'executiontime'
-style = 'plain'
-foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
-template = ' {{ .FormattedMs }} '
-background = ''
-foreground = 'p:green'
-Text = ''
-Duration = 0
-NameLength = 0
-
-[blocks.segments.properties]
-always_enabled = true
-style = 'roundrock'
-
-[[blocks]]
-type = 'prompt'
-alignment = 'left'
-newline = true
-
-[[blocks.segments]]
-type = 'text'
-style = 'plain'
-template = '#'
-background = ''
-foreground = 'p:green'
-Text = ''
-Duration = 0
-NameLength = 0
-
-[transient_prompt]
-template = '{{ .Shell }} # '
-background = 'transparent'
-foreground = 'p:pink'
-Text = ''
-Duration = 0
-NameLength = 0
+[palette]
+  bg = '#24273A'
+  text = '#F2F2F2'
+  white = '#FFFFFF'
 
 [secondary_prompt]
-template = '# '
-background = 'transparent'
-foreground = 'p:blue'
-Text = ''
-Duration = 0
-NameLength = 0
+  template = '# '
+  foreground = 'p:blue'
+  background = 'transparent'
 
-[palette]
-bg = '#24273A'
-text = '#F2F2F2'
-white = '#FFFFFF'
+[transient_prompt]
+  template = '{{ .Shell }} # '
+  foreground = 'p:pink'
+  background = 'transparent'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = '{{ .UserName }}@{{ .HostName }} [{{ .Shell }}]'
+    foreground = 'p:text'
+    powerline_symbol = ''
+    type = 'session'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = ' {{ .Path }}'
+    foreground = 'p:text'
+    type = 'path'
+
+    [blocks.segments.properties]
+      home_icon = '~'
+      style = 'agnoster_short'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = ' {{ .HEAD }}'
+    foreground = 'p:text'
+    type = 'git'
+
+    [blocks.segments.properties]
+      branch_max-length = 25.0
+      fetch_status = true
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+  overflow = 'hide'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = ' x{{ reason .Code }}'
+    foreground = 'p:green'
+    type = 'status'
+    alias = 'Err'
+    foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = ' {{ .FormattedMs }} '
+    foreground = 'p:green'
+    type = 'executiontime'
+    foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
+
+    [blocks.segments.properties]
+      always_enabled = true
+      style = 'roundrock'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = '#'
+    foreground = 'p:green'
+    type = 'text'
