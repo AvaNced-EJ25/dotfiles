@@ -1,7 +1,8 @@
+
 require("catppuccin").setup({
     flavour = "macchiato",
     term_colors = true,
-    transparent_background = true,
+    transparent_background = not vim.g.neovide,
     dim_inactive = {
         enabled = true,
         shade = "dark",
@@ -14,6 +15,7 @@ require("catppuccin").setup({
         treesitter = true,
         which_key = true,
         mason = true,
+        notify = true,
         indent_blankline = {
             enabled = true,
             scope_color = "sapphire",

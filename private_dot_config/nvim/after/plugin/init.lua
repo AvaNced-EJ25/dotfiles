@@ -9,8 +9,10 @@ vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 1
 
 vim.g.lazygit_floating_window_use_plenary = 1
-vim.g.lazygit_floating_window_winblend = 5 -- transparency of floating window
 vim.g.lazygit_use_custom_config_file_path = 1
+
+-- transparency of floating window (10 in neovide, 0 otherwise)
+vim.g.lazygit_floating_window_winblend = ( vim.g.neovide and 10 or 0 )
 
 vim.g.lazygit_config_file_path = {
     (os.getenv("HOME") .. "/.config/lazygit/config.yml"),
@@ -18,4 +20,3 @@ vim.g.lazygit_config_file_path = {
 }
 
 vim.notify = require('notify')
-

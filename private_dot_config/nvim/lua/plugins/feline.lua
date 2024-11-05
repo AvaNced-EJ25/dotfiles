@@ -11,7 +11,7 @@ return {
         -- text, subtext1, subtext0, overlay2, overlay1, overlay0, surface2, surface1, surface0, base, mantle, crust
         local clrs = require("catppuccin.palettes").get_palette()
         local ctp_feline = require('catppuccin.groups.integrations.feline')
-        local U = require "catppuccin.utils.colors"
+        local U = require("catppuccin.utils.colors")
 
         local function is_enabled(min_width)
             if shortline then return true end
