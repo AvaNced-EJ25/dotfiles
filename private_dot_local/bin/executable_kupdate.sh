@@ -39,11 +39,16 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
 
     eval ~/.local/lib/keepass.sh
 
+    if $?; then
+        kprinterr "Keepass database sync failed."
+    else
+
+        kprintf "Done."
+    fi
+
     if $mounted; then
         eval ~/.local/bin/mount.sh
     fi
-
-    kprintf "Done."
 fi
 
 if type oh-my-posh > /dev/null 2>&1; then
