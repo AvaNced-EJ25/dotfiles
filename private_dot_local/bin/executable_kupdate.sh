@@ -18,6 +18,24 @@ kprintf 'Requesting root privilages...'
 sudo -v > /dev/null 2>&1 || exit 1
 kprintf 'Done.'
 
+# keepass.sh is not in chezmoi
+if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
+    kprintf "Syncing keepass database..."
+    mounted=false
+    if [ -z "$(/bin/ls -A '/mnt/home')" ] && nc -z "steve.koman" 445; then
+        eval ~/.local/bin/mount.sh
+        mounted=true
+    fi
+
+    eval ~/.local/lib/keepass.sh
+
+    if $mounted; then
+        eval ~/.local/bin/mount.sh
+    fi
+
+    kprintf "Done."
+fi
+
 if type oh-my-posh > /dev/null 2>&1; then
     kprintf 'Updating Oh-My-Posh...'
     oh-my-posh upgrade
