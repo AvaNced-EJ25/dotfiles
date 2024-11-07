@@ -18,6 +18,16 @@ kprintf 'Requesting root privilages...'
 sudo -v > /dev/null 2>&1 || exit 1
 kprintf 'Done.'
 
+if type chezmoi > /dev/null 2>&1; then
+    kprintf 'Ugrading chezmoi...'
+    chezmoi upgrade
+    kprintf 'Done.'
+
+    kprintf 'Updating dotfiles...'
+    chezmoi update
+    kprintf 'Done.'
+fi
+
 # keepass.sh is not in chezmoi
 if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     kprintf "Syncing keepass database..."
@@ -44,16 +54,6 @@ if type oh-my-posh > /dev/null 2>&1; then
         kprinterr 'Oh My Posh could not upgrade, retrying with root permissions...'
         sudo oh-my-posh upgrade
     fi
-    kprintf 'Done.'
-fi
-
-if type chezmoi > /dev/null 2>&1; then
-    kprintf 'Ugrading chezmoi...'
-    chezmoi upgrade
-    kprintf 'Done.'
-
-    kprintf 'Updating dotfiles...'
-    chezmoi update
     kprintf 'Done.'
 fi
 
