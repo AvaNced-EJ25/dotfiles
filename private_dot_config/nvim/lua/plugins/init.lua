@@ -35,4 +35,9 @@ return {
     { 'mbbill/undotree' },
     { 'tpope/vim-fugitive' },
     { 'uga-rosa/ccc.nvim' },
+    {
+        "nvim-zh/colorful-winsep.nvim",
+        config = true,
+        event = { "WinLeave" },
+    }
 }

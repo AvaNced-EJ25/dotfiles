@@ -25,6 +25,10 @@ require("catppuccin").setup({
             enabled = true,
             color_mode = true,
         },
+        colorful_winsep = {
+            enabled = true,
+            color = "pink",
+        },
     },
 })
 
