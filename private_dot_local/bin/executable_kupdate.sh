@@ -37,29 +37,20 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
         mounted=true
     fi
 
-    eval ~/.local/lib/keepass.sh
+    eval "~/.local/lib/keepass.sh"
 
-    if $?; then
+    ret=$?
+
+    if [ "$ret" -eq 0 ]; then
         kprinterr "Keepass database sync failed."
     else
 
         kprintf "Done."
     fi
 
-    if $mounted; then
+    if [ "$mounted" = true ]; then
         eval ~/.local/bin/mount.sh
     fi
-fi
-
-if type oh-my-posh > /dev/null 2>&1; then
-    kprintf 'Updating Oh-My-Posh...'
-    oh-my-posh upgrade
-    ret=$?
-    if [ $ret -ne 0 ]; then
-        kprinterr 'Oh My Posh could not upgrade, retrying with root permissions...'
-        sudo oh-my-posh upgrade
-    fi
-    kprintf 'Done.'
 fi
 
 if type apt > /dev/null 2>&1; then
@@ -114,3 +105,15 @@ if type cargo > /dev/null 2>&1; then
         kprintf 'Done.'
     fi
 fi
+
+if type oh-my-posh > /dev/null 2>&1; then
+    kprintf 'Updating Oh-My-Posh...'
+    oh-my-posh upgrade
+    ret=$?
+    if [ "$ret" -ne 0 ]; then
+        kprinterr 'Oh My Posh could not upgrade, retrying with root permissions...'
+        sudo oh-my-posh upgrade
+    fi
+    kprintf 'Done.'
+fi
+
