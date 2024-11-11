@@ -20,3 +20,50 @@ vim.g.lazygit_config_file_path = {
 }
 
 vim.notify = require('notify')
+
+local ccc = require("ccc")
+local mapping = ccc.mapping
+
+local clrs = require("catppuccin.palettes").get_palette()
+
+custom_colors = {
+    ctpRosewater = clrs.rosewater,
+    ctpFlamingo = clrs.flamingo,
+    ctpPink = clrs.pink,
+    ctpMauve = clrs.mauve,
+    ctpRed = clrs.red,
+    ctpMaroon = clrs.maroon,
+    ctpPeach = clrs.peach,
+    ctpYellow = clrs.yellow,
+    ctpGreen = clrs.green,
+    ctpTeal = clrs.teal,
+    ctpSky = clrs.sky,
+    ctpSapphire = clrs.sapphire,
+    ctpBlue = clrs.blue,
+    ctpLavender = clrs.lavender,
+    ctpMantle = clrs.mantle,
+    ctpSubtext0 = clrs.subtext0,
+    ctpSubtext1 = clrs.subtext1,
+    ctpSurface0 = clrs.surface0,
+    ctpSurface1 = clrs.surface1,
+    ctpSurface2 = clrs.surface2,
+    ctpOverlay0 = clrs.overlay0,
+    ctpOverlay1 = clrs.overlay1,
+    ctpOverlay2 = clrs.overlay2,
+    ctpBase = clrs.base,
+    ctpText = clrs.text,
+    ctpCrust = clrs.crust,
+}
+
+ccc.setup({
+    -- Your preferred settings
+    -- Example: enable highlighter
+    highlighter = {
+        auto_enable = true,
+        lsp = true,
+    },
+    pickers = { ccc.picker.custom_entries(custom_colors) },
+    mappings = mapping,
+})
+
+vim.keymap.set('n', '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})

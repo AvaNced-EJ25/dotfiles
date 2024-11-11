@@ -34,4 +34,5 @@ return {
     {'akinsho/git-conflict.nvim', version = "*", config = true},
     { 'mbbill/undotree' },
     { 'tpope/vim-fugitive' },
+    { 'uga-rosa/ccc.nvim' },
 }
