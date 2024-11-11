@@ -32,7 +32,9 @@ fi
 if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     kprintf "Syncing keepass database..."
     mounted=false
-    if [ -z "$(/bin/ls -A '/mnt/home')" ] && nc -z "steve.koman" 445; then
+    nc -z "steve.koman" 445 > /dev/null 2>&1
+    ret=$?
+    if [ -z "$(/bin/ls -A '/mnt/home')" ] && [ "$ret" -eq 0 ]; then
         eval ~/.local/bin/mount.sh
         mounted=true
     fi
