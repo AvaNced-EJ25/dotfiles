@@ -44,10 +44,9 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     ret=$?
 
     if [ "$ret" -eq 0 ]; then
-        kprinterr "Keepass database sync failed."
-    else
-
         kprintf "Done."
+    else
+        kprinterr "Keepass database sync failed."
     fi
 
     if [ "$mounted" = true ]; then
