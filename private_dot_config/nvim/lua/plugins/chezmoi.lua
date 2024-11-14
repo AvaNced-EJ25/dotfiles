@@ -14,7 +14,7 @@ return {
         }
     },
     config = function()
-        require("chezmoi").setup {
+        require("chezmoi").setup({
             -- your configurations
             edit = {
                 watch = true,
@@ -23,7 +23,7 @@ return {
                 on_open = true,
                 on_apply = true,
                 on_watch = true,
-            }
-        }
+            },
+        })
     end
 }
