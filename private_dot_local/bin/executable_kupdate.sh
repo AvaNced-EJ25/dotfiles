@@ -87,6 +87,12 @@ if type brew > /dev/null 2>&1; then
     kprintf 'Done.'
 fi
 
+if type pyenv > /dev/null 2>&1; then
+    kprintf 'Updating pyenv...'
+    pyenv update
+    kprintf 'Done.'
+fi
+
 if type rustup > /dev/null 2>&1; then
     kprintf 'Updating rust...'
     rustup update
