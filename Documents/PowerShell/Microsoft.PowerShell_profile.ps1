@@ -17,8 +17,9 @@ function dot-rc {
 }
 
 # Add ~/.local/bin to PATH if it exists
-if ( Test-Path "$env:HOME\.local\bin" ) {
-    $env:PATH += "$env:HOME\.local\bin;"
+$local_bin="$env:HOME\.local\bin"
+if ( (Test-Path $local_bin) -and (-not $env:PATH -ilike "*$local_bin*" ) ) {
+    $env:PATH += "$local_bin;"
 }
 
 $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
