@@ -4,8 +4,14 @@ return {
     event = 'VeryLazy',
     opts = {}, -- calls require('cord').setup()
     config = function()
-        require("cord").setup({
-
-        })
+        if not vim.g.vscode then
+            -- TODO: Custom icons using catppuccin
+            -- https://github.com/catppuccin/vscord/tree/main
+            -- https://github.com/vyfor/cord.nvim/wiki/Add-or-change-file-icons
+            local languages_filenames = {}
+            local assets = {}
+            require("cord").setup({
+            })
+        end
     end,
 }
