@@ -28,7 +28,13 @@ if ( -not $admin ) {
     } catch {}
 
     try {
+        Write-Host "Updating spotify..."
         where.exe spicetify.exe | Out-Null
+
+        Stop-Process -Name Spotify -ErrorAction SilentlyContinue
+
+        winget upgrade spotify
+        Write-Host "Done."
 
         Write-Host "Updating spicetify..."
         spicetify update
