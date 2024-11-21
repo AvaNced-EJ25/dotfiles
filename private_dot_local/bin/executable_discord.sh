@@ -19,6 +19,9 @@ discord_url="https://discord.com/api/download?platform=linux&format=deb"
 better_url="https://github.com/BetterDiscord/Installer/releases/download/v1.3.0/BetterDiscord-Linux.AppImage"
 better_dnld="/tmp/BetterDiscord-Linux.AppImage"
 
+theme_url="https://github.com/refact0r/midnight-discord/raw/refs/heads/master/flavors/midnight-catppuccin-macchiato.theme.css"
+theme_dnld="${HOME}/.config/BetterDiscord/themes/midnight-catppuccin-macchiato.theme.css"
+
 dnld_pids=()
 discord_pid=0
 
@@ -30,6 +33,9 @@ dnld_pids+=($!)
 # download the newest betterdiscord installer
 wget $wget_opts --output-document="$better_dnld" "$better_url" &
 dnld_pids+=($!)
+
+# dowload the newest midnight theme
+wget $wget_opts --output-document="$theme_dnld" "$theme_url" &
 
 wait ${dnld_pids[0]}
 
