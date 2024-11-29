@@ -46,6 +46,7 @@ alias egrep="egrep --color=auto"
 
 alias makej="make -j $(nproc)"
 alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
+alias iwyu-fix="make-iwuy 2> /tmp/iwyu.out; /usr/bin/env fix_includes.py < /tmp/iwyu.out"
 
 alias bathelp='bat --plain --language=help'
 help() {
