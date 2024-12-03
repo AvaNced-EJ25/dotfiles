@@ -36,7 +36,7 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     ret=$?
     if [ -z "$(/bin/ls -A '/mnt/home')" ] && [ "$ret" -eq 0 ]; then
         eval ~/.local/bin/mount.sh
-        mounted=true
+        mounted=$?
     fi
 
     eval "~/.local/lib/keepass.sh"
@@ -49,7 +49,7 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
         kprinterr "Keepass database sync failed."
     fi
 
-    if [ "$mounted" = true ]; then
+    if [ "$mounted" == 0 ]; then
         eval ~/.local/bin/mount.sh
     fi
 fi

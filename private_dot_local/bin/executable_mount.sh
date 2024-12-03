@@ -1,9 +1,11 @@
 #!/bin/bash
+ret=0
 
 echo "Requesting root privilages..."
 sudo -v > /dev/null | exit 1
 echo "Done."
 
+# TODO: Some of these should be environment variables instead
 mount_point="/mnt"
 creds_file="/tmp/creds"
 smb_server="//steve.koman"
@@ -14,6 +16,7 @@ if mount | grep $smb_server; then
     # Unmount
     echo "Unmounting home..."
     sudo umount "$mount_point/home"
+    ret=$?
     echo "Done."
 else
     while [ -z "$smb_password" ]; do
@@ -28,9 +31,10 @@ else
 
     echo "Mounting home..."
     sudo mount -l -t cifs "$smb_server/home" "$mount_point/home" -o $opts
+    ret=$?
     echo "Done."
 
     rm -f $creds_file
 fi
 
-exit 0
+exit $ret
