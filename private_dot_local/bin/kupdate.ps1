@@ -1,3 +1,5 @@
+#!/bin/env -S echo "This is a powershell script lol, try again"
+
 param([switch]$admin)
 
 $omp_admin=$false
