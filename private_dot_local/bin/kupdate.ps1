@@ -2,20 +2,20 @@
 
 param([switch]$admin)
 
-$omp_admin=$false
+try {
+    where.exe oh-my-posh.exe | Out-Null
+
+    Write-Host "Updating Oh-My-Posh..."
+    oh-my-posh upgrade
+
+    if ( $LASTEXITCODE -gt 0 ) {
+        Write-Error "Could not update oh-my-posh, will retry as admin"
+    }
+    Write-Host "Done."
+} catch {}
 
 # Non-admin stuff
 if ( -not $admin ) {
-    try {
-        where.exe oh-my-posh.exe | Out-Null
-
-        Write-Host "Updating Oh-My-Posh..."
-        try { oh-my-posh upgrade } catch {
-            Write-Error "Could not update oh-my-posh, will retry as admin"
-            $omp_admin=$true
-        }
-        Write-Host "Done."
-    } catch {}
 
     Write-Host "Updating Scoop packages..."
     scoop update
@@ -30,18 +30,33 @@ if ( -not $admin ) {
     } catch {}
 
     try {
+        $upgrade_spotify = $true
         Write-Host "Updating spotify..."
         where.exe spicetify.exe | Out-Null
 
-        Stop-Process -Name Spotify -ErrorAction SilentlyContinue
+        if ( Get-Process -Name Spotify -ErrorAction SilentlyContinue ) {
+            Write-Host "Please close Spotify..."
+            try {
+                Wait-Process -Name Spotify -Timeout 10 -ErrorAction Stop
+            } catch {
+                if ( Get-Process -Name Spotify -ErrorAction SilentlyContinue ) {
+                    Write-Host "Spotify was not closed, skipping."
+                    upgrade-spotify = $false
+                }
+            }
+        }
 
-        winget upgrade spotify
-        Write-Host "Done."
+        if ( $upgrade_spotify ) {
 
-        Write-Host "Updating spicetify..."
-        spicetify update
-        Write-Host "Done."
+            winget upgrade spotify
+            Write-Host "Done."
+
+            Write-Host "Updating spicetify..."
+            spicetify update
+            Write-Host "Done."
+        }
     } catch {}
+
 }
 
 # Run Admin Stuff
@@ -65,7 +80,9 @@ if ($myWindowsPrincipal.IsInRole($adminRole)) {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
 
     # Specify the current script path and name as a parameter
-    $newProcess.Arguments = $myInvocation.MyCommand.Definition + " -admin";
+    $newProcess.Arguments = $myInvocation.MyCommand.Definition + " -admin ";
+
+    Write-Host $newProcess.Arguments
 
     # Indicate that the process should be elevated
     $newProcess.Verb = "runas";
@@ -74,18 +91,11 @@ if ($myWindowsPrincipal.IsInRole($adminRole)) {
     [System.Diagnostics.Process]::Start($newProcess);
 
     # Exit from the current, unelevated, process
-    Start-Sleep -s 1
-    Clear-Host
     exit
 }
 
 # Run your code that needs to be elevated here
 
-if ($omp_admin) {
-    Write-Host "Retrying oh-my-posh upgrade..."
-    oh-my-posh upgrade
-    Write-Host "Done"
-}
 
 try {
     where.exe choco.exe | Out-Null
