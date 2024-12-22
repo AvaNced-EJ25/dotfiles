@@ -171,3 +171,4 @@ if type pyenv &>/dev/null; then
 fi
 
 [ -d "$HOME/.cargo" ] && . "$HOME/.cargo/env"
+[ -d "$HOME/.local/lib/alacritty" ] && source "$HOME/.local/lib/alacritty/extra/completions/alacritty.bash"
