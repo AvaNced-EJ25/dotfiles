@@ -185,10 +185,12 @@ return {
         -- f:write(dump(comp))
         -- f:close()
 
-        require("feline").setup({
-            components = comp,
-            -- components = ctp_feline.get()
-        })
+        if not vim.g.vscode then
+            require("feline").setup({
+                components = comp,
+                -- components = ctp_feline.get()
+            })
+        end
 
     end
 }
