@@ -1,6 +1,6 @@
 frame = "none"
 # TODO: Make this a template for windows
-neovim-bin = "/usr/bin/env nvim"
+neovim-bin = "/usr/local/bin/nvim"
 title-hidden = true
 fork = true
 
