@@ -149,3 +149,14 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
     kprintf 'Done.'
 fi
 
+if [ -d "${HOME}/.local/lib/neovim" ]; then
+    kprintf 'Updating local build of neovim...'
+    cd "${HOME}/.local/lib/neovim"
+    git fetch
+    git checkout stable
+    make -j $(nproc) CMAKE_BUILD_TYPE=Release
+    sudo make -j $(nproc) install
+    cd -
+    kprintf 'Done.'
+fi
+
