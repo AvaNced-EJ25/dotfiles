@@ -18,7 +18,7 @@ try {
 if ( -not $admin ) {
 
     Write-Host "Updating Scoop packages..."
-    scoop update
+    scoop update --all
     Write-Host "Done."
 
     try {
