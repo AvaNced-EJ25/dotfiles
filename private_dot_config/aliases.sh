@@ -27,7 +27,6 @@ alias sreload="exec '$SHELL'"
 alias dotrc="$EDITOR ~/.dotfiles;chezmoi apply"
 alias zz="cd -"
 alias dl="cd ~/Downloads"
-alias fd="fdfind"
 
 alias ls="eza --icons=auto --classify=auto --hyperlink"
 alias ll="eza --long --header --icons=auto --classify=auto --git --smart-group --hyperlink"
