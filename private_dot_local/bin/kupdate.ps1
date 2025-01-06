@@ -8,7 +8,7 @@ try {
     Write-Host "Updating Oh-My-Posh..."
     oh-my-posh upgrade
 
-    if ( $LASTEXITCODE -gt 0 ) {
+    if ( $LASTEXITCODE -gt 0 -and -not $admin ) {
         Write-Error "Could not update oh-my-posh, will retry as admin"
     }
     Write-Host "Done."
@@ -17,9 +17,14 @@ try {
 # Non-admin stuff
 if ( -not $admin ) {
 
+    komorebic stop --bar
+
     Write-Host "Updating Scoop packages..."
     scoop update --all
     Write-Host "Done."
+
+    komorebic fetch-asc
+    komorebic start --bar
 
     try {
         where.exe chezmoi.exe | Out-Null
