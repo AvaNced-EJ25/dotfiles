@@ -1,7 +1,7 @@
 {
-    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.29/schema.bar.json",
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.32/schema.bar.json",
     "monitor": {
-        "index": {{ if .work }}1{{ else }}0{{ end }},
+        "index": 0,
         "work_area_offset": {
             "left": 0,
             "top": 40,
@@ -11,6 +11,7 @@
     },
     "max_label_width": 300,
     "font_family": "FiraCode Nerd Font Propo",
+    "font_size": 12,
     "theme": {
         "palette": "Catppuccin",
         "name": "Macchiato",
@@ -33,31 +34,11 @@
             }
         }
     ],
-    "right_widgets": [
+    "center_widgets": [
         {
-            "Media": {
-                "enable": true
-            }
-        },
-        {
-            "Storage": {
+            "Time": {
                 "enable": true,
-                "data_refresh_interval": 600
-            }
-        },
-        {
-            "Memory": {
-                "enable": true,
-                "data_refresh_interval": 10
-            }
-        },
-        {
-            "Network": {
-                "enable": true,
-                "show_total_data_transmitted": false,
-                "show_network_activity": true,
-                "data_refresh_interval": 5,
-                "network_activity_fill_characters": 10
+                "format": "TwentyFourHour"
             }
         },
         {
@@ -67,9 +48,38 @@
             }
         },
         {
-            "Time": {
+            "Media": {
+                "enable": true
+            }
+        }
+    ],
+    "right_widgets": [
+        {
+            "Cpu": {
                 "enable": true,
-                "format": "TwentyFourHour"
+                "data_refresh_interval": 5
+            }
+        },
+        {
+            "Memory": {
+                "enable": true,
+                "data_refresh_interval": 10
+            }
+        },
+        {
+            "Storage": {
+                "enable": true,
+                "data_refresh_interval": 600
+            }
+        },
+        {
+            "Network": {
+                "show_default_interface": true,
+                "enable": true,
+                "show_total_data_transmitted": false,
+                "show_network_activity": true,
+                "data_refresh_interval": 5,
+                "network_activity_fill_characters": 10
             }
         },
         {
