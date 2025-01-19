@@ -65,7 +65,8 @@ fi
 
 if type flatpak > /dev/null 2>&1; then
     kprintf 'Updating flatpak applications...'
-    sudo flatpak update -y || flatpak update -y
+     flatpak update -y
+     sudo flatpak update -y
     kprintf 'Done.'
 fi
 
