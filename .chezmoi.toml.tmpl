@@ -1,5 +1,6 @@
 {{ $email := promptString "email" -}}
 {{ $work := promptBool "Work System" }}
+{{ $window_decorations := promptBool "Show window decorations?" }}
 
 sourceDir = "~/.dotfiles"
 
@@ -9,6 +10,7 @@ sourceDir = "~/.dotfiles"
 [data]
     email = {{ $email | quote }}
     work = {{ $work }}
+    decorations = {{ $window_decorations }}
 
 [keepassxc]
     database = "{{ .chezmoi.homeDir }}/Documents/Chezmoi.kdbx"
