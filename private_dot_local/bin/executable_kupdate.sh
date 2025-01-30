@@ -13,6 +13,15 @@ function kprintf {
     printf "${PURPLE}󰰉 ${BLUE}${@}${NC}\n"
 }
 
+case "$(uname -s)" in
+    Linux*)     os_name=Linux;;
+    Darwin*)    os_name=Mac;;
+    CYGWIN*)    os_name=Cygwin;;
+    MINGW*)     os_name=MinGw;;
+    MSYS_NT*)   os_name=MSys;;
+    *)          os_name="UNKNOWN:${unameOut}"
+esac
+
 kprintf 'Requesting root privilages...'
 # Get sudo privileges at the start
 sudo -v > /dev/null 2>&1 || exit 1
@@ -54,25 +63,27 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     fi
 fi
 
-if type apt > /dev/null 2>&1; then
-    kprintf 'Updating system repositories...'
-    sudo apt update
-    kprintf 'Done.'
-    kprintf 'Updating system packages...'
-    sudo apt upgrade -y
-    kprintf 'Done.'
-fi
+if [[ $os_name == "Linux" ]]; then
+    if type apt > /dev/null 2>&1; then
+        kprintf 'Updating system repositories...'
+        sudo apt update
+        kprintf 'Done.'
+        kprintf 'Updating system packages...'
+        sudo apt upgrade -y
+        kprintf 'Done.'
+    fi
 
-if type flatpak > /dev/null 2>&1; then
-    kprintf 'Updating flatpak applications...'
-     flatpak update -y
-     sudo flatpak update -y
-    kprintf 'Done.'
-fi
+    if type flatpak > /dev/null 2>&1; then
+        kprintf 'Updating flatpak applications...'
+         flatpak update -y
+         sudo flatpak update -y
+        kprintf 'Done.'
+    fi
 
-if type snap > /dev/null 2>&1; then
-    kprintf 'Updating snap applications...'
-    snap refresh || sudo snap refresh
+    if type snap > /dev/null 2>&1; then
+        kprintf 'Updating snap applications...'
+        snap refresh || sudo snap refresh
+    fi
 fi
 
 if type spicetify > /dev/null 2>&1; then
