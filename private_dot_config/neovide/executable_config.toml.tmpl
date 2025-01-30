@@ -1,9 +1,25 @@
 {{ if not .decorations -}}
 frame = "none"
 {{- end }}
-{{ if eq .chezmoi.os "linux" }}{{ if stat "/usr/local/bin/nvim" }}neovim-bin = "/usr/local/bin/nvim"
-{{ else if stat "/usr/bin/nvim" }}neovim-bin = "/usr/bin/nvim"
-{{ else }} neovim-bin = "/usr/bin/env nvim"{{ end }}{{ else if eq .chezmoi.os "windows" }}neovim-bin = "{{ .chezmoi.homeDir }}/scoop/shims/nvim.exe"{{ end }}
+{{ if eq .chezmoi.os "linux" -}}
+{{ if stat "/usr/local/bin/nvim" -}}
+neovim-bin = "/usr/local/bin/nvim"
+{{ else if stat "/usr/bin/nvim" -}}
+neovim-bin = "/usr/bin/nvim"
+{{ else -}}
+neovim-bin = "/usr/bin/env nvim"
+{{ end -}}
+
+{{- else if eq .chezmoi.os "darwin" -}}
+{{ if stat "/opt/homebrew/bin/nvim" -}}
+neovim-bin = "/opt/homebrew/bin/nvim"
+{{ else -}}
+neovim-bin = "/usr/bin/env nvim"
+{{ end -}}
+
+{{- else if eq .chezmoi.os "windows" -}}
+neovim-bin = "{{ .chezmoi.homeDir }}/scoop/shims/nvim.exe"
+{{- end }}
 title-hidden = true
 fork = true
 
