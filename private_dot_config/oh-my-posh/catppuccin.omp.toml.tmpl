@@ -25,76 +25,40 @@ final_space = true
   foreground = 'p:pink'
   background = 'transparent'
 
-[[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  overflow = 'hide'
-
-  [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "'{{.Weather}} ({{.Temperature}}{{.UnitIcon}})'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    leading_powerline_symbol = ''
-    background = 'p:lavender'
-    type = 'owm'
-
-    [blocks.segments.properties]
-      api_key = '{{ keepassxcAttribute "OpenWeather" "API_KEY" }}'
-      http_timeout = 1000
-      location = 'Houghton,MI,US'
-      units = 'imperial'
-
-  [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "'{{ if ne .Status \"stopped\" }} {{ .Icon }}{{ .Full }}{{ end }}'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:red'
-    type = 'lastfm'
-    min_width = 50
-
-    [blocks.segments.properties]
-      api_key = '{{ keepassxcAttribute "Last.fm" "API_KEY" }}'
-      http_timeout = 1000
-      playing_icon = ' '
-      username = 'K0M4N'
-
-[[blocks]]
-  type = 'prompt'
-  alignment = 'right'
-  overflow = 'hide'
-
-  [[blocks.segments]]
-    style = 'plain'
-    template = {{ "' x{{ reason .Code }} '" }}
-    foreground = 'p:green'
-    type = 'status'
-    alias = 'Err'
-    foreground_templates = [{{ "'{{ if gt .Code 0 }}p:red{{ end }}'" }}]
-
-  [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "'{{ .FormattedMs }}'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:green'
-    type = 'executiontime'
-    leading_powerline_symbol = ''
-    background_templates = [{{ "'{{ if gt .Code 0 }}p:red{{ end }}'" }}]
-
-    [blocks.segments.properties]
-      always_enabled = true
-      style = 'roundrock'
-
-  [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "'  {{ .Shell }}'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:pink'
-    type = 'text'
-    leading_powerline_symbol = ''
+# [[blocks]]
+#   type = 'prompt'
+#   alignment = 'left'
+#   overflow = 'hide'
+# 
+#   [[blocks.segments]]
+#     style = 'powerline'
+#     template = {{ "'{{.Weather}} ({{.Temperature}}{{.UnitIcon}})'" }}
+#     foreground = 'p:text'
+#     powerline_symbol = ''
+#     leading_powerline_symbol = ''
+#     background = 'p:lavender'
+#     type = 'owm'
+# 
+#     [blocks.segments.properties]
+#       api_key = '{{ keepassxcAttribute "OpenWeather" "API_KEY" }}'
+#       http_timeout = 1000
+#       location = 'Houghton,MI,US'
+#       units = 'imperial'
+# 
+#   [[blocks.segments]]
+#     style = 'powerline'
+#     template = {{ "'{{ if ne .Status \"stopped\" }} {{ .Icon }}{{ .Full }}{{ end }}'" }}
+#     foreground = 'p:text'
+#     powerline_symbol = ''
+#     background = 'p:red'
+#     type = 'lastfm'
+#     min_width = 50
+# 
+#     [blocks.segments.properties]
+#       api_key = '{{ keepassxcAttribute "Last.fm" "API_KEY" }}'
+#       http_timeout = 1000
+#       playing_icon = ' '
+#       username = 'K0M4N'
 
 [[blocks]]
   type = 'prompt'
@@ -138,6 +102,42 @@ final_space = true
       charged_icon = '󰂅 '
       charging_icon = '󰢟 '
       discharging_icon = '󰂍 '
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+  overflow = 'hide'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = {{ "' x{{ reason .Code }} '" }}
+    foreground = 'p:green'
+    type = 'status'
+    alias = 'Err'
+    foreground_templates = [{{ "'{{ if gt .Code 0 }}p:red{{ end }}'" }}]
+
+  [[blocks.segments]]
+    style = 'powerline'
+    template = {{ "'{{ .FormattedMs }}'" }}
+    foreground = 'p:text'
+    powerline_symbol = ''
+    background = 'p:green'
+    type = 'executiontime'
+    leading_powerline_symbol = ''
+    background_templates = [{{ "'{{ if gt .Code 0 }}p:red{{ end }}'" }}]
+
+    [blocks.segments.properties]
+      always_enabled = true
+      style = 'roundrock'
+
+  [[blocks.segments]]
+    style = 'powerline'
+    template = {{ "'  {{ .Shell }}'" }}
+    foreground = 'p:text'
+    powerline_symbol = ''
+    background = 'p:pink'
+    type = 'text'
+    leading_powerline_symbol = ''
 
 [[blocks]]
   type = 'prompt'
