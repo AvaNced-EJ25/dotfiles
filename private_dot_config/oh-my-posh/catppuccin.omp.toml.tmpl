@@ -59,7 +59,7 @@ final_space = true
     template = {{ "' {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}'" }}
     foreground = 'p:text'
     powerline_symbol = ''
-    background = 'p:bg'
+    background = 'p:yellow'
     type = 'battery'
     background_templates = [{{ "'{{if eq \"Charging\" .State.String}}p:mauve{{end}}', '{{if eq \"Discharging\" .State.String}}p:peach{{end}}', '{{if eq \"Full\" .State.String}}p:green{{end}}'" }}]
 
@@ -157,13 +157,14 @@ final_space = true
         '~/.dotfiles' = ''
         '~/Downloads' = '󰉍'
         '~/dev' = '󰵮'
+        '/mnt/dev' = '󰵮'
 
     [[blocks.segments]]
     type = 'project'
     style = 'powerline'
     powerline_symbol = ''
     foreground = 'p:text'
-    background = 'p:lavender'
+    background = 'p:pink'
     template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} '" }}
 
     [[blocks.segments]]
