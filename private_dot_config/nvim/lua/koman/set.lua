@@ -20,6 +20,12 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 2
+
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim.undodir"
@@ -38,6 +44,7 @@ vim.opt.colorcolumn = "80,120"
 vim.o.guifont = "FiraCode Nerd Font Mono:h10"
 vim.o.timeout = true
 vim.o.timeoutlen = 3000
+vim.o.foldenable = false
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
