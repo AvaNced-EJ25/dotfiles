@@ -1,5 +1,8 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-context",
+    },
     build = function()
         require("nvim-treesitter.install").update({ with_sync = true })()
     end,
@@ -12,7 +15,7 @@ local M = {
                 "lua", "luadoc", "vim", "vimdoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
                 "json", "jsonc", "markdown", "markdown_inline", "latex", "powershell", "regex", "csv",
                 "python", "tcl", "cpp", "c", "make", "cmake", "ninja", "comment", "tmux",
-                "html", "javascript", "typescript", "css", "dockerfile",
+                "html", "javascript", "typescript", "tsx", "css", "dockerfile",
             },
             sync_install = true,
             highlight = {
@@ -28,6 +31,8 @@ local M = {
                 enable = true
             }
         })
+
+        require("treesitter-context").setup()
     end,
 }
 
