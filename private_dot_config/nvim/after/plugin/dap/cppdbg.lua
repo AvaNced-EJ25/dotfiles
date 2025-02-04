@@ -1,7 +1,5 @@
 local dap, dapui, telescope = require("dap"), require("dapui"), require("telescope")
 
-require("dap.ext.vscode").load_launchjs(nil)
-
 dapui.setup()
 
 telescope.load_extension("dap")
@@ -10,7 +8,7 @@ if os.name() == "Linux" then
     dap.adapters.cppdbg = {
         id = 'cppdbg',
         type = 'executable',
-        command = os.getenv("HOME") .. '/.local/lib/cppdbg/debugAdapters/bin/OpenDebugAD7',
+        command = MASON_PATH .. '/bin/OpenDebugAD7',
     }
 elseif os.name() == "Windows" then
     dap.adapters.cppdbg = {
