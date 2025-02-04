@@ -18,7 +18,7 @@ require("catppuccin").setup({
         notify = true,
         indent_blankline = {
             enabled = true,
-            scope_color = "sapphire",
+            scope_color = "pink",
             colored_indent_levels = true,
         },
         dropbar = {
