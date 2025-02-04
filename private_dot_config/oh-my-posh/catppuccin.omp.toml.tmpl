@@ -25,41 +25,6 @@ final_space = true
   foreground = 'p:pink'
   background = 'transparent'
 
-# [[blocks]]
-#   type = 'prompt'
-#   alignment = 'left'
-#   overflow = 'hide'
-# 
-#   [[blocks.segments]]
-#     style = 'powerline'
-#     template = {{ "'{{.Weather}} ({{.Temperature}}{{.UnitIcon}})'" }}
-#     foreground = 'p:text'
-#     powerline_symbol = ''
-#     leading_powerline_symbol = ''
-#     background = 'p:lavender'
-#     type = 'owm'
-# 
-#     [blocks.segments.properties]
-#       api_key = '{{ keepassxcAttribute "OpenWeather" "API_KEY" }}'
-#       http_timeout = 1000
-#       location = 'Houghton,MI,US'
-#       units = 'imperial'
-# 
-#   [[blocks.segments]]
-#     style = 'powerline'
-#     template = {{ "'{{ if ne .Status \"stopped\" }} {{ .Icon }}{{ .Full }}{{ end }}'" }}
-#     foreground = 'p:text'
-#     powerline_symbol = ''
-#     background = 'p:red'
-#     type = 'lastfm'
-#     min_width = 50
-# 
-#     [blocks.segments.properties]
-#       api_key = '{{ keepassxcAttribute "Last.fm" "API_KEY" }}'
-#       http_timeout = 1000
-#       playing_icon = ' '
-#       username = 'K0M4N'
-
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
