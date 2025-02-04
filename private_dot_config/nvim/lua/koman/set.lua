@@ -1,5 +1,6 @@
 local python3_path = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
 local python2_path = os.getenv("HOME") .. "/.pyenv/versions/neovim2/bin/python"
+local node_path = os.getenv("HOME") .. "/.nvm/versions/node/v22.11.0/bin/neovim-node-host"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -70,6 +71,10 @@ end
 
 if file_exists(python2_path) then
     vim.g.python_host_prog = python2_path
+end
+
+if file_exists(node_path) then
+    vim.g.node_host_prog = node_path
 end
 
 vim.opt.titlelen = 70
