@@ -18,10 +18,9 @@ local M = {
                 "python", "tcl", "cpp", "c", "make", "cmake", "ninja", "comment", "tmux",
                 "html", "javascript", "typescript", "tsx", "css", "dockerfile",
             },
-            sync_install = true,
             highlight = {
                 enable = true,
-                disable = function()
+                disable = function(lang, bufnr)
                     -- check if 'filetype' option includes 'chezmoitmpl'
                     if string.find(vim.bo.filetype, 'chezmoitmpl') then
                         return true
