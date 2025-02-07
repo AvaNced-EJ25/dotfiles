@@ -29,8 +29,6 @@ RunActivate(cmd) {
     return
 }
 
-#t::RunActivate(home_dir . "/.cargo/bin/alacritty.exe -e ubuntu.exe")
-
 !+o::Komorebic("reload-configuration")
 
 !q::Komorebic("close")
