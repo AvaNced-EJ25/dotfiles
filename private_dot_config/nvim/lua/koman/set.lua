@@ -1,7 +1,3 @@
-local python3_path = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
-local python2_path = os.getenv("HOME") .. "/.pyenv/versions/neovim2/bin/python"
-local node_path = os.getenv("HOME") .. "/.nvm/versions/node/v22.11.0/bin/neovim-node-host"
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -72,16 +68,16 @@ elseif os.name() == "Windows" then
     vim.opt.rtp:append("C:\\ProgramData\\chocolatey\\bin\\fzf.exe")
 end
 
-if file_exists(python3_path) then
-    vim.g.python3_host_prog = python3_path
+if file_exists(PYTHON3_PATH) then
+    vim.g.python3_host_prog = PYTHON3_PATH
 end
 
-if file_exists(python2_path) then
-    vim.g.python_host_prog = python2_path
+if file_exists(PYTHON2_PATH) then
+    vim.g.python_host_prog = PYTHON2_PATH
 end
 
-if file_exists(node_path) then
-    vim.g.node_host_prog = node_path
+if file_exists(NODE_PATH) then
+    vim.g.node_host_prog = NODE_PATH
 end
 
 vim.opt.titlelen = 70
