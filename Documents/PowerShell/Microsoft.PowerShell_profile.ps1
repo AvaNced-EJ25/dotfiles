@@ -16,6 +16,14 @@ function dot-rc {
     chezmoi apply
 }
 
+function reboot-func {
+    if ( -not $args ) {
+        $args=0
+    }
+
+    shutdown /r /t $args
+}
+
 # Add ~/.local/bin to PATH if it exists
 $local_bin="$env:HOME\.local\bin"
 if ( (Test-Path $local_bin) -and (-not ($env:PATH -like "*$local_bin*") ) ) {
@@ -44,6 +52,7 @@ New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
 New-Alias -Name sreload -value refreshenv.cmd
+New-Alias -Name reboot -Value reboot-func
 
 #New-Alias -Name more less.exe
 #$env:PAGER = 'less.exe'
