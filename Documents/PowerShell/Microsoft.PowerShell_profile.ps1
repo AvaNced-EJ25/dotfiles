@@ -28,7 +28,7 @@ function reboot-func {
 function pwd-func {
     $out=Get-Location
     if ( $out ) {
-        return $out.path
+        return ($out.path).trim()
     }
     return $null
 }
