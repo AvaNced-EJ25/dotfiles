@@ -7,7 +7,7 @@ function eza-la { eza --long --all --header --icons=auto --classify=auto --git -
 function eza-ltree { eza --tree --header --long --icons=auto --classify=auto --git --smart-group $args }
 function eza-tree { eza --tree --icons=auto --classify=auto $args }
 function cd-dl { cd "~/Downloads" }
-function cd-zz { cd "--" }
+function cd-zz { cd "-" }
 function fzf-nvim { fzf --preview='bat --color=always -- {}' --bind 'enter:become(nvim {})' }
 function fzf-bat { fzf --preview='bat --color=always -- {}' --bind 'enter:become(bat -- {})' }
 function bin-bat { bat --nonprintable-notation caret --show-all $args }
@@ -43,7 +43,7 @@ New-Alias -Name lg -Value lazygit.exe
 New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
-New-Alias -Name dotrc -Value dot-rc
+New-Alias -Name sreload -value refreshenv.cmd
 
 #New-Alias -Name more less.exe
 #$env:PAGER = 'less.exe'
