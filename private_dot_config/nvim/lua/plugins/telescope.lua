@@ -37,5 +37,6 @@ return {
         keymap.set('n', '<leader>fg', builtin.git_files, {desc = "Find git files" })
         keymap.set('n', '<leader>fm', builtin.marks, {desc = "Find marks" })
         keymap.set('n', '<leader>fl', builtin.man_pages, {desc = "Find man pages" })
+        keymap.set('n', '<leader>ft', builtin.treesitter, {desc = "Find treesitter entries" })
     end
 }
