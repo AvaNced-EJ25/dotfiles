@@ -17,14 +17,14 @@ try {
 # Non-admin stuff
 if ( -not $admin ) {
 
-    komorebic stop --bar
+    komorebic stop --bar --ahk
 
     Write-Host "Updating Scoop packages..."
     scoop update --all
     Write-Host "Done."
 
     komorebic fetch-asc
-    komorebic start --bar
+    komorebic start --bar --ahk
 
     try {
         where.exe chezmoi.exe | Out-Null
