@@ -1,7 +1,10 @@
+# Assume 2 processors by default
 num_proc=2
 if type nproc &> /dev/null; then
+    # Try with nproc (Linux)
     num_proc=$(nproc)
 elif type sysctl &> /dev/null; then
+    # Try with sysctl (MacOS)
     num_proc="$(sysctl -n hw.ncpu)"
 fi
 
