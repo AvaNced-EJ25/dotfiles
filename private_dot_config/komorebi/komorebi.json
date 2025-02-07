@@ -25,11 +25,11 @@
     },
     "stackbar": {
         "label": "Title",
-        "height": 30,
+        "height": 40,
         "mode": "OnStack",
         "tabs": {
-            "font_family": "FiraCode Nerd Font Propo",
-            "font_size": 14,
+            "font_family": "FiraCode Nerd Font",
+            "font_size": 30,
             "width": 250
         }
     },

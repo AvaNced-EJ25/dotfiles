@@ -11,7 +11,7 @@
     },
     "max_label_width": 300,
     "font_family": "FiraCode Nerd Font Propo",
-    "font_size": 12,
+    "font_size": 14,
     "theme": {
         "palette": "Catppuccin",
         "name": "Macchiato",
