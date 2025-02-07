@@ -1,5 +1,6 @@
 Remove-Alias -Name ls
 Remove-Alias -Name cat
+Remove-Alias -Name pwd
 
 function eza-ls { eza --icons=auto --classify=auto $args }
 function eza-ll { eza --long --header --icons=auto --classify=auto --git --smart-group $args }
@@ -22,6 +23,14 @@ function reboot-func {
     }
 
     shutdown /r /t $args
+}
+
+function pwd-func {
+    $out=Get-Location
+    if ( $out ) {
+        return $out.path
+    }
+    return $null
 }
 
 # Add ~/.local/bin to PATH if it exists
@@ -47,12 +56,14 @@ New-Alias -Name ltree -Value eza-ltree
 New-Alias -Name tree -Value eza-tree
 
 New-Alias -Name lg -Value lazygit.exe
+New-Alias -Name cz -Value chezmoi.exe
 
 New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
 New-Alias -Name sreload -value refreshenv.cmd
 New-Alias -Name reboot -Value reboot-func
+New-Alias -Name pwd -Value pwd-func
 
 #New-Alias -Name more less.exe
 #$env:PAGER = 'less.exe'
