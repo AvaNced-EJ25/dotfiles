@@ -57,7 +57,7 @@
         {
             "Cpu": {
                 "enable": true,
-                "data_refresh_interval": 5
+                "data_refresh_interval": 1
             }
         },
         {
