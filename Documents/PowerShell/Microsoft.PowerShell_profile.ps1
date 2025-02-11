@@ -12,10 +12,6 @@ function cd-zz { cd "-" }
 function fzf-nvim { fzf --preview='bat --color=always -- {}' --bind 'enter:become(nvim {})' }
 function fzf-bat { fzf --preview='bat --color=always -- {}' --bind 'enter:become(bat -- {})' }
 function bin-bat { bat --nonprintable-notation caret --show-all $args }
-function dot-rc {
-    nvim "$HOME\.dotfiles"
-    chezmoi apply
-}
 
 function reboot-func {
     if ( -not $args ) {
@@ -40,7 +36,7 @@ if ( (Test-Path $local_bin) -and (-not ($env:PATH -like "*$local_bin*") ) ) {
 }
 
 $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
-$env:LG_CONFIG_FILE="$HOME\.config\lazygit\config.yml,$HOME\.config\lazygit\pink.yml"
+$env:LG_CONFIG_FILE="$env:HOME\.config\lazygit\config.yml,$env:HOME\.config\lazygit\pink.yml"
 $env:EZA_CONFIG_DIR="$env:HOME\.config\eza"
 
 New-Alias -Name vi -Value nvim
