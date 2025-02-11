@@ -21,13 +21,13 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Download the Catppuccin theme for zsh if needed
-CATPPUCCIN_THEME="${ZDOTDIR:-~}/catppuccin_macchiato-zsh-syntax-highlighting.zsh"
+CATPPUCCIN_THEME="${ZDOTDIR:-~}/funcs/catppuccin_macchiato-zsh-syntax-highlighting.zsh"
 
 if [ ! -f $CATPPUCCIN_THEME ]; then
     wget --output-document="${CATPPUCCIN_THEME}" https://github.com/catppuccin/zsh-syntax-highlighting/raw/main/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 fi
 
-fpath+=${ZDOTDIR:-~}/zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 
 # Add brew to the shell
@@ -82,6 +82,10 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_AUTO_UPDATE_SECS='86400'
+# Source all zsh files
+for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
+    source $z
+done
 
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/histfile
@@ -99,10 +103,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# Source all zsh files
-for z in ${ZDOTDIR:-~}/zsh_functions/*.zsh; do
-    source $z
-done
 
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
