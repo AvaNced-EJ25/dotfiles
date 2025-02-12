@@ -34,6 +34,7 @@ if type chezmoi > /dev/null 2>&1; then
 
     kprintf 'Updating dotfiles...'
     chezmoi update
+
     kprintf 'Done.'
 fi
 
@@ -124,6 +125,26 @@ fi
 if type rustup > /dev/null 2>&1; then
     kprintf 'Updating rust...'
     rustup update
+
+    rustup completions zsh > "$(chezmoi source-path)/private_dot_config/zsh/dot_zsh_functions/executable__rustup"
+    rustup completions zsh cargo > "$(chezmoi source-path)/private_dot_config/zsh/dot_zsh_functions/executable__cargo"
+
+    # if the file changes, then push an update to chezmoi
+    if ! chezmoi git -- diff-index --quiet HEAD > /dev/null 2>&1; then
+        kprintf "Updating completions in chezmoi"
+        chezmoi git -- add "private_dot_config/zsh/zsh_functions/executable__rustup"
+        chezmoi git -- add "private_dot_config/zsh/zsh_functions/executable__cargo"
+        chezmoi git -- commit -m "<K: AUTO> Update rust completions"
+        chezmoi git -- push
+        kprintf "Done."
+    fi
+
+    competions_dir="${HOME}/.local/share/bash-completion/completions"
+    [ ! -d $competions_dir ] && mkdir -p $competions_dir
+    rustup completions bash > $competions_dir/rustup
+    rustup completions bash cargo > $competions_dir/cargo
+
+    unset competions_dir
     kprintf 'Done.'
 fi
 
@@ -154,13 +175,13 @@ fi
 
 if [ -d "${HOME}/.local/lib/alacritty" ]; then
     kprintf 'Updating local build of alacritty...'
-    cd "${HOME}/.local/lib/alacritty"
+    pushd "${HOME}/.local/lib/alacritty"
     git pull
     cargo build --release
 
     # Update completions
     if type chezmoi > /dev/null 2>&1; then
-        cp "extra/completions/_alacritty" "$(chezmoi source-path)/private_dot_config/zsh/zsh_functions/executable__alacritty"
+        cp "extra/completions/_alacritty" "$(chezmoi source-path)/private_dot_config/zsh/dot_zsh_functions/executable__alacritty"
 
         # if the file changes, then push an update to chezmoi
         if ! chezmoi git -- diff-index --quiet HEAD > /dev/null 2>&1; then
@@ -171,20 +192,32 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
             kprintf "Done."
         fi
     else
-        cp "extra/completions/_alacritty" "$HOME/.config/zsh/zsh_functions/_alacritty"
+        cp "extra/completions/_alacritty" "$HOME/.config/zsh/.zsh_functions/_alacritty"
     fi
-    cd -
+    popd
     kprintf 'Done.'
 fi
 
 if [ -d "${HOME}/.local/lib/neovim" ]; then
     kprintf 'Updating local build of neovim...'
-    cd "${HOME}/.local/lib/neovim"
+    pushd "${HOME}/.local/lib/neovim"
     git fetch
     git checkout stable
     make -j $(nproc) CMAKE_BUILD_TYPE=Release
     sudo make -j $(nproc) install
-    cd -
+    popd
     kprintf 'Done.'
+fi
+
+kprintf "Updating Catppuccin Files"
+
+wget --output-document="$(chezmoi source-path)/private_dot_config/zsh/executable_catppuccin_macchiato-zsh-syntax-highlighting.zsh" "https://github.com/catppuccin/zsh-syntax-highlighting/raw/refs/heads/main/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh"
+# if the file changes, then push an update to chezmoi
+if ! chezmoi git -- diff-index --quiet HEAD > /dev/null 2>&1; then
+    kprintf "Making a commit"
+    chezmoi git -- add "private_dot_config/zsh/executable_catppuccin_macchiato-zsh-syntax-highlighting.zsh"
+    chezmoi git -- commit -m "<K: AUTO> Update Catppuccin Files"
+    chezmoi git -- push
+    kprintf "Done."
 fi
 
