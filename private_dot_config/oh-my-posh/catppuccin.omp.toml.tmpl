@@ -139,67 +139,82 @@ final_space = true
     [blocks.segments.properties]
       time_format = '15:04:05'
 
+#  [[blocks.segments]]
+#    leading_diamond = ''
+#    trailing_diamond = ' '
+#    template = {{ "'{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}'" }}
+#    foreground = 'p:text'
+#    type = 'text'
+#    style = 'diamond'
+#    background_templates = [
+#        {{ "'{{if contains \"N\" .Env.POSH_VI_MODE}}p:blue{{end}}'," }}
+#        {{ "'{{if contains \"I\" .Env.POSH_VI_MODE}}p:mauve{{end}}'," }}
+#        {{ "'{{if contains \"V\" .Env.POSH_VI_MODE}}p:sky{{end}}'," }}
+#        {{ "'{{if contains \"V-L\" .Env.POSH_VI_MODE}}p:peach{{end}}'," }}
+#        {{ "'{{if contains \"R\" .Env.POSH_VI_MODE}}p:yellow{{end}}'," }}
+#    ]
+
   [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "' {{ .Path }}'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:sky'
-    type = 'path'
+  style = 'powerline'
+  template = {{ "' {{ .Path }}'" }}
+  foreground = 'p:text'
+  powerline_symbol = ''
+  background = 'p:sky'
+  type = 'path'
 
-    [blocks.segments.properties]
-      folder_icon = '....'
-      home_icon = '󱂵'
-      max_depth = 3
-      style = 'agnoster_short'
+  [blocks.segments.properties]
+  folder_icon = '....'
+  home_icon = '󱂵'
+  max_depth = 3
+  style = 'agnoster_short'
 
-      [blocks.segments.properties.mapped_locations]
-        '~/.dotfiles' = ''
-        '~/Downloads' = '󰉍'
-        '~/dev' = '󰵮'
-        '/mnt/dev' = '󰵮'
+  [blocks.segments.properties.mapped_locations]
+  '~/.dotfiles' = ''
+  '~/Downloads' = '󰉍'
+  '~/dev' = '󰵮'
+  '/mnt/dev' = '󰵮'
 
-    [[blocks.segments]]
-    type = 'project'
-    style = 'powerline'
-    powerline_symbol = ''
-    foreground = 'p:text'
-    background = 'p:pink'
-    template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} '" }}
+  [[blocks.segments]]
+  type = 'project'
+  style = 'powerline'
+  powerline_symbol = ''
+  foreground = 'p:text'
+  background = 'p:pink'
+  template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} '" }}
 
-    [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "' {{ .UpstreamIcon }} {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:lavender'
-    type = 'git'
-    background_templates = [{{ "'{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}', '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:peach{{ end }}', '{{ if gt .Ahead 0 }}p:mauve{{ end }}', '{{ if gt .Behind 0 }}p:mauve{{ end }}'" }}]
-    min_width = 100
+  [[blocks.segments]]
+  style = 'powerline'
+  template = {{ "' {{ .UpstreamIcon }} {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}'" }}
+  foreground = 'p:text'
+  powerline_symbol = ''
+  background = 'p:lavender'
+  type = 'git'
+  background_templates = [{{ "'{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}', '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:peach{{ end }}', '{{ if gt .Ahead 0 }}p:mauve{{ end }}', '{{ if gt .Behind 0 }}p:mauve{{ end }}'" }}]
+  min_width = 100
 
-    [blocks.segments.properties]
-    branch_icon = ' '
-    branch_max_length = 35
-    cherry_pick_icon = ' '
-    commit_icon = ' '
-    fetch_status = true
-    fetch_upstream_icon = true
-    merge_icon = ' '
-    no_commits_icon = ' '
-    rebase_icon = ' '
-    revert_icon = ' '
-    source = 'cli'
-    tag_icon = ' '
-    truncate_symbol = '󰇘'
+  [blocks.segments.properties]
+  branch_icon = ' '
+  branch_max_length = 35
+  cherry_pick_icon = ' '
+  commit_icon = ' '
+  fetch_status = true
+  fetch_upstream_icon = true
+  merge_icon = ' '
+  no_commits_icon = ' '
+  rebase_icon = ' '
+  revert_icon = ' '
+  source = 'cli'
+  tag_icon = ' '
+  truncate_symbol = '󰇘'
 
 
-[[blocks]]
+  [[blocks]]
   type = 'prompt'
   alignment = 'left'
   newline = true
 
   [[blocks.segments]]
-    style = 'plain'
-    template = ':3 󱢇'
-    foreground = 'p:green'
-    type = 'text'
+  style = 'plain'
+  template = ':3 󱢇'
+  foreground = 'p:green'
+  type = 'text'

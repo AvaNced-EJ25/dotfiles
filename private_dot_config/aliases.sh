@@ -1,3 +1,6 @@
+# Consistent across all shells (bash & zsh)
+export SHELL_NAME=$(sh -c 'ps -p $$ -o ppid=' | xargs ps -o comm= -p)
+
 # Assume 2 processors by default
 num_proc=2
 if type nproc &> /dev/null; then
@@ -8,43 +11,101 @@ elif type sysctl &> /dev/null; then
     num_proc="$(sysctl -n hw.ncpu)"
 fi
 
-# Consistent across bash and zsh
-# Exports
+# Add brew to the shell
+[ -d ~/.linuxbrew ] && eval "$(~/.linuxbrew/bin/brew shellenv)"
+[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -d /opt/homebrew/ ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/bin" ] && ! [[ "$PATH" == *"${HOME}/bin"* ]]; then
+    PATH="${HOME}/bin:$PATH"
+fi
+if [ -d "${HOME}/.local/bin" ] && ! [[ "$PATH" == *"${HOME}/.local/bin"* ]]; then
+    PATH="${HOME}/.local/bin:$PATH"
+fi
+
+# set PATH so it includes spicetify
+if [ -d "${HOME}/.spicetify" ]; then
+    PATH="$PATH:${HOME}/.spicetify"
+fi
+
+# Make the .local/lib dir if it does not exist
+[ ! -d "${HOME}/.local/lib" ] && mkdir -p "${HOME}/.local/lib"
+
 if type nvim &> /dev/null; then
     export EDITOR='nvim'
+
+    # Set pager to nvim
+    export MANPAGER='nvim +Man!'
 else
     export EDITOR='vim'
 fi
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/pink.yml"
+export LG_CONFIG_FILE="${HOME}/.config/lazygit/config.yml,${HOME}/.config/lazygit/pink.yml"
+
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_AUTO_UPDATE_SECS='86400'
 
 if [[ "$TERM" != xterm-256color* ]]; then
-    export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/tty.omp.toml"
+    export OH_MY_POSH_CONFIG="${HOME}/.config/oh-my-posh/tty.omp.toml"
     export EDITOR='vim'
 else
-    export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/catppuccin.omp.toml"
+    export OH_MY_POSH_CONFIG="${HOME}/.config/oh-my-posh/catppuccin.omp.toml"
 fi
 
 # Aliases
 alias vi="$EDITOR"
-alias fn="fzf --preview='bat -color=always {}' --bind 'enter:become(neovide {} &)'"
-alias fvim="fzf --preview='bat --color=always {}' --bind 'enter:become(nvim {})'"
-alias fbat="fzf --preview='bat --color=always {}' --bind 'enter:become(bat {})'"
+
+if type bat &> /dev/null; then
+    case "$SHELL_NAME" in
+        zsh)
+            alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+            alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+            ;;
+        bash)
+            alias bathelp='bat --plain --language=help'
+            help() {
+                "$@" --help 2>&1 | bathelp
+            }
+            ;;
+        *)
+            ;;
+    esac
+    alias binbat="bat --nonprintable-notation caret --show-all"
+
+fi
+
+if type fzf &> /dev/null; then
+
+    if type bat &> /dev/null; then
+        alias fn="fzf --preview='bat -color=always {}' --bind 'enter:become(neovide {} &)'"
+        alias fvim="fzf --preview='bat --color=always {}' --bind 'enter:become(nvim {})'"
+        alias fbat="fzf --preview='bat --color=always {}' --bind 'enter:become(bat {})'"
+    else
+        alias fn="fzf --preview='cat -color=always {}' --bind 'enter:become(neovide {} &)'"
+        alias fvim="fzf --preview='cat --color=always {}' --bind 'enter:become(nvim {})'"
+        alias fcat="fzf --preview='cat --color=always {}' --bind 'enter:become(cat {})'"
+    fi
+fi
 
 alias sreload="exec '$SHELL'"
-alias cz="chezmoi"
+
 alias zz="cd -"
 alias dl="cd ~/Downloads"
 
-alias ls="eza --icons=auto --classify=auto --hyperlink"
-alias ll="eza --long --header --icons=auto --classify=auto --git --smart-group --hyperlink"
-alias la="eza --long --all --header --icons=auto --classify=auto --git --smart-group --hyperlink"
-alias ltree="eza --tree --long --header --icons=auto --classify=auto --hyperlink"
-alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
+if type eza &> /dev/null; then
+    alias ls="eza --icons=auto --classify=auto --hyperlink"
+    alias ll="eza --long --header --icons=auto --classify=auto --git --smart-group --hyperlink"
+    alias la="eza --long --all --header --icons=auto --classify=auto --git --smart-group --hyperlink"
+    alias ltree="eza --tree --long --header --icons=auto --classify=auto --hyperlink"
+    alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
+fi
 
-alias binbat="bat --nonprintable-notation caret --show-all"
+if type lazygit &> /dev/null; then
+    alias lg="lazygit"
+fi
 
 if type xclip &> /dev/null; then
     alias clip-set="xclip -selection c"
@@ -62,7 +123,3 @@ alias makej="make -j $num_proc"
 alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
 alias iwyu-fix="make-iwuy 2> /tmp/iwyu.out; /usr/bin/env fix_includes.py < /tmp/iwyu.out"
 
-alias bathelp='bat --plain --language=help'
-help() {
-    "$@" --help 2>&1 | bathelp
-}

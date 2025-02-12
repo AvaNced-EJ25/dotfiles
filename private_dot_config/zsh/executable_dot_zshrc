@@ -1,15 +1,14 @@
+
 export ZDOTDIR="${HOME}/.config/zsh"
 
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] && ! [[ "$PATH" == *"$HOME/bin"* ]]; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] && ! [[ "$PATH" == *"$HOME/.local/bin"* ]]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+# VIM_CMD configs
+VIM_MODE_VICMD_KEY='^D'
+MODE_CURSOR_VIINS="#f5bde6 blinking block"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ed8796"
+MODE_CURSOR_VICMD="#a6da95 block"
+MODE_CURSOR_SEARCH="#c6a0f6 steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #8bd5ca"
 
 # Create ~/.zsh if needed
 [ ! -d ${ZDOTDIR:-~} ] && mkdir -p ${ZDOTDIR:-~}
@@ -24,68 +23,36 @@ source "${ZINIT_HOME}/zinit.zsh"
 CATPPUCCIN_THEME="${ZDOTDIR:-~}/funcs/catppuccin_macchiato-zsh-syntax-highlighting.zsh"
 
 if [ ! -f $CATPPUCCIN_THEME ]; then
-    wget --output-document="${CATPPUCCIN_THEME}" https://github.com/catppuccin/zsh-syntax-highlighting/raw/main/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+wget --output-document="${CATPPUCCIN_THEME}" https://github.com/catppuccin/zsh-syntax-highlighting/raw/main/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 fi
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-
-# Add brew to the shell
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-test -d /opt/homebrew/ && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-if type brew &>/dev/null; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
-# Load aliases file (need brew in the path first)
+# Load aliases file
 source "${HOME}/.config/aliases.sh"
 
-# Add lesspipe
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# Add zoxide on cd
-if type zoxide &>/dev/null; then
-    eval "$(zoxide init zsh --cmd cd)"
+# brew completions
+if type brew &>/dev/null; then
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 # Plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
 zinit light lukechilds/zsh-better-npm-completion
-
-# Keybinds
-# bindkey '^p' history-search-backward
-# bindkey '^n' history-search-forward
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light softmoth/zsh-vim-mode
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 alias zshrc="chezmoi edit ${ZDOTDIR:-~} --apply;sreload"
-alias kee="flatpak run org.keepassxc.KeePassXC cli"
 
-alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
-
-# set PATH so it includes spicetify
-if [ -d "$HOME/.spicetify" ]; then
-    PATH="$PATH:$HOME/.spicetify"
-fi
-
-# Set pager to nvim
-export MANPAGER='nvim +Man!'
-
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-export HOMEBREW_NO_ENV_HINTS=1
-export HOMEBREW_AUTO_UPDATE_SECS='86400'
 # Source all zsh files
 for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
-    source $z
-done
+                              source $z
+                              done
 
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/histfile
@@ -93,7 +60,13 @@ HISTSIZE=5000
 SAVEHIST=5000
 HISTDUP=erase
 setopt autocd beep nomatch appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups INC_APPEND_HISTORY
+
 bindkey -v
+
+# Keybinds
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^ ' autosuggest-accept
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -104,37 +77,6 @@ compinit
 # End of lines added by compinstall
 
 
-if [ -d "$HOME/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+# Load shell setup file
+source "${HOME}/.config/setup_shell.sh"
 
-# Add oh-my-posh
-if type oh-my-posh &>/dev/null; then
-    eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
-    eval "$(oh-my-posh completion zsh)"
-fi
-
-# Add pyenv
-if [ -d "$HOME/.pyenv" ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-# Add chezmoi
-if type chezmoi &>/dev/null; then
-    eval "$(chezmoi completion zsh)"
-fi
-
-# Add pip
-if type pip &>/dev/null; then
-    eval "$(pip completion --zsh)"
-fi
-
-# Add docker
-if type docker &>/dev/null; then
-    eval "$(docker completion zsh)"
-fi
