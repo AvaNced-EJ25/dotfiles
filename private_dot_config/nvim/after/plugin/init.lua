@@ -1,4 +1,4 @@
-
+local keymap = vim.keymap
 -- fold settings
 vim.wo.foldenable = false
 vim.wo.foldmethod = "expr"
@@ -66,4 +66,6 @@ ccc.setup({
     mappings = mapping,
 })
 
-vim.keymap.set('n', '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})
+keymap.set('n', '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})
+
+keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
