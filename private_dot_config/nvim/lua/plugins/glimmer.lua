@@ -38,5 +38,11 @@ return {
             { noremap = true, silent = true },
         }
     },
-    opts = {},
+    opts = {
+        overwrite = {
+            search = {
+                enabled = true
+            },
+        },
+    },
 }
