@@ -20,7 +20,7 @@ RunActivate(cmd) {
 
 
 !t::RunActivate(home_dir . "/.cargo/bin/alacritty.exe")
-#+!t:: {
+!^t:: {
     Run("*RunAs " . home_dir . "/.cargo/bin/alacritty.exe", , , &wpid)
     WinWaitActive("ahk_pid" wpid,,1)
     if !(WinActive("ahk_pid" wpid)) {
