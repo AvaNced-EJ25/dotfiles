@@ -2,6 +2,10 @@
 
 param([switch]$admin)
 
+Get-Command -Name "komorebic" -ErrorAction SilentlyContinue -ErrorVariable komorebic_installed
+
+$komorebic_installed = ($komorebic_installed.Capacity -eq 0)
+
 try {
     where.exe oh-my-posh.exe | Out-Null
 
@@ -17,14 +21,18 @@ try {
 # Non-admin stuff
 if ( -not $admin ) {
 
-    komorebic stop --bar --ahk
+    if ( $komorebic_installed ) {
+        komorebic stop --bar --ahk
+    }
 
     Write-Host "Updating Scoop packages..."
     scoop update --all
     Write-Host "Done."
 
-    komorebic fetch-asc
-    komorebic start --bar --ahk
+    if ( $komorebic_installed ) {
+        komorebic fetch-asc
+        komorebic start --bar --ahk
+    }
 
     try {
         where.exe chezmoi.exe | Out-Null
