@@ -79,6 +79,10 @@ if (Get-Command chezmoi -errorAction SilentlyContinue) {
     . "$PSScriptRoot\completions\chezmoi.ps1"
 }
 
+Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
+    . "$($_.FullName)"
+}
+
 if (Get-Command pip -errorAction SilentlyContinue) {
     if ((Test-Path Function:\TabExpansion) -and -not `
         (Test-Path Function:\_pip_completeBackup)) {
