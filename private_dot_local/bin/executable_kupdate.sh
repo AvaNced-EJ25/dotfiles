@@ -165,18 +165,20 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
 
     # Update completions
     if type chezmoi > /dev/null 2>&1; then
-        cp "extra/completions/_alacritty" "$(chezmoi source-path)/private_dot_config/zsh/zsh_functions/executable__alacritty"
+        cz_file="private_dot_config/zsh/dot_zsh_functions/executable__alacritty"
+        cp "extra/completions/_alacritty" "$(chezmoi source-path)/${cz_file}"
 
         # if the file changes, then push an update to chezmoi
-        if ! chezmoi git -- diff-index --quiet HEAD > /dev/null 2>&1; then
-            kprintf "Updating completions in chezmoi"
-            chezmoi git -- add "private_dot_config/zsh/zsh_functions/executable__alacritty"
+        if [ ! -z $(chezmoi git -- diff-index HEAD | grep "${cz_file}" &> /dev/null) ]; then
+            kprintf "Updating completions"
+            chezmoi git -- add "${cz_file}"
             chezmoi git -- commit -m "<K: AUTO> Update alacritty completions"
-            chezmoi git -- push
             kprintf "Done."
+        else
+            kprintf "No changes to completions"
         fi
     else
-        cp "extra/completions/_alacritty" "$HOME/.config/zsh/zsh_functions/_alacritty"
+        cp "extra/completions/_alacritty" "$HOME/.config/zsh/.zsh_functions/_alacritty"
     fi
     cd -
     kprintf 'Done.'
