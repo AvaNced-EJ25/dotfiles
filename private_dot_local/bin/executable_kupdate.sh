@@ -41,11 +41,16 @@ fi
 if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     kprintf "Syncing keepass database..."
     mounted=false
-    nc -z "steve.koman" 445 > /dev/null 2>&1
-    ret=$?
-    if [ -z "$(/bin/ls -A '/mnt/home')" ] && [ "$ret" -eq 0 ]; then
-        eval ~/.local/bin/mount.sh
-        mounted=$?
+    server_name=""
+    read -r server_name < ~/.local/lib/server
+
+    if [ ! -z $server_name ]; then
+        nc -z "${server_name}" 445 > /dev/null 2>&1
+        ret=$?
+        if [ -z "$(/bin/ls -A '/mnt/home')" ] && [ "$ret" -eq 0 ]; then
+            eval ~/.local/bin/mount.sh 'andrew' "${server_name}" 'home' '/mnt/home'
+            mounted=$?
+        fi
     fi
 
     eval "~/.local/lib/keepass.sh"
@@ -59,7 +64,7 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     fi
 
     if [ "$mounted" == 0 ]; then
-        eval ~/.local/bin/mount.sh
+        eval ~/.local/bin/mount.sh 'andrew' "${server_name}" 'home' '/mnt/home'
     fi
 fi
 
