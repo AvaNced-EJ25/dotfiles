@@ -29,7 +29,17 @@ kprintf 'Done.'
 
 if type chezmoi > /dev/null 2>&1; then
     kprintf 'Ugrading chezmoi...'
-    chezmoi upgrade
+    chezmoi upgrade --dry-run --progress
+    SCRIPTNAME=$(realpath $0)
+
+    if [ ! -z $(chezmoi diff $SCRIPTNAME) ]; then
+        kprintf "kupdate.sh has changed, restarting..."
+        chezmoi apply --apply
+        bash $SCRIPTNAME
+        exit $?
+    fi
+
+    chezmoi apply --progress
     kprintf 'Done.'
 
     kprintf 'Updating dotfiles...'
@@ -195,3 +205,6 @@ if [ -d "${HOME}/.local/lib/neovim" ]; then
     kprintf 'Done.'
 fi
 
+chezmoi apply
+
+exit 0
