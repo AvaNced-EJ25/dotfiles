@@ -29,7 +29,7 @@ kprintf 'Done.'
 
 if type chezmoi > /dev/null 2>&1; then
     kprintf 'Ugrading chezmoi...'
-    chezmoi upgrade --dry-run --progress
+    chezmoi upgrade --dry-run --progress true
     SCRIPTNAME=$(realpath $0)
 
     if [ ! -z $(chezmoi diff $SCRIPTNAME) ]; then
@@ -39,7 +39,7 @@ if type chezmoi > /dev/null 2>&1; then
         exit $?
     fi
 
-    chezmoi apply --progress
+    chezmoi apply --progress true
     kprintf 'Done.'
 
     kprintf 'Updating dotfiles...'
