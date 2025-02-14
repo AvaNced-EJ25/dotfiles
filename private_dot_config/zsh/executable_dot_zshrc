@@ -54,10 +54,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light lukechilds/zsh-better-npm-completion
 
-# Keybinds
-# bindkey '^p' history-search-backward
-# bindkey '^n' history-search-forward
-
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -93,6 +89,9 @@ SAVEHIST=5000
 HISTDUP=erase
 setopt autocd beep nomatch appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups INC_APPEND_HISTORY
 bindkey -v
+
+bindkey ^R history-incremental-search-backward 
+bindkey ^S history-incremental-search-forward
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
