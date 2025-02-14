@@ -86,6 +86,8 @@ for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
     source $z
 done
 
+source <(fzf --zsh)
+
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/histfile
 HISTSIZE=5000
