@@ -44,6 +44,8 @@ alias la="eza --long --all --header --icons=auto --classify=auto --git --smart-g
 alias ltree="eza --tree --long --header --icons=auto --classify=auto --hyperlink"
 alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
 
+alias lg="lazygit"
+
 alias binbat="bat --nonprintable-notation caret --show-all"
 
 if type xclip &> /dev/null; then
