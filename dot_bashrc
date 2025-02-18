@@ -144,30 +144,49 @@ if type fzf &>/dev/null; then
 
     eval "$(fzf --bash)"
 
+# Preview file content using bat (https://github.com/sharkdp/bat)
+    export FZF_CTRL_T_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'bat -n --color=always {}'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# CTRL-Y to copy the command into clipboard using pbcopy
+    export FZF_CTRL_R_OPTS="
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Print tree structure in the preview window
+    export FZF_ALT_C_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'tree -C {}'"
+
     export FZF_DEFAULT_OPTS=" \
-        --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-        --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-        --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
-        --height 40% --layout=reverse --border --info=inline"
+         --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+         --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+         --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+         --color=selected-bg:#494d64 \
+         --multi \
+         "
 
     export FZF_COMPLETION_TRIGGER='``'
 fi
 
 if [ -d "$HOME/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 if [ -d "$HOME/.pyenv" ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/.pyenv"
 fi
 
 # TODO: Move to .profile (and fix neovide to use proper python)
 if type pyenv &>/dev/null; then
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 fi
 
 [ -d "$HOME/.cargo" ] && . "$HOME/.cargo/env"

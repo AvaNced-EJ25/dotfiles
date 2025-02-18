@@ -1,12 +1,41 @@
 # Setup fzf
 # ---------
 
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'bat -n --color=always {}'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | clip-set)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
---color=selected-bg:#494d64 \
---multi"
+    --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+    --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+    --color=selected-bg:#494d64 \
+    --multi"
+
+function fzfrg {
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    INITIAL_QUERY="${*:-}"
+    fzf --ansi --disabled --query "$INITIAL_QUERY" \
+        --bind "start:reload:$RG_PREFIX {q}" \
+        --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+        --delimiter : \
+        --preview 'bat --color=always {1} --highlight-line {2}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+        --bind "enter:become($EDITOR {1} +{2})"
+}
 
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
