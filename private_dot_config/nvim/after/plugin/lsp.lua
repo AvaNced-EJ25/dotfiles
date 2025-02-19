@@ -6,6 +6,11 @@ keymap.set('n', 'gl', function () vim.diagnostic.open_float() end, { desc = 'Ope
 keymap.set('n', '[d', function () vim.diagnostic.jump({count=1, float=true}) end, { desc = 'Go to Next Diagnostic'})
 keymap.set('n', ']d', function () vim.diagnostic.jump({count=-1, float=true}) end, { desc = 'Go to Previous Diagnostic'})
 
+vim.diagnostic.config({
+    signs = true,
+    virtual_text = true,
+})
+
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
     callback = function(event)
