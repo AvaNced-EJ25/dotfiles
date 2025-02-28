@@ -16,12 +16,13 @@ final_space = true
   yellow = '#eed49f'
 
 [secondary_prompt]
-  template = ' '
+  template = ' '
   foreground = 'p:blue'
   background = 'transparent'
 
 [transient_prompt]
-  template = {{ "':3 [{{ .Shell }} {{now | date \"15:04:05\"}}] 󱢇 '" }}
+  template = {{ "'Ɛ: <p:sky>[{{ .Shell }} {{now | date \"15:04:05\"}}]</> 󱢇 '" }}
+  newline = true
   foreground = 'p:pink'
   background = 'transparent'
 
@@ -179,7 +180,7 @@ final_space = true
 
     [blocks.segments.properties]
     branch_icon = ' '
-    branch_max_length = 35
+    branch_template = [{{ "'{{ truncE 32 .Branch }}'" }}]
     cherry_pick_icon = ' '
     commit_icon = ' '
     fetch_status = true
@@ -200,6 +201,6 @@ final_space = true
 
   [[blocks.segments]]
     style = 'plain'
-    template = ':3 󱢇'
+    template = 'Ɛ: 󱢇'
     foreground = 'p:green'
     type = 'text'
