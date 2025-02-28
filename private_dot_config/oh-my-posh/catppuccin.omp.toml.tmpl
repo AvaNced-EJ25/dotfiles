@@ -57,6 +57,17 @@ final_space = true
 
   [[blocks.segments]]
     style = 'powerline'
+    template = {{ "'  {{ .CurrentDate | date .Format }}'" }}
+    foreground = 'p:text'
+    powerline_symbol = ''
+    background = 'p:mauve'
+    type = 'time'
+
+    [blocks.segments.properties]
+      time_format = '15:04:05'
+
+  [[blocks.segments]]
+    style = 'powerline'
     template = {{ "' {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}'" }}
     foreground = 'p:text'
     powerline_symbol = ''
@@ -106,23 +117,6 @@ final_space = true
     leading_powerline_symbol = ''
 
 [[blocks]]
-  type = 'prompt'
-  alignment = 'right'
-  overflow = 'hide'
-
-  [[blocks.segments]]
-    style = 'powerline'
-    powerline_symbol = ''
-    leading_powerline_symbol = ''
-    template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}'" }}
-    foreground = 'p:text'
-    background = 'p:yellow'
-    type = 'python'
-
-    [blocks.segments.properties]
-      fetch_virtual_env = true
-
-[[blocks]]
     type = 'prompt'
     alignment = 'left'
     newline = true
@@ -130,22 +124,11 @@ final_space = true
 
   [[blocks.segments]]
     style = 'powerline'
-    template = {{ "' {{ .CurrentDate | date .Format }}'" }}
+    template = {{ "'{{ .Path }}'" }}
     foreground = 'p:text'
     powerline_symbol = ''
-    background = 'p:mauve'
-    type = 'time'
     leading_powerline_symbol = ''
-
-    [blocks.segments.properties]
-      time_format = '15:04:05'
-
-  [[blocks.segments]]
-    style = 'powerline'
-    template = {{ "' {{ .Path }}'" }}
-    foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:sky'
+    background = 'p:lavender'
     type = 'path'
 
     [blocks.segments.properties]
@@ -159,14 +142,6 @@ final_space = true
         '~/Downloads' = '󰉍'
         '~/dev' = '󰵮'
         '/mnt/dev' = '󰵮'
-
-    [[blocks.segments]]
-    type = 'project'
-    style = 'powerline'
-    powerline_symbol = ''
-    foreground = 'p:text'
-    background = 'p:pink'
-    template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} '" }}
 
     [[blocks.segments]]
     style = 'powerline'
@@ -192,6 +167,50 @@ final_space = true
     source = 'cli'
     tag_icon = ' '
     truncate_symbol = '󰇘'
+
+[[blocks]]
+    type = 'prompt'
+    alignment = 'right'
+    overflow = 'hide'
+
+    [[blocks.segments]]
+    style = 'powerline'
+    powerline_symbol = ''
+    leading_powerline_symbol = ''
+    template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}'" }}
+    foreground = 'p:text'
+    background = 'p:yellow'
+    type = 'python'
+
+    [blocks.segments.properties]
+    fetch_virtual_env = true
+
+    [[blocks.segments]]
+    type = 'project'
+    style = 'powerline'
+    powerline_symbol = ''
+    leading_powerline_symbol = ''
+    foreground = 'p:text'
+    background = 'p:peach'
+    template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }}'" }}
+
+    [[blocks.segments]]
+    type = "react"
+    style = "powerline"
+    powerline_symbol = ''
+    leading_powerline_symbol = ''
+    foreground = "p:text"
+    background = "p:sky"
+    template = {{ "'  {{ .Full }}'" }}
+
+    [[blocks.segments]]
+    type = "yarn"
+    style = "powerline"
+    powerline_symbol = ''
+    leading_powerline_symbol = ''
+    foreground = "p:text"
+    background = "p:lavender"
+    template = {{ "' 󰄛 {{ .Full }}'" }}
 
 
 [[blocks]]
