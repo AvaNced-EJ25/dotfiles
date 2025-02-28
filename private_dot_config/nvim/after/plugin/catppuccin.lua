@@ -15,6 +15,7 @@ require("catppuccin").setup({
         mason = true,
         notify = true,
         nvim_surround = true,
+        lsp_trouble = true,
         indent_blankline = {
             enabled = true,
             scope_color = "pink",
