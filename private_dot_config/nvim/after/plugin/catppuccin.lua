@@ -1,4 +1,3 @@
-
 require("catppuccin").setup({
     flavour = "macchiato",
     term_colors = true,
@@ -7,7 +6,6 @@ require("catppuccin").setup({
         enabled = true,
         shade = "dark",
         percentage = 0.20,
-
     },
     integrations = {
         gitsigns = true,
@@ -16,6 +14,7 @@ require("catppuccin").setup({
         which_key = true,
         mason = true,
         notify = true,
+        nvim_surround = true,
         indent_blankline = {
             enabled = true,
             scope_color = "pink",
@@ -28,5 +27,4 @@ require("catppuccin").setup({
     },
 })
 
-vim.cmd.colorscheme "catppuccin"
-
+vim.cmd.colorscheme("catppuccin")
