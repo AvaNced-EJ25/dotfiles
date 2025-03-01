@@ -32,7 +32,7 @@ final_space = true
 
   [[blocks.segments]]
     style = 'powerline'
-    template = {{ "'{{ if .WSL }} WSL {{ end }}{{.Icon}}'" }}
+    template = {{ "' {{ if .WSL }} WSL {{ end }}{{.Icon}} '" }}
     foreground = 'p:text'
     powerline_symbol = ''
     background = 'p:blue'
@@ -49,7 +49,7 @@ final_space = true
 
   [[blocks.segments]]
     style = 'powerline'
-    template = ' '
+    template = '  '
     foreground = 'p:text'
     powerline_symbol = ''
     background = 'p:yellow'
@@ -68,7 +68,7 @@ final_space = true
 
   [[blocks.segments]]
     style = 'powerline'
-    template = {{ "' {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}'" }}
+    template = {{ "' {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} '" }}
     foreground = 'p:text'
     powerline_symbol = ''
     background = 'p:yellow'
@@ -132,16 +132,16 @@ final_space = true
     type = 'path'
 
     [blocks.segments.properties]
-      folder_icon = '....'
-      home_icon = '󱂵'
+      folder_icon = '..  ..'
+      home_icon = ' 󱂵 '
       max_depth = 3
       style = 'agnoster_short'
 
       [blocks.segments.properties.mapped_locations]
-        '~/.dotfiles' = ''
-        '~/Downloads' = '󰉍'
-        '~/dev' = '󰵮'
-        '/mnt/dev' = '󰵮'
+        '~/.dotfiles' = '  '
+        '~/Downloads' = ' 󰉍 '
+        '~/dev' = ' 󰵮 '
+        '/mnt/dev' = ' 󰵮 '
 
     [[blocks.segments]]
     style = 'powerline'
