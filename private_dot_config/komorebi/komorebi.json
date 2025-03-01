@@ -28,7 +28,7 @@
         "height": 40,
         "mode": "OnStack",
         "tabs": {
-            "font_family": "FiraCode Nerd Font",
+            "font_family": "JetBrainsMono Nerd Font",
             "font_size": 30,
             "width": 250
         }
