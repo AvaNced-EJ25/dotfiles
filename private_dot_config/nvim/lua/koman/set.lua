@@ -37,7 +37,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80,120"
 
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h10"
+vim.o.guifont = "JetBrainsMono Nerd Font:h10"
 vim.o.timeout = true
 vim.o.timeoutlen = 3000
 vim.o.foldenable = false

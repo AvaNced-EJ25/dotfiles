@@ -43,5 +43,5 @@
 # resize-overlay-duration = 4s 200ms
 
 theme = catppuccin-macchiato.conf
-# font-family = JetBrainsMono Nerd Font Mono
+# font-family = JetBrainsMono Nerd Font
 font-feature = +cv02, +cv05, +cv09, +cv14, +ss04, +cv16, +cv31, +cv25, +cv26, +cv32, +cv28, +ss10, +zero, +onum
