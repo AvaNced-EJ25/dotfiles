@@ -16,12 +16,12 @@ final_space = true
   yellow = '#eed49f'
 
 [secondary_prompt]
-  template = ' '
+  template = ''
   foreground = 'p:blue'
   background = 'transparent'
 
 [transient_prompt]
-  template = {{ "'Ɛ: <p:sky>[{{ .Shell }} {{now | date \"15:04:05\"}}]</> 󱢇 '" }}
+  template = {{ "':3 <p:sky>[{{ .Shell }} {{now | date \"15:04:05\"}}]</> 󱢇'" }}
   newline = true
   foreground = 'p:pink'
   background = 'transparent'
@@ -220,6 +220,6 @@ final_space = true
 
   [[blocks.segments]]
     style = 'plain'
-    template = 'Ɛ: 󱢇'
+    template = ':3 󱢇'
     foreground = 'p:green'
     type = 'text'
