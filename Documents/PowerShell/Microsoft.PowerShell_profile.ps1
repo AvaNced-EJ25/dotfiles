@@ -15,18 +15,12 @@ function bin-bat { bat --nonprintable-notation caret --show-all $args }
 
 function reboot-func {
     if ( -not $args ) {
-        $args=0
+        $shutdown_args = 0
+    } else {
+        $shutdown_args = $args
     }
 
-    shutdown /r /t $args
-}
-
-function pwd-func {
-    $out=Get-Location
-    if ( $out ) {
-        return ($out.path).trim()
-    }
-    return $null
+    shutdown /r /t $shutdown_args
 }
 
 # Add ~/.local/bin to PATH if it exists
@@ -60,7 +54,6 @@ New-Alias -Name binbat -Value bin-bat
 
 New-Alias -Name sreload -value refreshenv.cmd
 New-Alias -Name reboot -Value reboot-func
-New-Alias -Name pwd -Value pwd-func
 
 #New-Alias -Name more less.exe
 #$env:PAGER = 'less.exe'
@@ -68,7 +61,6 @@ $env:EDITOR= 'nvim'
 
 if (Get-Command oh-my-posh -errorAction SilentlyContinue) {
     oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
-    . "$PSScriptRoot\completions\omp.ps1"
 }
 
 if (Get-Command zoxide -errorAction SilentlyContinue) {
