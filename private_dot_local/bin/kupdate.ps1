@@ -1,8 +1,10 @@
 #!/bin/env -S echo "This is a powershell script lol, try again"
 
-param([switch]$admin)
+param(
+    [switch]$admin
+)
 
-Get-Command -Name "komorebic" -ErrorAction SilentlyContinue -ErrorVariable komorebic_installed
+Get-Command -Name "komorebic" -ErrorAction SilentlyContinue -ErrorVariable komorebic_installed | Out-Null
 
 $komorebic_installed = ($komorebic_installed.Capacity -eq 0)
 
@@ -44,6 +46,7 @@ if ( -not $admin ) {
 
     try {
         $upgrade_spotify = $true
+        $upgrade_spotify = $true
         Write-Host "Updating spotify..."
         where.exe spicetify.exe | Out-Null
 
@@ -60,7 +63,22 @@ if ( -not $admin ) {
         }
 
         if ( $upgrade_spotify ) {
+        if ( Get-Process -Name Spotify -ErrorAction SilentlyContinue ) {
+            Write-Host "Please close Spotify..."
+            try {
+                Wait-Process -Name Spotify -Timeout 10 -ErrorAction Stop
+            } catch {
+                if ( Get-Process -Name Spotify -ErrorAction SilentlyContinue ) {
+                    Write-Host "Spotify was not closed, skipping."
+                    upgrade-spotify = $false
+                }
+            }
+        }
 
+        if ( $upgrade_spotify ) {
+
+            winget upgrade spotify
+            Write-Host "Done."
             winget upgrade spotify
             Write-Host "Done."
 
@@ -68,7 +86,12 @@ if ( -not $admin ) {
             spicetify update
             Write-Host "Done."
         }
+            Write-Host "Updating spicetify..."
+            spicetify update
+            Write-Host "Done."
+        }
     } catch {}
+
 
 }
 
@@ -93,6 +116,9 @@ if ($myWindowsPrincipal.IsInRole($adminRole)) {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
 
     # Specify the current script path and name as a parameter
+    $newProcess.Arguments = $myInvocation.MyCommand.Definition + " -admin ";
+
+    Write-Host $newProcess.Arguments
     $newProcess.Arguments = $myInvocation.MyCommand.Definition + " -admin ";
 
     Write-Host $newProcess.Arguments
