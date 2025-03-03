@@ -14,11 +14,6 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
-    {
-        "nvim-zh/colorful-winsep.nvim",
-        config = true,
-        event = { "WinLeave" },
-    },
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     { -- optional completion source for require statements and module annotations
         "hrsh7th/nvim-cmp",
