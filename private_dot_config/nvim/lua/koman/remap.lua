@@ -28,4 +28,4 @@ keymap.set('n', '<leader>qa', "<cmd>qall<cr>", { desc = "Quit All Buffers" })
 keymap.set('n', '<leader>fe', tree_api.tree.toggle, { desc = 'Toggle Nvim Tree' })
 
 keymap.set('i', '<C-d>', '<Esc>', { desc = "Enter normal mode" })
-keymap.set({'n', 'v'}, '<leader>D', '"_d', { silent = true, nowait = true, desc = "Send to the black hole" })
+keymap.set({'n', 'v'}, '<leader>dd', '"_d', { silent = true, nowait = true, desc = "Yeet into the black hole" })
