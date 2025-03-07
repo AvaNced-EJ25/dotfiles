@@ -47,6 +47,8 @@ if type chezmoi > /dev/null 2>&1; then
     kprintf 'Done.'
 fi
 
+sudo -nv
+
 # keepass.sh is not in chezmoi
 if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     kprintf "Syncing keepass database..."
@@ -78,6 +80,8 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     fi
 fi
 
+sudo -nv
+
 if [[ $os_name == "Linux" ]]; then
     if type apt > /dev/null 2>&1; then
         kprintf 'Updating system repositories...'
@@ -104,6 +108,8 @@ if [[ $os_name == "Linux" ]]; then
         kprintf 'Done.'
     fi
 
+    sudo -nv
+
     if type flatpak > /dev/null 2>&1; then
         kprintf 'Updating flatpak applications...'
          flatpak update -y
@@ -117,11 +123,15 @@ if [[ $os_name == "Linux" ]]; then
     fi
 fi
 
+sudo -nv
+
 if type spicetify > /dev/null 2>&1; then
     kprintf 'Updating Spicetify...'
     spicetify update
     kprintf 'Done.'
 fi
+
+sudo -nv
 
 if type brew > /dev/null 2>&1; then
     kprintf 'Updating brew bottles...'
@@ -130,17 +140,23 @@ if type brew > /dev/null 2>&1; then
     kprintf 'Done.'
 fi
 
+sudo -nv
+
 if type pyenv > /dev/null 2>&1; then
     kprintf 'Updating pyenv...'
     pyenv update
     kprintf 'Done.'
 fi
 
+sudo -nv
+
 if type rustup > /dev/null 2>&1; then
     kprintf 'Updating rust...'
     rustup update
     kprintf 'Done.'
 fi
+
+sudo -nv
 
 if type cargo > /dev/null 2>&1; then
     if [ ! -z "$(cargo install --list | grep 'alacritty')" ]; then
@@ -156,6 +172,8 @@ if type cargo > /dev/null 2>&1; then
     fi
 fi
 
+sudo -nv
+
 if type oh-my-posh > /dev/null 2>&1; then
     kprintf 'Updating Oh-My-Posh...'
     oh-my-posh upgrade
@@ -166,6 +184,8 @@ if type oh-my-posh > /dev/null 2>&1; then
     fi
     kprintf 'Done.'
 fi
+
+sudo -nv
 
 if [ -d "${HOME}/.local/lib/alacritty" ]; then
     kprintf 'Updating local build of alacritty...'
@@ -193,6 +213,8 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
     cd -
     kprintf 'Done.'
 fi
+
+sudo -nv
 
 if [ -d "${HOME}/.local/lib/neovim" ]; then
     kprintf 'Updating local build of neovim...'
