@@ -14,7 +14,7 @@ elseif os.name() == "Windows" then
     dap.adapters.cppdbg = {
         id = 'cppdbg',
         type = 'executable',
-        command = os.getenv("HOME") .. '\\.local\\lib\\cppdbg\\debugAdapters\\bin\\OpenDebugAD7.exe',
+        command = MASON_PATH .. '\\bin\\OpenDebugAD7.cmd',
         options = {
             detached = false
         }

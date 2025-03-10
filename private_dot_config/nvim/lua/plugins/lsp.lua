@@ -5,7 +5,13 @@ return {
 
     {
         'williamboman/mason.nvim',
-        config = function() MASON_PATH = os.getenv("HOME") .. "/.local/share/nvim/mason"end,
+        config = function()
+            if os.name() == "Linux" then
+                MASON_PATH = os.getenv("HOME") .. "/.local/share/nvim/mason"
+            elseif os.name() == "Windows" then
+                MASON_PATH = os.getenv("LOCALAPPDATA") .. "\\nvim-data\\mason"
+            end
+        end,
     },
     {'williamboman/mason-lspconfig.nvim'},
     {
