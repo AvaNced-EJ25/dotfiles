@@ -68,7 +68,7 @@ if (Get-Command zoxide -errorAction SilentlyContinue) {
 }
 
 if (Get-Command chezmoi -errorAction SilentlyContinue) {
-    . "$PSScriptRoot\completions\chezmoi.ps1"
+    Invoke-Expression (& { (chezmoi completion powershell | Out-String)})
 }
 
 Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
