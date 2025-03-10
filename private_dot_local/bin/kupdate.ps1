@@ -92,7 +92,9 @@ if ( -not $admin ) {
         }
     } catch {}
 
-
+    if (Get-Command rustup -errorAction SilentlyContinue) {
+        rustup up
+    }
 }
 
 # Run Admin Stuff
