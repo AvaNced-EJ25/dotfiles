@@ -39,11 +39,26 @@ if type chezmoi > /dev/null 2>&1; then
         exit $?
     fi
 
+    sudo -nv
+
     chezmoi apply --progress true
     kprintf 'Done.'
 
     kprintf 'Updating dotfiles...'
     chezmoi update
+    kprintf 'Done.'
+fi
+
+sudo -nv
+
+if type oh-my-posh > /dev/null 2>&1; then
+    kprintf 'Updating Oh-My-Posh...'
+    oh-my-posh upgrade
+    ret=$?
+    if [ "$ret" -ne 0 ]; then
+        kprinterr 'Oh My Posh could not upgrade, retrying with root permissions...'
+        sudo oh-my-posh upgrade
+    fi
     kprintf 'Done.'
 fi
 
@@ -97,6 +112,7 @@ if [[ $os_name == "Linux" ]]; then
             esac
             tput rc
             echo -en "\r[$j] Waiting for other software managers to finish..." 
+            sudo -nv
             sleep 0.5
             ((i=i+1))
         done
@@ -112,8 +128,8 @@ if [[ $os_name == "Linux" ]]; then
 
     if type flatpak > /dev/null 2>&1; then
         kprintf 'Updating flatpak applications...'
-         flatpak update -y
-         sudo flatpak update -y
+        flatpak update -y
+        sudo flatpak update -y
         kprintf 'Done.'
     fi
 
@@ -170,19 +186,6 @@ if type cargo > /dev/null 2>&1; then
         cargo install --git https://github.com/neovide/neovide
         kprintf 'Done.'
     fi
-fi
-
-sudo -nv
-
-if type oh-my-posh > /dev/null 2>&1; then
-    kprintf 'Updating Oh-My-Posh...'
-    oh-my-posh upgrade
-    ret=$?
-    if [ "$ret" -ne 0 ]; then
-        kprinterr 'Oh My Posh could not upgrade, retrying with root permissions...'
-        sudo oh-my-posh upgrade
-    fi
-    kprintf 'Done.'
 fi
 
 sudo -nv
