@@ -71,8 +71,10 @@ if (Get-Command chezmoi -errorAction SilentlyContinue) {
     Invoke-Expression (& { (chezmoi completion powershell | Out-String)})
 }
 
-Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
-    . "$($_.FullName)"
+if (Test-Path -Path "$PSScriptRoot\functions") {
+	Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
+		. "$($_.FullName)"
+	}
 }
 
 if (Get-Command pip -errorAction SilentlyContinue) {
