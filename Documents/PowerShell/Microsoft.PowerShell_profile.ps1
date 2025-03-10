@@ -100,3 +100,4 @@ if (Get-Command pip -errorAction SilentlyContinue) {
     }
 }
 
+Import-Module scoop-completion
