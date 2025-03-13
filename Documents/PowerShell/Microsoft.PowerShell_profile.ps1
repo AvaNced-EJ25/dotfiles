@@ -730,7 +730,7 @@ New-Alias -Name sreload -value refreshenv.cmd
 New-Alias -Name reboot -Value reboot-func
 
 #New-Alias -Name more less.exe
-#$env:PAGER = 'less.exe'
+$env:PAGER = 'less.exe'
 $env:EDITOR= 'nvim'
 
 if (Get-Command oh-my-posh -errorAction SilentlyContinue) {
