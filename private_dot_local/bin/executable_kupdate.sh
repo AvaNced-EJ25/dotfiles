@@ -32,6 +32,8 @@ if type chezmoi > /dev/null 2>&1; then
     chezmoi upgrade --dry-run --progress true
     SCRIPTNAME=$(realpath $0)
 
+    echo $(chezmoi diff $SCRIPTNAME)
+
     if [ ! -z $(chezmoi diff $SCRIPTNAME) ]; then
         kprintf "kupdate.sh has changed, restarting..."
         chezmoi apply --apply
