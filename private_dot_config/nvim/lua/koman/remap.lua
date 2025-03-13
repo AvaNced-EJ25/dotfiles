@@ -18,7 +18,11 @@ keymap.set('n', '<leader>nh', '<cmd>:noh<cr>', { desc = 'No Highlight Search' })
 keymap.set('n', '<leader>sc', function() vim_opt_toggle("cursorcolumn", true, false, "Cursor Column") end,
     { desc = 'Toggle Cursor Column' })
 
-keymap.set('n', '<leader>wd', '<cmd>:w !diff % - <cr>', { desc = 'View File Diff' })
+keymap.set('n', '<leader>wd', function()
+    local col = vim.o.columns - 4
+    vim.cmd("w !difft --width " .. col .. " --syntax-highlight off % - ")
+end, { desc = 'View File Diff' })
+
 keymap.set('n', '<leader>ww', "<cmd>w<cr>", { silent = true })
 keymap.set('n', '<leader>wq', "<cmd>wq<cr>", { silent = true })
 
