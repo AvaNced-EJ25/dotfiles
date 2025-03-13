@@ -177,8 +177,9 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
     cargo build --release
 
     # Update completions
+    # TODO: Update all completions
     if type chezmoi > /dev/null 2>&1; then
-        cz_file="private_dot_config/zsh/dot_zsh_functions/executable__alacritty"
+        cz_file="private_dot_config/zsh/dot_zsh_completions/executable__alacritty"
         cp "extra/completions/_alacritty" "$(chezmoi source-path)/${cz_file}"
 
         # if the file changes, then push an update to chezmoi
@@ -191,7 +192,7 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
             kprintf "No changes to completions"
         fi
     else
-        cp "extra/completions/_alacritty" "$HOME/.config/zsh/.zsh_functions/_alacritty"
+        cp "extra/completions/_alacritty" "$HOME/.config/zsh/.zsh_completions/_alacritty"
     fi
     cd -
     kprintf 'Done.'
