@@ -644,8 +644,8 @@ Register-ArgumentCompleter -Native -CommandName 'rustup' -ScriptBlock {
         }
     })
 
-    $completions.Where{ $_.CompletionText -like "$wordToComplete*" } |
-        Sort-Object -Property ListItemText
+if (Get-Command bat -ErrorAction SilentlyContinue) {
+    Invoke-Expression (& { (bat --completion ps1 | Out-String)})
 }
 
 # pip powershell completion start
