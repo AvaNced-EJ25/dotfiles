@@ -16,7 +16,7 @@ export FZF_CTRL_R_OPTS="
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
-  --preview 'tree -C {}'"
+  --preview 'eza --tree --icons=auto --classify=auto {}'"
 
 export FZF_DEFAULT_OPTS=" \
     --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
