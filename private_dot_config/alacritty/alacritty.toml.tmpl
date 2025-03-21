@@ -18,11 +18,13 @@ import = [
     {{- end }}
 
 [window]
-    {{- if not .decorations }}
+    {{- if not .window.decorations }}
     decorations = "None"
     {{- end }}
     startup_mode = "Maximized"
+    {{- if .window.transparency }}
     opacity = 0.95
+    {{- end }}
     dynamic_title = true
 
 [env]

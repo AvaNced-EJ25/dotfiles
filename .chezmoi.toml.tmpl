@@ -1,6 +1,7 @@
 {{ $email := promptString "email" -}}
 {{ $work := promptBool "Work System" }}
 {{ $window_decorations := promptBool "Show window decorations" }}
+{{ $window_transparency := promptBool "Enable Transparent Windows" }}
 
 sourceDir = "~/.dotfiles"
 
@@ -11,7 +12,9 @@ command = "C:/Program Files/PowerShell/7/pwsh.exe"{{ end }}
 [data]
     email = {{ $email | quote }}
     work = {{ $work }}
+    [data.window]
     decorations = {{ $window_decorations }}
+    transparency = {{ $window_transparency }}
 
 [keepassxc]
     database = "{{ .chezmoi.homeDir }}/Documents/Chezmoi.kdbx"
