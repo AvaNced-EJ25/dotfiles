@@ -15,7 +15,6 @@ import = [
     args = ["zsh"]
     {{- else if eq .chezmoi.os "windows" -}}
     program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-    args = ["-WorkingDirectory", "~"]
     {{- end }}
 
 [window]
