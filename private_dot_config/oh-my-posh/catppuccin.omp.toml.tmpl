@@ -141,7 +141,11 @@ final_space = true
         '~/.dotfiles' = ' '
         '~/Downloads' = '󰉍 '
         '~/dev' = '󰵮 '
+	{{- if eq .chezmoi.os  "linux" }}
         '/mnt/dev' = '󰵮 '
+        {{- else if eq .chezmoi.os "windows" }}
+        'C:/Dev' = '󰵮 '
+        {{- end }}
 
     [[blocks.segments]]
     style = 'powerline'
