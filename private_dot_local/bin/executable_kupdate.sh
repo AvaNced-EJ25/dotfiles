@@ -92,6 +92,12 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
 fi
 
 if [[ $os_name == "Linux" ]]; then
+    if type fwupdmgr > /dev/null 2>&1; then
+        kprintf 'Updating BIOS and Device FW'
+        sudo fwupdmgr get-updates
+        kprintf 'Done.'
+    fi
+
     if type apt > /dev/null 2>&1; then
         kprintf 'Updating system repositories...'
 
