@@ -1,4 +1,3 @@
-vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.number = true
 
@@ -6,15 +5,14 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.smartindent = true
 
+vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars = "tab:󰌒∙,leadmultispace: :,multispace:∙,precedes:󰅁,extends:󰅂,nbsp:∙,trail:"
 vim.opt.cursorline = true
 vim.opt.showbreak = "󰌑"
 
-vim.opt.smartindent = true
-
-vim.opt.wrap = false
 
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -34,13 +32,11 @@ vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80,120"
 
 vim.o.guifont = "JetBrainsMono Nerd Font:h10"
 vim.o.timeout = true
 vim.o.timeoutlen = 3000
-vim.o.foldenable = false
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
