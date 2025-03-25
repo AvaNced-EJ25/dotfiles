@@ -12,7 +12,7 @@ vim.opt.list = true
 vim.opt.listchars = "tab:󰌒∙,leadmultispace: :,multispace:∙,precedes:󰅁,extends:󰅂,nbsp:∙,trail:"
 vim.opt.cursorline = true
 vim.opt.showbreak = "󰌑"
-
+vim.opt.colorcolumn = "120"
 
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -31,8 +31,6 @@ vim.opt.incsearch = true
 vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
-
-vim.opt.colorcolumn = "80,120"
 
 vim.o.guifont = "JetBrainsMono Nerd Font:h10"
 vim.o.timeout = true
