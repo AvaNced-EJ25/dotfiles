@@ -57,11 +57,18 @@ if vim.g.neovide then
     vim.g.neovide_padding_bottom=8
 end
 
+local fzf_path = ""
 
 if os.name() == "Linux" then
-    vim.opt.rtp:append("/home/linuxbrew/.linuxbrew/opt/fzf")
+    fzf_path = "/home/linuxbrew/.linuxbrew/opt/fzf"
+elseif os.name() == "MacOS" then
+    fzf_path = "/opt/homebrew/bin/fzf"
 elseif os.name() == "Windows" then
-    vim.opt.rtp:append("C:\\ProgramData\\chocolatey\\bin\\fzf.exe")
+    fzf_path = vim.env("HOME") .. "\\scoop\\apps\\fzf\\current"
+end
+
+if (file_exists(fzf_path)) then
+    vim.opt.rtp:append(fzf_path)
 end
 
 if file_exists(PYTHON3_PATH) then
