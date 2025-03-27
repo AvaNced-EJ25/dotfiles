@@ -69,6 +69,10 @@ alias makej="make -j $num_proc"
 alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
 alias iwyu-fix="make-iwuy 2> /tmp/iwyu.out; /usr/bin/env fix_includes.py < /tmp/iwyu.out"
 
+if type kitten &> /dev/null; then
+    alias s="kitten ssh"
+fi
+
 alias bathelp='bat --plain --language=help'
 help() {
     "$@" --help 2>&1 | bathelp
