@@ -97,13 +97,6 @@ fi
 
 source "${HOME}/.config/aliases.sh"
 
-# Start the ssh-agent if it is not already running
-runcount=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
-if [ $runcount -eq 0 ]; then
-    echo Starting SSH Agent
-    eval $(ssh-agent -s)
-fi
-
 [ -d ~/.linuxbrew ] && eval "$(~/.linuxbrew/bin/brew shellenv)"
 [ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
