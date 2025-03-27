@@ -177,6 +177,8 @@ if type cargo > /dev/null 2>&1; then
     fi
 fi
 
+# TODO: Update Kitty
+
 if [ -d "${HOME}/.local/lib/alacritty" ]; then
     kprintf 'Updating local build of alacritty...'
     cd "${HOME}/.local/lib/alacritty"
