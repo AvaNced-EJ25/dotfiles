@@ -79,6 +79,10 @@
 # Open Launchpad
 alt - space : open /System/Applications/Launchpad.app
 
+# Move between workspaces (MacOS Rebind)
+cmd + alt - l : skhd -k "ctrl - right"
+cmd + alt - h : skhd -k "ctrl - left"
+
 # focus window
 alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
