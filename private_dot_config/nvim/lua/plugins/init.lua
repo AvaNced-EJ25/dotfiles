@@ -76,4 +76,9 @@ return {
     { 'mbbill/undotree' },
     { 'tpope/vim-fugitive' },
     { 'uga-rosa/ccc.nvim' },
+    {
+        "fladson/vim-kitty",
+        ft = "kitty",
+        -- tag = "*"  -- You can select a tagged version
+    },
 }
