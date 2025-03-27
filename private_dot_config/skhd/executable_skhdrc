@@ -160,4 +160,4 @@ shift + alt - 0 : yabai -m space --balance
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
 # Launch terminal
-ctrl + alt - t : alacritty
+cmd - return : kitty --single-instance -d ~
