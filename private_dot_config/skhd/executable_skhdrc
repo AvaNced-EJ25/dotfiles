@@ -161,3 +161,6 @@ shift + alt - 0 : yabai -m space --balance
 
 # Launch terminal
 cmd - return : kitty --single-instance -d ~
+
+# Close Window
+cmd - q : yabai -m window --close
