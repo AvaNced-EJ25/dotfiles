@@ -37,6 +37,8 @@ function fzfrg {
         --bind "enter:become($EDITOR {1} +{2})"
 }
 
+export FZF_COMPLETION_TRIGGER='``'
+
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
@@ -64,7 +66,6 @@ _fzf_comprun() {
     local command=$1
     shift
 
-    # cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
     case "$command" in
         cd)           fzf --preview 'eza --tree --level=3 --color=always --icons=auto --classify=auto --hyperlink {} | head -200'   "$@" ;;
         export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
