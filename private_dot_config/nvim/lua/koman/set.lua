@@ -6,7 +6,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
-vin.opt.showmode = false
+vim.opt.showmode = false
 
 vim.opt.wrap = false
 vim.opt.list = true
