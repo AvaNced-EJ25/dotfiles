@@ -101,4 +101,10 @@ return {
     { 'tpope/vim-fugitive' },
     { 'uga-rosa/ccc.nvim' },
     { "fladson/vim-kitty", ft = "kitty" },
+    {
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
+        opts = { -- set to setup table
+        },
+    }
 }
