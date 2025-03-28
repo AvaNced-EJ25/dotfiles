@@ -138,16 +138,16 @@ if [[ $os_name == "Linux" ]]; then
     fi
 fi
 
-if type spicetify > /dev/null 2>&1; then
-    kprintf 'Updating Spicetify...'
-    spicetify update
-    kprintf 'Done.'
-fi
-
 if type brew > /dev/null 2>&1; then
     kprintf 'Updating brew bottles...'
     brew update
     brew upgrade
+    kprintf 'Done.'
+fi
+
+if type spicetify > /dev/null 2>&1; then
+    kprintf 'Updating Spicetify...'
+    spicetify update
     kprintf 'Done.'
 fi
 
