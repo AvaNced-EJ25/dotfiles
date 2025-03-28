@@ -20,11 +20,15 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/pink.yml"
 
-if [[ "$TERM" == xterm-256color* ]] || [[ "$TERM" == xterm-ghostty ]] || [[ "$TERM" == xterm-kitty ]]; then
+if [[ "$TERM" == xterm-256color* ]] || [[ "$TERM" == xterm-kitty ]]; then
     export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/catppuccin.omp.toml"
 else
     export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/tty.omp.toml"
     export EDITOR='vim'
+fi
+
+if [[ "$TERM" == xterm-kitty ]]; then
+    alias s="kitten ssh"
 fi
 
 # Start the ssh-agent if it is not already running
@@ -68,10 +72,6 @@ alias egrep="egrep --color=auto"
 alias makej="make -j $num_proc"
 alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
 alias iwyu-fix="make-iwuy 2> /tmp/iwyu.out; /usr/bin/env fix_includes.py < /tmp/iwyu.out"
-
-if type kitten &> /dev/null; then
-    alias s="kitten ssh"
-fi
 
 alias bathelp='bat --plain --language=help'
 help() {
