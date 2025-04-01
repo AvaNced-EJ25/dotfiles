@@ -169,4 +169,4 @@ shift + alt - 0 : yabai -m space --balance
 cmd - return : kitty --single-instance -d ~
 
 # Close Window
-cmd - q : yabai -m window --close
+alt + shift - q : yabai -m window --close
