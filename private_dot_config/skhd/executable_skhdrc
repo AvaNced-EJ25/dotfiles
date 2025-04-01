@@ -79,6 +79,9 @@
 # Open Launchpad
 alt - space : open /System/Applications/Launchpad.app
 
+# Open Screenshot
+f13 : open /System/Applications/Utilities/Screenshot.app
+
 # Move between workspaces (MacOS Rebind)
 alt + shift - h : skhd -k "ctrl - left"
 alt + shift - j : skhd -k "ctrl - down"
