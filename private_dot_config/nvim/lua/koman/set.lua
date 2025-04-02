@@ -63,7 +63,7 @@ if os.name() == "Linux" then
 elseif os.name() == "MacOS" then
     fzf_path = "/opt/homebrew/bin/fzf"
 elseif os.name() == "Windows" then
-    fzf_path = vim.env("HOME") .. "\\scoop\\apps\\fzf\\current"
+    fzf_path = os.getenv("HOME") .. "\\scoop\\apps\\fzf\\current"
 end
 
 if (file_exists(fzf_path)) then
