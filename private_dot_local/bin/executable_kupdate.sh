@@ -177,7 +177,14 @@ if type cargo > /dev/null 2>&1; then
     fi
 fi
 
-# TODO: Update Kitty
+if type kitty > /dev/null 2>&1; then
+    latest=$(curl -fsSL https://sw.kovidgoyal.net/kitty/current-version.txt)
+    if [[ ! "$(kitty --version)" == *$latest* ]]; then
+        kprintf "Updating kitty to $($latest)"
+        curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
+        kprintf 'Done.'
+    fi
+fi
 
 if [ -d "${HOME}/.local/lib/alacritty" ]; then
     kprintf 'Updating local build of alacritty...'
