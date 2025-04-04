@@ -1,5 +1,30 @@
 #!/usr/bin/env bash
 
+# Determine what (Bourne compatible) shell we are running under. Put the result
+# in $INVOKED_SHELL (not $SHELL) so further code can depend on the shell type.
+
+if test -n "$ZSH_VERSION"; then
+    INVOKED_SHELL=zsh
+elif test -n "$BASH_VERSION"; then
+    INVOKED_SHELL=bash
+elif test -n "$KSH_VERSION"; then
+    INVOKED_SHELL=ksh
+elif test -n "$FCEDIT"; then
+    INVOKED_SHELL=ksh
+elif test -n "$PS3"; then
+    INVOKED_SHELL=unknown
+else
+    INVOKED_SHELL=sh
+fi
+
+# If we can invoke this using zsh, then do it
+if type zsh > /dev/null 2>&1; then
+    if [ "$INVOKED_SHELL" != zsh ]; then
+        zsh $0
+        exit $?
+    fi
+fi
+
 BLUE="\033[0;34m"
 RED="\033[0;31m"
 PURPLE="\033[0;35m"
@@ -57,6 +82,15 @@ if type oh-my-posh > /dev/null 2>&1; then
         kprinterr 'Oh My Posh could not upgrade, retrying with root permissions...'
         sudo oh-my-posh upgrade
     fi
+    kprintf 'Done.'
+fi
+
+if [ "$INVOKED_SHELL" = zsh ]; then
+    kprintf 'Updating zinit and ZSH plugins'
+    ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+    [ -d $ZINIT_HOME ] && source "${ZINIT_HOME}/zinit.zsh"
+    zinit self-update
+    zinit update
     kprintf 'Done.'
 fi
 
