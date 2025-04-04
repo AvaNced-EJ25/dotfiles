@@ -19,7 +19,6 @@ if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-
 # Create ~/.zsh if needed
 [ ! -d ${ZDOTDIR:-~} ] && mkdir -p ${ZDOTDIR:-~}
 
