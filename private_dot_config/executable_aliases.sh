@@ -31,11 +31,6 @@ if [[ "$TERM" == xterm-kitty ]]; then
     alias s="kitten ssh"
 fi
 
-# Start the ssh-agent if it is not already running
-if [ $(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l) -eq 0 ]; then
-    eval $(ssh-agent -s) > /dev/null
-fi
-
 # Aliases
 alias vi="$EDITOR"
 alias fn="fzf --preview='bat -color=always {}' --bind 'enter:become(neovide {} &)'"
