@@ -120,7 +120,7 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
         kprinterr "Keepass database sync failed."
     fi
 
-    if [ "$mounted" == 0 ]; then
+    if [ "$mounted" = 0 ]; then
         eval ~/.local/bin/mount.sh 'andrew' "${server_name}" 'home' '/mnt/home'
     fi
 fi
