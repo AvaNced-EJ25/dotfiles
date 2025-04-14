@@ -62,15 +62,20 @@ return {
             },
             dashboard = { enabled = true },
             explorer = { enabled = true },
+            image = { enabled = true },
             indent = { enabled = true },
             input = { enabled = true },
-            picker = { enabled = true },
+            lazygit = { enabled = true },
             notifier = { enabled = true },
+            picker = { enabled = true },
             quickfile = { enabled = true },
             scope = { enabled = true },
             scroll = { enabled = true },
             statuscolumn = { enabled = true },
             words = { enabled = true },
+        },
+        keys = {
+            { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit"},
         },
     }
 }

@@ -13,9 +13,12 @@ require("catppuccin").setup({
         treesitter = true,
         which_key = true,
         mason = true,
-        notify = true,
         nvim_surround = true,
         lsp_trouble = true,
+        snacks = {
+            enabled = true,
+            indent_scope_color = 'pink'
+        },
         indent_blankline = {
             enabled = true,
             scope_color = "pink",

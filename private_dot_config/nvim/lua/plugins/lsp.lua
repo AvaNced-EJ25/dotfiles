@@ -16,7 +16,6 @@ return {
     {'williamboman/mason-lspconfig.nvim'},
     {
         'mrded/nvim-lsp-notify',
-        dependencies = { 'rcarriga/nvim-notify' },
     },
     {'mfussenegger/nvim-lint'}
 }
