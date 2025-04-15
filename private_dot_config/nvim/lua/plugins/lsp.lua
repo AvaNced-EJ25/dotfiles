@@ -14,8 +14,5 @@ return {
         end,
     },
     {'williamboman/mason-lspconfig.nvim'},
-    {
-        'mrded/nvim-lsp-notify',
-    },
     {'mfussenegger/nvim-lint'}
 }
