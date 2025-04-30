@@ -18,10 +18,18 @@ keymap.set('n', '<leader>nh', '<cmd>:noh<cr>', { desc = 'No Highlight Search' })
 keymap.set('n', '<leader>sc', function() vim_opt_toggle("cursorcolumn", true, false, "Cursor Column") end,
     { desc = 'Toggle Cursor Column' })
 
-keymap.set('n', '<leader>wd', function()
-    local col = vim.o.columns - 4
-    vim.cmd("w !difft --width " .. col .. " --syntax-highlight off % - ")
-end, { desc = 'View File Diff' })
+keymap.set('n', '<leader>do', function() vim.cmd("DiffOrig") end, { desc = 'Diff Original' })
+keymap.set('n', '<leader>dc', function()
+    if vim.bo.buftype ~= 'nofile' then
+        vim.cmd.wincmd('p')
+        if vim.bo.buftype ~= 'nofile' then
+            vim.cmd.wincmd('p')
+            vim.notify("Cannot find diff to close")
+        end
+    end
+
+    vim.cmd.wincmd('c')
+end, { desc = 'Diff Close' })
 
 keymap.set('n', '<leader>ww', "<cmd>w<cr>", { silent = true })
 keymap.set('n', '<leader>wq', "<cmd>wq<cr>", { silent = true })
