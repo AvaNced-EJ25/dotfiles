@@ -19,9 +19,6 @@ if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-# Create ~/.zsh if needed
-[ ! -d ${ZDOTDIR:-~} ] && mkdir -p ${ZDOTDIR:-~}
-
 # Download zinit if needed
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -91,7 +88,7 @@ HISTFILE=${ZDOTDIR:-~}/histfile
 HISTSIZE=5000
 SAVEHIST=5000
 HISTDUP=erase
-setopt autocd beep nomatch appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups INC_APPEND_HISTORY
+setopt autocd beep nomatch appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups INC_APPEND_HISTORY COMPLETE_IN_WORD
 bindkey -v
 
 # Keybinds
