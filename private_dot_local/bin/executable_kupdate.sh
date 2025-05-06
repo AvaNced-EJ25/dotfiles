@@ -5,6 +5,7 @@
 
 if test -n "$ZSH_VERSION"; then
     INVOKED_SHELL=zsh
+    emulate sh
 elif test -n "$BASH_VERSION"; then
     INVOKED_SHELL=bash
 elif test -n "$KSH_VERSION"; then
