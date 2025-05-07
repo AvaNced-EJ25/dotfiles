@@ -18,8 +18,8 @@ keymap.set('n', '<leader>nh', '<cmd>:noh<cr>', { desc = 'No Highlight Search' })
 keymap.set('n', '<leader>sc', function() vim_opt_toggle("cursorcolumn", true, false, "Cursor Column") end,
     { desc = 'Toggle Cursor Column' })
 
-keymap.set('n', '<leader>do', function() vim.cmd("DiffOrig") end, { desc = 'Diff Original' })
-keymap.set('n', '<leader>dc', function()
+keymap.set('n', '<leader>Do', function() vim.cmd("DiffOrig") end, { desc = 'Diff Original' })
+keymap.set('n', '<leader>Dc', function()
     if vim.bo.buftype ~= 'nofile' then
         vim.cmd.wincmd('p')
         if vim.bo.buftype ~= 'nofile' then
