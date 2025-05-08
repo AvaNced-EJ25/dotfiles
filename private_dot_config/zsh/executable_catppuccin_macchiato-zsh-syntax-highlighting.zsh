@@ -1,3 +1,5 @@
+# vim: syntax=bash
+
 # Catppuccin Macchiato Theme (for zsh-syntax-highlighting)
 #
 # Paste this files contents inside your ~/.zshrc before you activate zsh-syntax-highlighting

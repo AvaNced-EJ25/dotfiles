@@ -1,3 +1,4 @@
+# vim: syntax=gitignore
 # Global GitIgnore
 
 .cache

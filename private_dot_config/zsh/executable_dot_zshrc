@@ -1,3 +1,5 @@
+# vim: syntax=bash
+
 export ZDOTDIR="${HOME}/.config/zsh"
 
 # set PATH so it includes user's private bin if it exists
