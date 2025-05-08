@@ -66,25 +66,48 @@ dap.configurations.cpp = {
         },
     },
     {
-        name = 'Attach to gdbserver :69420',
+        name = 'Attach to gdbserver localhost:3884',
         type = 'cppdbg',
         request = 'launch',
         MIMode = 'gdb',
-        miDebuggerServerAddress = 'localhost:69420',
+        miDebuggerServerAddress = 'localhost:3884',
         miDebuggerPath = '/usr/bin/gdb',
         cwd = '${workspaceFolder}',
         program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
         end,
     },
+    {
+        name = 'Attach to gdbserver on port 3884',
+        type = 'cppdbg',
+        request = 'launch',
+        MIMode = 'gdb',
+        miDebuggerServerAddress = function()
+            return vim.fn.input('Enter the Server to attach to (hostname): ') .. 3884
+        end,
+
+        miDebuggerPath = '/usr/bin/gdb',
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        setupCommands = {
+            {
+                text = "-enable-pretty-printing",
+                description = "Enable pretty printing",
+                ignoreFailures = false
+            }
+        },
+    },
+
 }
 
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 dap.listeners.before.attach.dapui_config = function()
-  dapui.open()
+    dapui.open()
 end
 dap.listeners.before.launch.dapui_config = function()
-  dapui.open()
+    dapui.open()
 end
