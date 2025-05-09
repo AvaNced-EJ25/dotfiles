@@ -29,6 +29,7 @@ fi
 
 if [[ "$TERM" == xterm-kitty ]]; then
     alias s="kitten ssh"
+    alias icat="kitten icat"
 fi
 
 # Aliases
