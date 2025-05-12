@@ -82,15 +82,9 @@ require("lazy").setup({
     -- automatically check for plugin updates
     rtp = {
         disabled_plugins = {
-            "gzip",
-            "matchit",
-            "matchparen",
-
             "netrwPlugin",
-            "tarPlugin",
             "tohtml",
             "tutor",
-            "zipPlugin",
         },
     }
 })
