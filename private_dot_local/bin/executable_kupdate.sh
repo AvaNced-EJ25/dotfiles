@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+BLUE="\033[0;34m"
+RED="\033[0;31m"
+PURPLE="\033[0;35m"
+NC="\033[0m" # No Color
+
+function kprinterr {
+    printf "${RED}<E> ${@}${NC}\n" 1>&2
+}
+
+function kprintf {
+    printf "${PURPLE}󰰉 ${BLUE}${@}${NC}\n"
+}
+
 # Determine what (Bourne compatible) shell we are running under. Put the result
 # in $INVOKED_SHELL (not $SHELL) so further code can depend on the shell type.
 
@@ -18,6 +31,8 @@ else
     INVOKED_SHELL=sh
 fi
 
+kprintf "Running with ${INVOKED_SHELL}"
+
 # If we can invoke this using zsh, then do it
 if type zsh > /dev/null 2>&1; then
     if [ "$INVOKED_SHELL" != zsh ]; then
@@ -25,19 +40,6 @@ if type zsh > /dev/null 2>&1; then
         exit $?
     fi
 fi
-
-BLUE="\033[0;34m"
-RED="\033[0;31m"
-PURPLE="\033[0;35m"
-NC="\033[0m" # No Color
-
-function kprinterr {
-    printf "${RED}<E> ${@}${NC}\n" 1>&2
-}
-
-function kprintf {
-    printf "${PURPLE}󰰉 ${BLUE}${@}${NC}\n"
-}
 
 case "$(uname -s)" in
     Linux*)     os_name=Linux;;
