@@ -91,9 +91,16 @@ fi
 if [ "$INVOKED_SHELL" = zsh ]; then
     kprintf 'Updating zinit and ZSH plugins'
     ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-    [ -d $ZINIT_HOME ] && source "${ZINIT_HOME}/zinit.zsh"
-    zinit self-update
-    zinit update
+    if [ -f "${ZINIT_HOME}/zinit.zsh" ]; then
+        emulate zsh
+        source "${ZINIT_HOME}/zinit.zsh"
+        zinit self-update
+        zinit update
+        emulate sh
+    else
+        kprinterr "Could not load zinit, skipping shell plugin updates."
+    fi
+
     kprintf 'Done.'
 fi
 
