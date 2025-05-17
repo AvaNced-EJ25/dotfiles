@@ -34,7 +34,7 @@ fi
 kprintf "Running with ${INVOKED_SHELL}"
 
 # If we can invoke this using zsh, then do it
-if type zsh > /dev/null 2>&1; then
+if command -v zsh > /dev/null 2>&1; then
     if [ "$INVOKED_SHELL" != zsh ]; then
         zsh $0
         exit $?
@@ -55,7 +55,7 @@ kprintf 'Requesting root privilages...'
 sudo -v > /dev/null 2>&1 || exit 1
 kprintf 'Done.'
 
-if type chezmoi > /dev/null 2>&1; then
+if command -v chezmoi > /dev/null 2>&1; then
     kprintf 'Ugrading chezmoi...'
     chezmoi upgrade --dry-run --progress true
     SCRIPTNAME=$(realpath $0)
@@ -77,7 +77,7 @@ if type chezmoi > /dev/null 2>&1; then
     kprintf 'Done.'
 fi
 
-if type oh-my-posh > /dev/null 2>&1; then
+if command -v oh-my-posh > /dev/null 2>&1; then
     kprintf 'Updating Oh-My-Posh...'
     oh-my-posh upgrade
     ret=$?
@@ -98,7 +98,7 @@ if [ "$INVOKED_SHELL" = zsh ]; then
 fi
 
 # keepass.sh is not in chezmoi
-if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
+if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
     kprintf "Syncing keepass database..."
     mounted=false
     server_name=""
@@ -129,13 +129,13 @@ if type keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
 fi
 
 if [[ $os_name == "Linux" ]]; then
-    if type fwupdmgr > /dev/null 2>&1; then
+    if command -v fwupdmgr > /dev/null 2>&1; then
         kprintf 'Updating BIOS and Device FW'
         sudo fwupdmgr get-updates
         kprintf 'Done.'
     fi
 
-    if type apt > /dev/null 2>&1; then
+    if command -v apt > /dev/null 2>&1; then
         kprintf 'Updating system repositories...'
 
         i=0
@@ -161,46 +161,46 @@ if [[ $os_name == "Linux" ]]; then
         kprintf 'Done.'
     fi
 
-    if type flatpak > /dev/null 2>&1; then
+    if command -v flatpak > /dev/null 2>&1; then
         kprintf 'Updating flatpak applications...'
         flatpak update -y
         sudo flatpak update -y
         kprintf 'Done.'
     fi
 
-    if type snap > /dev/null 2>&1; then
+    if command -v snap > /dev/null 2>&1; then
         kprintf 'Updating snap applications...'
         snap refresh || sudo snap refresh
         kprintf 'Done.'
     fi
 fi
 
-if type brew > /dev/null 2>&1; then
+if command -v brew > /dev/null 2>&1; then
     kprintf 'Updating brew bottles...'
     brew update
     brew upgrade
     kprintf 'Done.'
 fi
 
-if type spicetify > /dev/null 2>&1; then
+if command -v spicetify > /dev/null 2>&1; then
     kprintf 'Updating Spicetify...'
     spicetify update
     kprintf 'Done.'
 fi
 
-if type pyenv > /dev/null 2>&1; then
+if command -v pyenv > /dev/null 2>&1; then
     kprintf 'Updating pyenv...'
     pyenv update
     kprintf 'Done.'
 fi
 
-if type rustup > /dev/null 2>&1; then
+if command -v rustup > /dev/null 2>&1; then
     kprintf 'Updating rust...'
     rustup update
     kprintf 'Done.'
 fi
 
-if type cargo > /dev/null 2>&1; then
+if command -v cargo > /dev/null 2>&1; then
     if [ ! -z "$(cargo install --list | grep 'alacritty')" ]; then
         kprintf 'Updating alacritty...'
         cargo install 'alacritty'
@@ -214,7 +214,7 @@ if type cargo > /dev/null 2>&1; then
     fi
 fi
 
-if type kitty > /dev/null 2>&1; then
+if command -v kitty > /dev/null 2>&1; then
     latest=$(curl -fsSL https://sw.kovidgoyal.net/kitty/current-version.txt)
     if [[ ! "$(kitty --version)" == *$latest* ]]; then
         kprintf "Updating kitty to $($latest)"
@@ -231,7 +231,7 @@ if [ -d "${HOME}/.local/lib/alacritty" ]; then
 
     # Update completions
     # TODO: Update all completions
-    if type chezmoi > /dev/null 2>&1; then
+    if command -v chezmoi > /dev/null 2>&1; then
         cz_file="private_dot_config/zsh/dot_zsh_completions/executable__alacritty"
         cp "extra/completions/_alacritty" "$(chezmoi source-path)/${cz_file}"
 
