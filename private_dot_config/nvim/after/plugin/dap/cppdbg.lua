@@ -52,7 +52,7 @@ dap.configurations.cpp = {
             for arg in str_args:gmatch("%w+") do
                 table.insert(arg_table,arg)
             end
-            print(dump_table(arg_table))
+            -- print(dump_table(arg_table))
             return arg_table
         end,
         cwd = '${workspaceFolder}',
