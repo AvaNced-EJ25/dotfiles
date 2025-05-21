@@ -36,5 +36,6 @@ return {
         event = "BufReadPre",
         opts = { -- set to setup table
         },
-    }
+    },
+    { 'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'} }
 }

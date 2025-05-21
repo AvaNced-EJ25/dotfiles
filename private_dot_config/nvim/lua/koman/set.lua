@@ -15,11 +15,10 @@ vim.opt.cursorline = true
 vim.opt.showbreak = "󰌑"
 vim.opt.colorcolumn = "120"
 
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 2
+vim.opt.foldcolumn = '1' -- '0' is not bad
+vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
