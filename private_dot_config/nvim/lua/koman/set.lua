@@ -47,7 +47,7 @@ end
 
 -- If neovide session
 if vim.g.neovide then
-    vim.g.neovide_transparency = 0.97
+    vim.g.neovide_opacity = 0.95
     vim.g.neovide_cursor_animation_length = 0.13
     vim.g.neovide_cursor_trail_size = 0.5
     vim.g.neovide_hide_mouse_when_typing = true
