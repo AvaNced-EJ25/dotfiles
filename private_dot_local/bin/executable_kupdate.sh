@@ -138,7 +138,7 @@ fi
 if [[ $os_name == "Linux" ]]; then
     if command -v fwupdmgr > /dev/null 2>&1; then
         kprintf 'Updating BIOS and Device FW'
-        sudo fwupdmgr get-updates
+        sudo fwupdmgr get-updates && sudo fwupdmgr update
         kprintf 'Done.'
     fi
 
