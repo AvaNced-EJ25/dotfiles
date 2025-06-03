@@ -1,12 +1,4 @@
 local keymap = vim.keymap
--- fold settings
-vim.wo.foldenable = false
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
-vim.wo.fillchars = "fold:\\"
-vim.wo.foldnestmax = 3
-vim.wo.foldminlines = 1
 
 local ccc = require("ccc")
 local mapping = ccc.mapping
