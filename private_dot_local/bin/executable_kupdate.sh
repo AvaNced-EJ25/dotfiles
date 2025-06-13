@@ -95,7 +95,7 @@ if [ "$INVOKED_SHELL" = zsh ]; then
         emulate zsh
         source "${ZINIT_HOME}/zinit.zsh"
         zinit self-update
-        zinit update
+        zinit update --parallel
         emulate sh
     else
         kprinterr "Could not load zinit, skipping shell plugin updates."
