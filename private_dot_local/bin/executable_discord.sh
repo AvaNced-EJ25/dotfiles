@@ -19,7 +19,7 @@ discord_url="https://discord.com/api/download?platform=linux&format=deb"
 better_url="https://github.com/BetterDiscord/Installer/releases/download/v1.3.0/BetterDiscord-Linux.AppImage"
 better_dnld="/tmp/BetterDiscord-Linux.AppImage"
 
-theme_url="https://github.com/refact0r/midnight-discord/raw/refs/heads/master/flavors/midnight-catppuccin-macchiato.theme.css"
+theme_url="https://github.com/refact0r/midnight-discord/raw/refs/heads/master/themes/flavors/midnight-catppuccin-macchiato.theme.css"
 theme_dnld="${HOME}/.config/BetterDiscord/themes/midnight-catppuccin-macchiato.theme.css"
 
 dnld_pids=()
