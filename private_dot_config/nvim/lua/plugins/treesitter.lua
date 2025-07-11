@@ -15,7 +15,7 @@ local M = {
             ensure_installed = {
                 "lua", "luadoc", "vim", "vimdoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
                 "json", "jsonc", "markdown", "markdown_inline", "latex", "powershell", "regex", "csv",
-                "python", "tcl", "cpp", "c", "make", "cmake", "ninja", "comment", "tmux",
+                "python", "cpp", "c", "make", "cmake", "ninja", "comment",
                 "html", "javascript", "typescript", "tsx", "css", "dockerfile",
             },
             highlight = {
