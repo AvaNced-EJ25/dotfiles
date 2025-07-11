@@ -8,7 +8,7 @@ local M = {
     end,
 
     config = function ()
-	require("nvim-treesitter.install").prefer_git = false
+        require("nvim-treesitter.install").prefer_git = false
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
