@@ -1,20 +1,22 @@
 local BinaryFormat = package.cpath:match("%p[\\|/]?%p(%a+)")
 if BinaryFormat == "dll" then
-    function os.name()
-        return "Windows"
-    end
+    function os.name() return "Windows" end
 elseif BinaryFormat == "so" then
-    function os.name()
-        return "Linux"
-    end
+    function os.name() return "Linux" end
 elseif BinaryFormat == "dylib" then
-    function os.name()
-        return "MacOS"
-    end
+    function os.name() return "MacOS" end
+else
+    function os.name() return "Unknown" end
 end
 BinaryFormat = nil
 
-NODE_PATH = os.getenv("HOME") .. "/.nvm/versions/node/v22.11.0/bin/neovim-node-host"
+if os.name() == "Linux" then
+    NODE_PATH = os.getenv("HOME") .. "/.nvm/versions/node/v22.11.0/bin/neovim-node-host"
+elseif os.name() == "Windows" then
+    NODE_PATH = os.getenv("HOME") .. "/scoop/persist/nvm/nodejs/nodejs/neovim-node-host"
+elseif os.name() == "MacOS" then
+    NODE_PATH = os.getenv("HOMEBREW_PREFIX") .. "/bin/neovim-node-host"
+end
 
 -- Helper function for transparency formatting
 -- local alpha = function()
