@@ -71,14 +71,6 @@ if (file_exists(fzf_path)) then
     vim.opt.rtp:append(fzf_path)
 end
 
-if file_exists(PYTHON3_PATH) then
-    vim.g.python3_host_prog = PYTHON3_PATH
-end
-
-if file_exists(PYTHON2_PATH) then
-    vim.g.python_host_prog = PYTHON2_PATH
-end
-
 if file_exists(NODE_PATH) then
     vim.g.node_host_prog = NODE_PATH
 end

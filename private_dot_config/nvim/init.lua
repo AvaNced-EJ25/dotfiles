@@ -14,8 +14,6 @@ elseif BinaryFormat == "dylib" then
 end
 BinaryFormat = nil
 
-PYTHON3_PATH = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
-PYTHON2_PATH = os.getenv("HOME") .. "/.pyenv/versions/neovim2/bin/python"
 NODE_PATH = os.getenv("HOME") .. "/.nvm/versions/node/v22.11.0/bin/neovim-node-host"
 
 -- Helper function for transparency formatting
