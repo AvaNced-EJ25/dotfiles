@@ -20,11 +20,12 @@ gui:
   expandFocusedSidePanel: true
 
 services:
-    {{ if .work -}}
+    {{- if .work }}
     'bitbucket.wdc.com': 'bitbucketServer:bitbucket.wdc.com'
-    {{ else -}}
+    {{- else }}
     'github.com': 'github:gitservicework.com'
-    {{ end }}
+    {{- end }}
+
 git:
   paging:
     parseEmoji: true
