@@ -1,3 +1,5 @@
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -ShowToolTips
+
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (rustup completions powershell | Out-String)})
 }
