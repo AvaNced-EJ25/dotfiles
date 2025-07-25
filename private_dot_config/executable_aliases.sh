@@ -65,7 +65,6 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
-alias makej="make -j $num_proc"
 alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
 alias iwyu-fix="make-iwuy 2> /tmp/iwyu.out; /usr/bin/env fix_includes.py < /tmp/iwyu.out"
 
