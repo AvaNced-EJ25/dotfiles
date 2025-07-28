@@ -183,5 +183,5 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 fi
 
-[ -d "$HOME/.cargo" ] && . "$HOME/.cargo/env"
+[ -x "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 [ -d "$HOME/.local/lib/alacritty" ] && source "$HOME/.local/lib/alacritty/extra/completions/alacritty.bash"
