@@ -20,7 +20,7 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/pink.yml"
 
-if [[ "$TERM" == xterm-256color* ]] || [[ "$TERM" == xterm-kitty ]]; then
+if [[ "$TERM" == xterm-256color* ]] || [[ "$TERM" == xterm-kitty ]] || [[ "$TERM" == foot ]]; then
     export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/catppuccin.omp.toml"
 else
     export OH_MY_POSH_CONFIG="$HOME/.config/oh-my-posh/tty.omp.toml"
