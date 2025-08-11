@@ -36,5 +36,6 @@ return {
         opts = { -- set to setup table
         },
     },
-    { 'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'} }
+    { 'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'} },
+    { 'equalsraf/neovim-gui-shim' }
 }
