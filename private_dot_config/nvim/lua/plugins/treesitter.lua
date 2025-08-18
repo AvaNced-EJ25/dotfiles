@@ -14,9 +14,8 @@ local M = {
         configs.setup({
             ensure_installed = {
                 "lua", "luadoc", "vim", "vimdoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
-                "json", "jsonc", "markdown", "markdown_inline", "latex", "powershell", "regex", "csv",
-                "python", "cpp", "c", "make", "cmake", "ninja", "comment",
-                "html", "javascript", "typescript", "tsx", "css", "dockerfile",
+                "json", "jsonc", "markdown", "markdown_inline", "powershell", "regex", "csv",
+                "python", "cpp", "c", "make", "cmake", "comment", "html", "javascript", "typescript", "tsx", "css",
             },
             highlight = {
                 enable = true,
