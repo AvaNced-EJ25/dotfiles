@@ -269,6 +269,4 @@ if [ -d "${HOME}/.local/lib/neovim" ]; then
     kprintf 'Done.'
 fi
 
-chezmoi apply
-
 exit 0
