@@ -185,15 +185,16 @@ final_space = true
 
     [[blocks.segments]]
     style = 'powerline'
+    type = 'python'
     powerline_symbol = ''
     leading_powerline_symbol = ''
     template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}'" }}
     foreground = 'p:text'
     background = 'p:yellow'
-    type = 'python'
 
     [blocks.segments.properties]
     fetch_virtual_env = true
+    home_enabled = true
 
     [[blocks.segments]]
     type = 'project'
