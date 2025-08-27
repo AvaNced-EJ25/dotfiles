@@ -1,5 +1,8 @@
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -ShowToolTips -Colors @{ InlinePrediction = "`e[38;2;245;189;230m" }
 
+Set-PSReadLineOption -EditMode Vi
+Set-PSReadLineOption -ViModeIndicator Cursor
+
 Set-PSReadLineKeyHandler -Chord "Ctrl+\" -Function AcceptSuggestion
 
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
