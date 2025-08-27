@@ -1,4 +1,6 @@
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -ShowToolTips
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -ShowToolTips -Colors @{ InlinePrediction = "`e[38;2;245;189;230m" }
+
+Set-PSReadLineKeyHandler -Chord "Ctrl+\" -Function AcceptSuggestion
 
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (rustup completions powershell | Out-String)})
