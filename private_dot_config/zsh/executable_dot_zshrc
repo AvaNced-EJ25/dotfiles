@@ -99,8 +99,8 @@ bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^H' backward-kill-word
-bindkey '^ ' autosuggest-accept
-bindkey '^\' autosuggest-clear
+bindkey '^\' autosuggest-accept
+bindkey '^[\' autosuggest-clear
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
