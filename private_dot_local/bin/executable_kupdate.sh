@@ -170,8 +170,8 @@ if [[ $os_name == "Linux" ]]; then
 
     if command -v flatpak > /dev/null 2>&1; then
         kprintf 'Updating flatpak applications...'
-        flatpak update -y
-        sudo flatpak update -y
+        flatpak update -y --user
+        sudo flatpak update -y --system
         kprintf 'Done.'
     fi
 
