@@ -77,7 +77,7 @@ if command -v chezmoi > /dev/null 2>&1; then
     kprintf 'Done.'
 fi
 
-if command -v oh-my-posh > /dev/null 2>&1; then
+if omp_path=$(command -v oh-my-posh) && [[ "$omp_path" != "/home/linuxbrew/.linuxbrew/bin/oh-my-posh" ]]; then
     kprintf 'Updating Oh-My-Posh...'
     oh-my-posh upgrade
     ret=$?
