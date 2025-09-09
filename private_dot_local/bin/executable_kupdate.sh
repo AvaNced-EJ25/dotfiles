@@ -208,12 +208,6 @@ if command -v rustup > /dev/null 2>&1; then
 fi
 
 if command -v cargo > /dev/null 2>&1; then
-    if [ ! -z "$(cargo install --list | grep 'alacritty')" ]; then
-        kprintf 'Updating alacritty...'
-        cargo install 'alacritty'
-        kprintf 'Done.'
-    fi
-
     if [ ! -z "$(cargo install --list | grep 'neovide')" ]; then
         kprintf 'Updating neovide...'
         cargo install --git https://github.com/neovide/neovide
@@ -228,34 +222,6 @@ if command -v kitty > /dev/null 2>&1; then
         curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
         kprintf 'Done.'
     fi
-fi
-
-if [ -d "${HOME}/.local/lib/alacritty" ]; then
-    kprintf 'Updating local build of alacritty...'
-    cd "${HOME}/.local/lib/alacritty"
-    git pull
-    cargo build --release
-
-    # Update completions
-    # TODO: Update all completions
-    if command -v chezmoi > /dev/null 2>&1; then
-        cz_file="private_dot_config/zsh/dot_zsh_completions/executable__alacritty"
-        cp "extra/completions/_alacritty" "$(chezmoi source-path)/${cz_file}"
-
-        # if the file changes, then push an update to chezmoi
-        if [ ! -z $(chezmoi git -- diff-index HEAD | grep "${cz_file}" &> /dev/null) ]; then
-            kprintf "Updating completions"
-            chezmoi git -- add "${cz_file}"
-            chezmoi git -- commit -m "<K: AUTO> Update alacritty completions"
-            kprintf "Done."
-        else
-            kprintf "No changes to completions"
-        fi
-    else
-        cp "extra/completions/_alacritty" "$HOME/.config/zsh/.zsh_completions/_alacritty"
-    fi
-    cd -
-    kprintf 'Done.'
 fi
 
 if [ -d "${HOME}/.local/lib/neovim" ]; then
