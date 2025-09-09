@@ -172,15 +172,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
-if [ -d "$HOME/.pyenv" ]; then
-export PYENV_ROOT="$HOME/.pyenv"
-fi
-
-# TODO: Move to .profile (and fix neovide to use proper python)
-if type pyenv &>/dev/null; then
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-fi
-
 [ -x "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

@@ -121,14 +121,6 @@ if type oh-my-posh &>/dev/null; then
     eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
 fi
 
-# Add pyenv
-if [ -d "$HOME/.pyenv" ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
 # Add pip
 if type pip &>/dev/null; then
     eval "$(pip completion --zsh)"
