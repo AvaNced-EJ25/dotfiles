@@ -204,25 +204,6 @@ final_space = true
     background = 'p:peach'
     template = {{ "' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }}'" }}
 
-    [[blocks.segments]]
-    type = "react"
-    style = "powerline"
-    powerline_symbol = ''
-    leading_powerline_symbol = ''
-    foreground = "p:text"
-    background = "p:sky"
-    template = {{ "'  {{ .Full }}'" }}
-
-    [[blocks.segments]]
-    type = "yarn"
-    style = "powerline"
-    powerline_symbol = ''
-    leading_powerline_symbol = ''
-    foreground = "p:text"
-    background = "p:lavender"
-    template = {{ "' 󰄛 {{ .Full }}'" }}
-
-
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
