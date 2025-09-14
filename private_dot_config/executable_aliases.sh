@@ -51,6 +51,14 @@ alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
 
 alias lg="lazygit"
 
+if type fdfind &>/dev/null; then
+    alias fd=fdfind
+fi
+
+if type batcat &>/dev/null; then
+    alias bat=batcat
+fi
+
 alias binbat="bat --nonprintable-notation caret --show-all"
 
 if type xclip &> /dev/null; then
