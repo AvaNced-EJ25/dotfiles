@@ -11,7 +11,6 @@ require("catppuccin").setup({
         shade = "dark",
         percentage = 0.20,
     },
-    -- auto_integrations = true,
     integrations = {
         gitsigns = true,
         nvimtree = true,
@@ -33,6 +32,10 @@ require("catppuccin").setup({
             enabled = true,
             color_mode = true,
         },
+    },
+    float = {
+        transparent = true,
+        solid = false,
     },
 })
 
