@@ -30,8 +30,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 })
 
-keymap.set('n', '<leader>fn', function () require("telescope").extensions.notify.notify() end, { desc = "Find notifications" })
-
 ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 local progress = vim.defaulttable()
 vim.api.nvim_create_autocmd("LspProgress", {
