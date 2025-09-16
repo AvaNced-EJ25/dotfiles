@@ -95,13 +95,14 @@ local noop = function() end
 
 -- Enable language servers with the additional completion capabilities offered by nvim-cmp
 require('mason-lspconfig').setup({
+    automatic_enable = true,
     handlers = {
         function(server_name)
             -- print("Auto Install LSP: " .. server_name)
-            require('lspconfig')[server_name].setup({ capabilities = capabilities })
+            vim.lsp.config(server_name, { capabilities = capabilities })
         end,
         ['clangd'] = function()
-            require('lspconfig')['clangd'].setup({
+            vim.lsp.config('clangd', {
                 capabilities = capabilities,
                 cmd = {
                     "clangd",
@@ -147,7 +148,7 @@ require('mason-lspconfig').setup({
             }
         end,
         ['harper_ls'] = function ()
-            require('lspconfig')['harper_ls'].setup({ capabilities = capabilities, autostart = false })
+            vim.lsp.config('harper_ls', { capabilities = capabilities, autostart = false })
         end,
     },
 })
