@@ -1,11 +1,12 @@
 local keymap = vim.keymap
 
 local ccc = require("ccc")
+local picker= ccc.picker
 local mapping = ccc.mapping
 
 local clrs = require("catppuccin.palettes").get_palette()
 
-custom_colors = {
+local custom_colors = {
     ctpRosewater = clrs.rosewater,
     ctpFlamingo = clrs.flamingo,
     ctpPink = clrs.pink,
@@ -41,10 +42,21 @@ ccc.setup({
         auto_enable = true,
         lsp = true,
     },
-    pickers = { ccc.picker.custom_entries(custom_colors) },
+    pickers = {
+        picker.hex,
+        picker.css_rgb,
+        picker.css_hsl,
+        picker.css_hwb,
+        picker.css_lab,
+        picker.css_lch,
+        picker.css_oklab,
+        picker.css_oklch,
+        picker.custom_entries(custom_colors)
+    },
     mappings = mapping,
 })
 
 keymap.set('n', '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})
+keymap.set({'v', 'o'}, '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})
 
 keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
