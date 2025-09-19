@@ -105,11 +105,11 @@ if [ "$INVOKED_SHELL" = zsh ]; then
 fi
 
 # keepass.sh is not in chezmoi
-if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; then
+if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/src/keepass.sh ]; then
     kprintf "Syncing keepass database..."
     mounted=false
     server_name=""
-    read -r server_name < ~/.local/lib/server
+    read -r server_name < ~/.local/src/server
 
     if [ ! -z $server_name ]; then
         nc -z "${server_name}" 445 > /dev/null 2>&1
@@ -120,7 +120,7 @@ if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/lib/keepass.sh ]; 
         fi
     fi
 
-    eval "~/.local/lib/keepass.sh"
+    eval "~/.local/src/keepass.sh"
 
     ret=$?
 
@@ -189,9 +189,9 @@ if command -v brew > /dev/null 2>&1; then
     kprintf 'Done.'
 fi
 
-if [ -d "${HOME}/.local/lib/neovim" ]; then
+if [ -d "${HOME}/.local/src/neovim" ]; then
     kprintf 'Updating local build of neovim...'
-    pushd "${HOME}/.local/lib/neovim"
+    pushd "${HOME}/.local/src/neovim"
 
     local TAG="stable"
     git fetch --tags
