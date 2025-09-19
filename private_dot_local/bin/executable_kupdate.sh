@@ -226,12 +226,29 @@ fi
 
 if [ -d "${HOME}/.local/lib/neovim" ]; then
     kprintf 'Updating local build of neovim...'
-    cd "${HOME}/.local/lib/neovim"
-    git fetch
-    git checkout stable
-    make -j $(nproc) CMAKE_BUILD_TYPE=Release
-    sudo make -j $(nproc) install
-    cd -
+    pushd "${HOME}/.local/lib/neovim"
+
+    local TAG="stable"
+    git fetch --tags
+
+    local_hash=$(git rev-parse HEAD)
+    remote_hash=$(git ls-remote origin "refs/tags/${TAG}" | cut -f1)
+
+    if [ "${local_hash}" != "${remote_hash}" ]; then
+        git tag -d "${TAG}"
+        git fetch origin
+        git checkout "${TAG}"
+
+        version_tag=$(git tag --points-at=HEAD | grep -E 'v[0-9.]*' | sort | head -n 1)
+        kprintf "Rebuilding Neovim to ${version_tag}."
+
+        make -DCMAKE_BUILD_TYPE=Release
+        sudo make install
+    else
+        kprintf 'Nothing to do, already at latest stable build.'
+    fi
+
+    popd
     kprintf 'Done.'
 fi
 
