@@ -172,6 +172,9 @@ if [[ $os_name == "Linux" ]]; then
         kprintf 'Updating flatpak applications...'
         flatpak update -y --user
         sudo flatpak update -y --system
+
+        # Install any user-level system flatpacks that were missed
+        flatpak update -y --system
         kprintf 'Done.'
     fi
 
@@ -207,7 +210,7 @@ if [ -d "${HOME}/.local/src/neovim" ]; then
         version_tag=$(git tag --points-at=HEAD | grep -E 'v[0-9.]*' | sort | head -n 1)
         kprintf "Rebuilding Neovim to ${version_tag}."
 
-        make -DCMAKE_BUILD_TYPE=Release
+        make CMAKE_BUILD_TYPE=Release
         sudo make install
     else
         kprintf 'Nothing to do, already at latest stable build.'
