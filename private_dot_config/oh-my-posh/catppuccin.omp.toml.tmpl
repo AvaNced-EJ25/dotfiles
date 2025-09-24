@@ -45,7 +45,7 @@ final_space = true
     template = {{ "' {{ .UserName }}@{{ .HostName }}'" }}
     foreground = 'p:text'
     powerline_symbol = ''
-    background = 'p:pink'
+    background_templates = [ {{ "'{{ if .SSHSession }}p:sky{{ end }}'" }}, "p:pink" ]
     type = 'session'
 
   [[blocks.segments]]
