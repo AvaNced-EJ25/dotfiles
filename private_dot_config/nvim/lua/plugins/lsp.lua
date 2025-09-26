@@ -11,6 +11,9 @@ return {
             elseif os.name() == "Windows" then
                 MASON_PATH = os.getenv("LOCALAPPDATA") .. "\\nvim-data\\mason"
             end
+            if not os.file_exists(MASON_PATH) then
+                MASON_PATH = ""
+            end
         end,
     },
     {'williamboman/mason-lspconfig.nvim'},

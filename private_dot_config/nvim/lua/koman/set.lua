@@ -59,19 +59,17 @@ end
 
 local fzf_path = ""
 
-if os.name() == "Linux" then
-    fzf_path = "/home/linuxbrew/.linuxbrew/opt/fzf"
-elseif os.name() == "MacOS" then
-    fzf_path = "/opt/homebrew/bin/fzf"
+if os.type() == "UNIX" then
+    fzf_path = os.getenv("HOMEBREW_PREFIX") .. "/bin/fzf"
 elseif os.name() == "Windows" then
     fzf_path = os.getenv("HOME") .. "\\scoop\\apps\\fzf\\current"
 end
 
-if (file_exists(fzf_path)) then
+if (os.file_exists(fzf_path)) then
     vim.opt.rtp:append(fzf_path)
 end
 
-if file_exists(NODE_PATH) then
+if os.file_exists(NODE_PATH) then
     vim.g.node_host_prog = NODE_PATH
 end
 

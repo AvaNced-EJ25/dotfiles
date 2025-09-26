@@ -1,21 +1,36 @@
 local BinaryFormat = package.cpath:match("%p[\\|/]?%p(%a+)")
 if BinaryFormat == "dll" then
     function os.name() return "Windows" end
+    function os.type() return "NT" end
 elseif BinaryFormat == "so" then
     function os.name() return "Linux" end
+    function os.type() return "UNIX" end
 elseif BinaryFormat == "dylib" then
     function os.name() return "MacOS" end
+    function os.type() return "UNIX" end
 else
     function os.name() return "Unknown" end
+    function os.type() return "Unknown" end
 end
 BinaryFormat = nil
 
-if os.name() == "Linux" then
-    NODE_PATH = os.execute('find ' .. os.getenv("HOME") .. '/.nvm/versions/node -name neovim-node-host')
-elseif os.name() == "Windows" then
-    NODE_PATH = os.getenv("HOME") .. "/scoop/persist/nvm/nodejs/nodejs/neovim-node-host"
-elseif os.name() == "MacOS" then
+function os.file_exists(filename)
+    local file_obj = io.open(filename, 'r')
+    if file_obj ~= nil then
+        io.close(file_obj)
+        return true
+    else
+        return false
+    end
+end
+
+if os.type() == "UNIX" then
     NODE_PATH = os.getenv("HOMEBREW_PREFIX") .. "/bin/neovim-node-host"
+    if not os.file_exists(NODE_PATH) then
+        NODE_PATH = os.execute('find ' .. os.getenv("HOME") .. '/.nvm/versions/node -name neovim-node-host')
+    end
+elseif os.type() == "NT" then
+    NODE_PATH = os.getenv("HOME") .. "/scoop/persist/nvm/nodejs/nodejs/neovim-node-host"
 end
 
 -- Helper function for transparency formatting
@@ -24,7 +39,7 @@ end
 -- end
 
 -- Dump table
-function dump_table(o)
+function os.dump_table(o)
     if type(o) == 'table' then
         local s = '{ '
         for k,v in pairs(o) do
@@ -34,16 +49,6 @@ function dump_table(o)
         return s .. '} '
     else
         return tostring(o)
-    end
-end
-
-function file_exists(filename)
-    local file_obj = io.open(filename, 'r')
-    if file_obj ~= nil then
-        io.close(file_obj)
-        return true
-    else
-        return false
     end
 end
 
