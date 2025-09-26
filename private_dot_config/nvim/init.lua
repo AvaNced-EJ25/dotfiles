@@ -11,7 +11,7 @@ end
 BinaryFormat = nil
 
 if os.name() == "Linux" then
-    NODE_PATH = os.getenv("HOME") .. "/.nvm/versions/node/v22.11.0/bin/neovim-node-host"
+    NODE_PATH = os.execute('find ' .. os.getenv("HOME") .. '/.nvm/versions/node -name neovim-node-host')
 elseif os.name() == "Windows" then
     NODE_PATH = os.getenv("HOME") .. "/scoop/persist/nvm/nodejs/nodejs/neovim-node-host"
 elseif os.name() == "MacOS" then
