@@ -1,1 +1,2 @@
 [ -x "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+ZSH_MOTD_HYFETCH=1
