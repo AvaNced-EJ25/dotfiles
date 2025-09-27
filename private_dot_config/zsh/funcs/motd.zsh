@@ -6,7 +6,7 @@ stamp="$HOME/.motd_shown"
 
 print_header() {
     # Custom message
-    if [[ -v ZSH_MOTD_HYFETCH ]]; then
+    if [[ -v ZSH_MOTD_HYFETCH ]] && $(type hyfetch &>/dev/null ); then
         hyfetch -C "${HOME}/.config/hyfetch.json"
     fi
 }
