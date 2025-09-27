@@ -9,6 +9,11 @@
     },
     "backend": "fastfetch",
     "args": null,
+    {{- if eq .chezmoi.os "windows" }}
+    "distro": "windows_11_small",
+    {{- else -}}
     "distro": null,
+    {{- end }}
     "pride_month_disable": false
 }
+// vim: syntax=json : commentstring=//\ %s
