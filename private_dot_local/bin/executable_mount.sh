@@ -3,8 +3,8 @@
 # args: mount.sh user smb_server server_dir mount_point
 ret=0
 
-if [ $# -lt 4 ]; then
-    echo "Invalid args: $@"
+if [ $# -ne 3 -o $# -ne 5 ]; then
+    echo "<E> Invalid args: $@" >&2
     exit 1;
 fi
 
@@ -14,37 +14,54 @@ if [ ! $(id -u) -ne 0 ]; then
     echo "Done."
 fi
 
-smb_username="${1}"
 smb_server="//${2}"
-server_dir="${3}"
-mount_point="${4}"
-creds_file="/tmp/creds"
+mount_point="${3}"
+creds_file="/etc/.smb_creds"
 
-if mount | grep $smb_server &> /dev/null; then
-    # Unmount
-    echo "Unmounting home..."
-    sudo umount "$mount_point"
-    ret=$?
-    echo "Done."
-else
-    smb_password=""
-    while [ -z "$smb_password" ]; do
-        read -p "Enter Password for ${smb_server}: " -s smb_password
-        echo ""
-    done
+case $1 in
+    "-m")
+        # Mount
+        # Test if server is already mounted
+        if mount | grep $smb_server &> /dev/null; then
+            echo "<W> Server is already mounted"
+            # Exit with 2 so that we DON'T unmount it later
+            exit 2
+        elif [ $(nc -z "${server_name}" 445 > /dev/null 2>&1) -ne 0 ]; then
+            echo "<E> Cannot connect to server" >&2
+            exit 1
+        fi
 
-    echo "username=$smb_username" > $creds_file
-    echo "password=$smb_password" >> $creds_file
-    unset smb_password
+        server_dir="${4}"
 
-    opts="iocharset=utf8,file_mode=0777,dir_mode=0777,credentials=$creds_file"
+        opts="iocharset=utf8,file_mode=0777,dir_mode=0777,credentials=$creds_file"
 
-    echo "Mounting home..."
-    sudo mount -l -t cifs "${smb_server}/${server_dir}" "${mount_point}" -o $opts
-    ret=$?
-    echo "Done."
+        echo "Mounting home..."
+        sudo mount -l -t cifs "${smb_server}/${server_dir}" "${mount_point}" -o $opts
+        ret=$?
+        echo "Done."
+        ;;
+    "-u")
+        # Unmount
+        # Test if the server is mounted
+        if ! mount | grep $smb_server &> /dev/null; then
+            echo "<W> Server is not mounted"
+            exit 0
+        fi
 
-    rm -f $creds_file
-fi
+        echo "Unmounting home..."
+        if [ ! -d "$mount_point" ]; then
+            echo "<E> Mount point ${mount_point} is not a directory"
+            ret=1
+        else
+            sudo umount "$mount_point"
+            ret=$?
+        fi
+        echo "Done."
+        ;;
+    *)
+        echo "<E> Invalid Option: $1" >&2
+        ret=1
+    ;;
+esac
 
 exit $ret

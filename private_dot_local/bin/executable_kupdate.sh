@@ -111,17 +111,13 @@ if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/src/keepass.sh ]; 
     server_name=""
     read -r server_name < ~/.local/src/server
 
+    # TODO: Use systemd mount instead
     if [ ! -z $server_name ]; then
-        nc -z "${server_name}" 445 > /dev/null 2>&1
-        ret=$?
-        if [ -z "$(/bin/ls -A '/mnt/home')" ] && [ "$ret" -eq 0 ]; then
-            eval ~/.local/bin/mount.sh 'andrew' "${server_name}" 'home' '/mnt/home'
-            mounted=$?
-        fi
+        eval ~/.local/bin/mount.sh -m "${server_name}" '/mnt/home' 'dietpi/home'
+        mounted=$?
     fi
 
     eval "~/.local/src/keepass.sh"
-
     ret=$?
 
     if [ "$ret" -eq 0 ]; then
@@ -130,8 +126,8 @@ if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/src/keepass.sh ]; 
         kprinterr "Keepass database sync failed."
     fi
 
-    if [ "$mounted" = 0 ]; then
-        eval ~/.local/bin/mount.sh 'andrew' "${server_name}" 'home' '/mnt/home'
+    if [ "$mounted" -eq 0 ]; then
+        eval ~/.local/bin/mount.sh -u "${server_name}" '/mnt/home'
     fi
 fi
 
