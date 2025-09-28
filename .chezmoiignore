@@ -1,8 +1,30 @@
+# vim: syntax=gitignore
 README.md
 
+{{- if ne .chezmoi.os "linux" }}
+private_dot_config/variety
+private_dot_local/bin/executable_mount.sh
+private_dot_local/private_share/desktop-files
+{{ end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+private_dot_config/yabai
+private_dot_config/skhd
+private_dot_config/sketchybar
+private_dot_config/linearmouse
+{{ end }}
+
 {{- if eq .chezmoi.os "windows" }}
+private_dot_config/kitty
+private_dot_config/zsh
+executable_dot_zshenv
 **/*.zsh
 {{- else }}
+private_dot_config/komorebi
 Documents
 **/*.ps1
+{{ end }}
+
+{{ if .work }}
+private_dot_local/bin/executable_discord.sh
 {{ end }}
