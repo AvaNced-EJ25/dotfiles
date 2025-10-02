@@ -14,13 +14,12 @@ else
 end
 BinaryFormat = nil
 
-function os.file_exists(filename)
-    local file_obj = io.open(filename, 'r')
-    if file_obj ~= nil then
-        io.close(file_obj)
-        return true
-    else
-        return false
+function os.file_exists(file)
+    local f = io.open(file, 'rb')
+    if f then io.close(f) end
+    return f ~= nil
+end
+
     end
 end
 
