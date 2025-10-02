@@ -32,7 +32,24 @@ end
 if os.type() == "UNIX" then
     NODE_PATH = os.getenv("HOMEBREW_PREFIX") .. "/bin/neovim-node-host"
     if not os.file_exists(NODE_PATH) then
-        NODE_PATH = os.execute('find ' .. os.getenv("HOME") .. '/.nvm/versions/node -name neovim-node-host')
+        local nvm_dir = os.getenv("HOME") .. '/.nvm'
+        local lines = os.read_lines(nvm_dir .. '/alias/default')
+        local version = nil
+
+        if #lines > 0 then
+            version = lines[#lines]
+        end
+
+        if version and string.find(version, "^v%d+%.[0-9%.]*$") == nil then
+            lines = os.read_lines(nvm_dir .. '/alias/' .. version)
+            if #lines > 0 then
+                version = lines[#lines]
+            end
+        end
+
+        if version and string.find(version, "^v%d+%.[0-9%.]*$") ~= nil then
+            NODE_PATH = nvm_dir .. '/versions/node/' .. version .. '/bin/neovim-node-host'
+        end
     end
 elseif os.type() == "NT" then
     NODE_PATH = os.getenv("HOME") .. "/scoop/persist/nvm/nodejs/nodejs/neovim-node-host"
