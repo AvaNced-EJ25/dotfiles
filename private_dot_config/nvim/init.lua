@@ -51,6 +51,8 @@ if os.type() == "UNIX" then
             NODE_PATH = nvm_dir .. '/versions/node/' .. version .. '/bin/neovim-node-host'
         end
     end
+
+    -- if not os.file_exists(NODE_PATH) then NODE_PATH="" end
 elseif os.type() == "NT" then
     NODE_PATH = os.getenv("HOME") .. "/scoop/persist/nvm/nodejs/nodejs/neovim-node-host"
 end
