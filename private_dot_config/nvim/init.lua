@@ -20,7 +20,13 @@ function os.file_exists(file)
     return f ~= nil
 end
 
+function os.read_lines(file)
+    if not os.file_exists(file) then return {} end
+    local lines = {}
+    for line in io.lines(file) do
+        lines[#lines+1] = line
     end
+    return lines
 end
 
 if os.type() == "UNIX" then
