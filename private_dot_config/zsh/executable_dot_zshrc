@@ -85,7 +85,9 @@ for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
     source $z
 done
 
-source <(fzf --zsh)
+if type fzf &>/dev/null; then
+    source <(fzf --zsh)
+fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/histfile
