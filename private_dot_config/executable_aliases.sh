@@ -32,6 +32,11 @@ if [[ "$TERM" == xterm-kitty ]]; then
     alias icat="kitten icat"
 fi
 
+# Load env vars from $HOME/.env
+if [ -r "${HOME}/.env" ]; then
+    export $(cat "${HOME}/.env")
+fi
+
 # Aliases
 alias vi="$EDITOR"
 alias fn="fzf --preview='bat -color=always {}' --bind 'enter:become(neovide {} &)'"
