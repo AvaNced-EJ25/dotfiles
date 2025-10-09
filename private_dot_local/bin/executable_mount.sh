@@ -20,9 +20,11 @@ creds_file="/etc/.smb_creds"
 
 case $1 in
     "-m")
+        server_dir="${4}"
+
         # Mount
         # Test if server is already mounted
-        if mount | grep $smb_server &> /dev/null; then
+        if [ $(mount | grep -c "^//${smb_server}/${server_dir} on ${mount_point}") -ne 0 ] ; then
             echo "<W> Server is already mounted"
             # Exit with 2 so that we DON'T unmount it later
             exit 2
@@ -33,8 +35,6 @@ case $1 in
                 exit 1
             fi
         fi
-
-        server_dir="${4}"
 
         opts="iocharset=utf8,file_mode=0777,dir_mode=0777,credentials=$creds_file"
 
