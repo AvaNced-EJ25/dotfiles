@@ -3,18 +3,18 @@
 # args: mount.sh user smb_server server_dir mount_point
 ret=0
 
-if [ $# -ne 3 -o $# -ne 5 ]; then
+if [ $# -ne 3 ] && [ $# -ne 4 ]; then
     echo "<E> Invalid args: $@" >&2
     exit 1;
 fi
 
-if [ ! $(id -u) -ne 0 ]; then
+if ! [ $(id -u) -ne 0 ]; then
     echo "Requesting root privilages..."
     sudo -v > /dev/null | exit 1
     echo "Done."
 fi
 
-smb_server="//${2}"
+smb_server="${2}"
 mount_point="${3}"
 creds_file="/etc/.smb_creds"
 
@@ -26,9 +26,12 @@ case $1 in
             echo "<W> Server is already mounted"
             # Exit with 2 so that we DON'T unmount it later
             exit 2
-        elif [ $(nc -z "${server_name}" 445 > /dev/null 2>&1) -ne 0 ]; then
-            echo "<E> Cannot connect to server" >&2
-            exit 1
+        else
+            nc -z "${smb_server}" 445
+            if [ $? -ne 0 ]; then
+                echo "<E> Cannot connect to server" >&2
+                exit 1
+            fi
         fi
 
         server_dir="${4}"
@@ -36,7 +39,7 @@ case $1 in
         opts="iocharset=utf8,file_mode=0777,dir_mode=0777,credentials=$creds_file"
 
         echo "Mounting home..."
-        sudo mount -l -t cifs "${smb_server}/${server_dir}" "${mount_point}" -o $opts
+        sudo mount -l -t cifs "//${smb_server}/${server_dir}" "${mount_point}" -o $opts
         ret=$?
         echo "Done."
         ;;
