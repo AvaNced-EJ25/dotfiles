@@ -39,6 +39,19 @@ case $1 in
         opts="iocharset=utf8,file_mode=0777,dir_mode=0777,credentials=$creds_file"
 
         echo "Mounting home..."
+
+        if ! [ -d "${mount_point}" ]; then
+            echo "<W> ${mount_point} does not exist."
+            read -p "Would you like to create the directory? (y/N)" -n 1 -r
+            echo
+
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                sudo mkdir -p "${mount_point}"
+            else
+                exit 1
+            fi
+        fi
+
         sudo mount -l -t cifs "//${smb_server}/${server_dir}" "${mount_point}" -o $opts
         ret=$?
         echo "Done."
