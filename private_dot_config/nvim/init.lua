@@ -30,7 +30,10 @@ function os.read_lines(file)
 end
 
 if os.type() == "UNIX" then
-    NODE_PATH = os.getenv("HOMEBREW_PREFIX") .. "/bin/neovim-node-host"
+    NODE_PATH = ""
+    if os.getenv("HOMEBREW_PREFIX") ~= nil then
+        NODE_PATH = os.getenv("HOMEBREW_PREFIX") .. "/bin/neovim-node-host"
+    end
     if not os.file_exists(NODE_PATH) then
         local nvm_dir = os.getenv("HOME") .. '/.nvm'
         local lines = os.read_lines(nvm_dir .. '/alias/default')

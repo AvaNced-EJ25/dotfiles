@@ -60,7 +60,9 @@ end
 local fzf_path = ""
 
 if os.type() == "UNIX" then
-    fzf_path = os.getenv("HOMEBREW_PREFIX") .. "/bin/fzf"
+    if os.getenv("HOMEBREW_PREFIX") ~= nil then
+        fzf_path = os.getenv("HOMEBREW_PREFIX") .. "/bin/fzf"
+    end
 elseif os.name() == "Windows" then
     fzf_path = os.getenv("HOME") .. "\\scoop\\apps\\fzf\\current"
 end
