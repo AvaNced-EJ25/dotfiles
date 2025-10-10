@@ -176,7 +176,7 @@ if [[ $os_name == "Linux" ]]; then
 
     if command -v snap > /dev/null 2>&1; then
         kprintf 'Updating snap applications...'
-        snap refresh || sudo snap refresh
+        sudo snap refresh
         kprintf 'Done.'
     fi
 fi
