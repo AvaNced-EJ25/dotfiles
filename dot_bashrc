@@ -130,6 +130,10 @@ if type pip &>/dev/null; then
     eval "$(pip completion --bash)"
 fi
 
+if type pipx &>/dev/null; then
+    eval "$(register-python-argcomplete pipx)"
+fi
+
 # Add fzf
 if type fzf &>/dev/null; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then

@@ -108,8 +108,10 @@ bindkey '^[\' autosuggest-clear
 # The following lines were added by compinstall
 zstyle :compinstall filename "${ZDOTDIR}/.zshrc"
 
-autoload -Uz compinit
+autoload -Uz compinit bashcompinit
 compinit
+bashcompinit
+
 # End of lines added by compinstall
 
 if [ -d "$HOME/.nvm" ]; then
@@ -128,3 +130,7 @@ if type pip &>/dev/null; then
     eval "$(pip completion --zsh)"
 fi
 
+
+if type pipx &>/dev/null; then
+    eval "$(register-python-argcomplete pipx)"
+fi
