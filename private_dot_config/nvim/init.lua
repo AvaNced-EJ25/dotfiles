@@ -15,6 +15,9 @@ end
 BinaryFormat = nil
 
 function os.file_exists(file)
+    if file == nil then
+        return false
+    end
     local f = io.open(file, 'rb')
     if f then io.close(f) end
     return f ~= nil
