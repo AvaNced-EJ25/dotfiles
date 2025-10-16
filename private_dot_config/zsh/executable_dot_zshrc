@@ -53,6 +53,8 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
 
+zinit snippet OMZP::nvm/nvm.plugin.zsh
+
 if [[ $COLORTERM =~ ^(truecolor|24bit)$ ]]; then
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#f5bde6"
 fi
@@ -113,12 +115,6 @@ compinit
 bashcompinit
 
 # End of lines added by compinstall
-
-if [ -d "$HOME/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
 
 # Add oh-my-posh
 if type oh-my-posh &>/dev/null; then
