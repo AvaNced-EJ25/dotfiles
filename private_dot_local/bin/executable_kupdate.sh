@@ -193,7 +193,7 @@ if [ -d "${HOME}/.local/src/neovim" ]; then
     pushd "${HOME}/.local/src/neovim"
 
     local TAG="stable"
-    git fetch --tags
+    git fetch --tags --force
 
     local_hash=$(git rev-parse HEAD)
     remote_hash=$(git ls-remote origin "refs/tags/${TAG}" | cut -f1)
