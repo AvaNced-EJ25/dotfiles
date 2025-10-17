@@ -5,10 +5,6 @@ Set-PSReadLineOption -ViModeIndicator Cursor
 
 Set-PSReadLineKeyHandler -Chord "Ctrl+\" -Function AcceptSuggestion
 
-$env:PWSH_MOTD_HYFETCH=1
-
-$motd_stamp="$env:HOME/.motd_shown"
-
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (rustup completions powershell | Out-String)})
 }
@@ -71,19 +67,7 @@ $local_bin="$env:HOME\.local\bin"
 if ( (Test-Path $local_bin) -and (-not ($env:PATH -like "*$local_bin*") ) ) {
     $env:PATH += ";$local_bin;"
 }
-function print_header() {
-    # Custom message
-    if (Test-Path env:PWSH_MOTD_HYFETCH ) {
-        hyfetch -C "${HOME}/.config/hyfetch.json"
-    }
-}
  
-# PWSH MOTD - once every 3 hours
-if ( (Test-Path env:PWSH_MOTD_ALWAYS) -or ((Get-Item $motd_stamp -ErrorAction SilentlyContinue).LastWriteTime -lt (Get-Date).AddHours(-3)) ) {
-    print_header
-    New-Item -Force $motd_stamp | Out-Null
-}
-
 $env:FZF_DEFAULT_OPTS="--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 --height 40% --layout=reverse --border --info=inline"
 $env:LG_CONFIG_FILE="$env:HOME\.config\lazygit\config.yml,$env:HOME\.config\lazygit\pink.yml"
 $env:EZA_CONFIG_DIR="$env:HOME\.config\eza"
