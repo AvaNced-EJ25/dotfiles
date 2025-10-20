@@ -5,16 +5,19 @@
 stamp="$HOME/.motd_shown"
 
 print_header() {
-    touch $stamp
-    flag=$(cat $stamp)
+    if [ -r $stamp ]; then
+        flag=$(cat $stamp)
+    fi
+    ret=0
 
     [ -z "$flag" ] && flag="transgender"
 
     if [[ -v ZSH_MOTD_HYFETCH ]] && $(command -v hyfetch > /dev/null 2>&1 ); then
         hyfetch -C "${HOME}/.config/hyfetch.json" -p "$flag"
+        ret=$?
     fi
 
-    [ "$flag" = "transgender" ] && flag="lesbian" || flag="transgender"
+    [ "$ret" = 0 ] && [ "$flag" = "transgender" ] && flag="lesbian" || flag="transgender"
 
     echo "$flag" > $stamp
     return
