@@ -76,11 +76,20 @@ vim.api.nvim_create_autocmd("LspProgress", {
 
 --- if you want to know more about mason.nvim
 --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
-require('mason').setup({
-    pip = {
-        upgrade_pip = true,
+require('mason').setup(
+    {
+        pip = {
+            upgrade_pip = true,
+        },
+        ui = {
+            icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+            }
+        }
     }
-})
+)
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
