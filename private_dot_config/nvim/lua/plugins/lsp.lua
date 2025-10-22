@@ -4,7 +4,7 @@ return {
     {'L3MON4D3/LuaSnip'},
 
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         config = function()
             if os.name() == "Linux" then
                 MASON_PATH = os.getenv("HOME") .. "/.local/share/nvim/mason"
@@ -16,6 +16,6 @@ return {
             end
         end,
     },
-    {'williamboman/mason-lspconfig.nvim'},
+    {'mason-org/mason-lspconfig.nvim'},
     {'mfussenegger/nvim-lint'}
 }
