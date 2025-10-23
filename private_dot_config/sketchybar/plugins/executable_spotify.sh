@@ -3,7 +3,7 @@
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 # Allow override via first arg or env variable
 COVER_PATH="/tmp/cover.jpg"
-MAX_LABEL_LENGTH=35
+MAX_LABEL_LENGTH=32
 truncate_text() {
     local text="$1"
     local max_length=$MAX_LABEL_LENGTH
