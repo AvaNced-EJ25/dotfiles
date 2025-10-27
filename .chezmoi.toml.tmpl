@@ -18,8 +18,3 @@ command = "C:/Program Files/PowerShell/7/pwsh.exe"
     [data.window]
     decorations = {{ $window_decorations }}
     transparency = {{ $window_transparency }}
-
-[keepassxc]
-    database = "{{ .chezmoi.homeDir }}/Documents/Chezmoi.kdbx"
-    args = ["--no-password", "--key-file", "{{ .chezmoi.homeDir }}/.chezmoi.keyx"]
-    prompt = false
