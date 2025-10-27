@@ -171,5 +171,8 @@ shift + alt - 0 : yabai -m space --balance
 # Launch terminal
 cmd - return : $HOME/.local/bin/kitty --single-instance -d $HOME
 
+# Launch finder
+cmd - e : open -a Finder
+
 # Close Window
 alt + shift - q : yabai -m window --close
