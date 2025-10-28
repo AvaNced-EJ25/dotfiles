@@ -34,7 +34,7 @@ vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.o.guifont = "JetBrainsMono Nerd Font:h14"
+vim.o.guifont = "Hack Nerd Font:h14"
 vim.o.timeout = true
 vim.o.timeoutlen = 3000
 
