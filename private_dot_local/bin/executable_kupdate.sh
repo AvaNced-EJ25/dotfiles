@@ -235,6 +235,10 @@ if command -v rustup > /dev/null 2>&1; then
 fi
 
 if command -v cargo > /dev/null 2>&1; then
+    kprintf 'Updating cargo crates...'
+    cargo install-update -a
+    kprintf 'Done.'
+
     if [ ! -z "$(cargo install --list | grep 'neovide')" ]; then
         kprintf 'Updating neovide...'
         cargo install --git https://github.com/neovide/neovide
