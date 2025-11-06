@@ -26,18 +26,18 @@ services:
     {{- end }}
 
 git:
-  paging:
-    parseEmoji: true
-    {{- if eq .chezmoi.os "windows" }}
-    externalDiffCommand: difft --color=always --display=inline
-    {{- else }}
-    colorArg: always
-    pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
-    {{- end }}
+  pagers:
+    - parseEmoji: true
+      {{- if eq .chezmoi.os "windows" }}
+      externalDiffCommand: difft --color=always --display=inline
+      {{- else }}
+      colorArg: always
+      pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      {{- end }}
 
-    {{ if .work -}}
-    branchPrefix: "koman/"
-    {{- end }}
+      {{ if .work -}}
+      branchPrefix: "koman/"
+      {{- end }}
 
 os:
   editPreset: 'nvim'
