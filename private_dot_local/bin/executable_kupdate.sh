@@ -50,6 +50,10 @@ case "$(uname -s)" in
     *)          os_name="UNKNOWN:${unameOut}"
 esac
 
+if command -v hyfetch_cycle > /dev/null; 2>&1; then
+    hyfetch_cycle
+fi
+
 kprintf 'Requesting root privilages...'
 # Get sudo privileges at the start
 sudo -v > /dev/null 2>&1 || exit 1

@@ -21,6 +21,12 @@ if ( $admin.IsPresent ) {
     return
 }
 
+Get-Command -Name "print_header" -ErrorAction SilentlyContinue -ErrorVariable motd | Out-Null
+$motd = ($motd.Capacity -eq 0)
+if ( $motd ) {
+    print_header stop --bar --ahk
+}
+
 Get-Command -Name "komorebic" -ErrorAction SilentlyContinue -ErrorVariable komorebic_installed | Out-Null
 $komorebic_installed = ($komorebic_installed.Capacity -eq 0)
 if ( $komorebic_installed ) {
