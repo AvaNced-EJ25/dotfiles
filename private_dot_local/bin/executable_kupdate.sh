@@ -50,8 +50,8 @@ case "$(uname -s)" in
     *)          os_name="UNKNOWN:${unameOut}"
 esac
 
-if command -v hyfetch_cycle > /dev/null; 2>&1; then
-    hyfetch_cycle
+if command -v hyfetch > /dev/null; 2>&1; then
+    hyfetch
 fi
 
 kprintf 'Requesting root privilages...'
