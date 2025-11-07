@@ -57,19 +57,7 @@ kprintf 'Done.'
 
 if command -v chezmoi > /dev/null 2>&1; then
     kprintf 'Ugrading chezmoi...'
-    # chezmoi upgrade --dry-run --progress true
-    # SCRIPTNAME=$(realpath $0)
-    #
-    # echo $(chezmoi diff $SCRIPTNAME)
-    #
-    # if [ ! -z $(chezmoi diff $SCRIPTNAME) ]; then
-    #     kprintf "kupdate.sh has changed, restarting..."
-    #     chezmoi apply --apply
-    #     bash $SCRIPTNAME
-    #     exit $?
-    # fi
-
-    chezmoi apply --progress true
+    chezmoi upgrade
     kprintf 'Done.'
 
     kprintf 'Updating dotfiles...'
