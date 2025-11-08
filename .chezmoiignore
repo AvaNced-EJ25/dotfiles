@@ -1,6 +1,15 @@
 # vim: syntax=gitignore
 README.md
 
+# Light nvim install if a
+{{- if eq .chezmoi.arch "arm64" }}
+.zshenv
+.config/zsh
+.config/nvim/after
+.config/nvim/plugins
+.local/private_share
+{{- end }}
+
 {{- if ne .chezmoi.os "linux" }}
 .config/variety/
 .local/bin/mount.sh
