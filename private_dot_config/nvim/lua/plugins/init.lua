@@ -37,5 +37,15 @@ return {
         },
     },
     { 'kevinhwang91/nvim-ufo', dependencies = {'kevinhwang91/promise-async'} },
-    { 'equalsraf/neovim-gui-shim' }
+    { 'equalsraf/neovim-gui-shim' },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        -- install with yarn or npm
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
 }
