@@ -42,10 +42,35 @@ source "${HOME}/.config/aliases.sh"
 # Add lesspipe
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Add zoxide on cd
-if type zoxide &>/dev/null; then
-    eval "$(zoxide init zsh --cmd cd)"
+if type fzf &> /dev/null; then
+export FZF_BASE="$(which fzf)"
 fi
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'bat -n --color=always {}'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | clip-set)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'eza --tree --icons=auto --classify=auto {}'"
+
+export FZF_DEFAULT_OPTS=" \
+    --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+    --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+    --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+    --color=selected-bg:#494d64 \
+    --multi"
+
+export ZOXIDE_CMD_OVERRIDE="cd"
 
 # Plugins
 zinit light lukechilds/zsh-better-npm-completion
@@ -53,7 +78,17 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
 
-zinit snippet OMZP::nvm/nvm.plugin.zsh
+# OMZ Pluggins
+omzp=( chezmoi docker docker-compose eza fzf git git-auto-fetch kitty npm nvm rust sudo yarn zoxide )
+
+for plug in $omzp; do
+    zinit snippet "OMZP::${plug}/${plug}.plugin.zsh"
+done
+
+alias ltree="eza --tree --long --header --icons=auto --classify=auto --hyperlink"
+alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 if [[ $COLORTERM =~ ^(truecolor|24bit)$ ]]; then
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#f5bde6"
@@ -65,9 +100,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 alias kee="flatpak run org.keepassxc.KeePassXC cli"
 
-alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
-
 # set PATH so it includes spicetify
 if [ -d "$HOME/.spicetify" ]; then
     PATH="$PATH:$HOME/.spicetify"
@@ -76,9 +108,6 @@ fi
 # Set pager to nvim
 export MANPAGER='nvim +Man!'
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_AUTO_UPDATE_SECS='86400'
 
@@ -86,10 +115,6 @@ export HOMEBREW_AUTO_UPDATE_SECS='86400'
 for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
     source $z
 done
-
-if type fzf &>/dev/null; then
-    source <(fzf --zsh)
-fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/histfile
@@ -114,19 +139,14 @@ autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'header' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+zstyle ':omz:plugins:eza' 'color-scale' all
+zstyle ':omz:plugins:eza' 'color-scale-mode' gradient
+zstyle ':omz:plugins:eza' 'hyperlink' yes
+
 # End of lines added by compinstall
 
-# Add oh-my-posh
-if type oh-my-posh &>/dev/null; then
-    eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
-fi
-
-# Add pip
-if type pip &>/dev/null; then
-    eval "$(pip completion --zsh)"
-fi
-
-
-if type pipx &>/dev/null; then
-    eval "$(register-python-argcomplete pipx)"
-fi
+# Add oh-my-posh prompt
+eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
