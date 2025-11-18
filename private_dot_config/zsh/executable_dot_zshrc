@@ -79,7 +79,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
 
 # OMZ Pluggins
-omzp=( chezmoi docker docker-compose eza fzf git git-auto-fetch kitty npm nvm rust sudo yarn zoxide )
+omzp=( chezmoi docker docker-compose eza fzf git kitty npm nvm rust sudo yarn zoxide )
 
 for plug in $omzp; do
     zinit snippet "OMZP::${plug}/${plug}.plugin.zsh"
