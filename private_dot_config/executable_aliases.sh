@@ -1,13 +1,3 @@
-# Assume 2 processors by default
-num_proc=2
-if type nproc &> /dev/null; then
-    # Try with nproc (Linux)
-    num_proc=$(nproc)
-elif type sysctl &> /dev/null; then
-    # Try with sysctl (MacOS)
-    num_proc="$(sysctl -n hw.ncpu)"
-fi
-
 # Consistent across bash and zsh
 # Exports
 if type nvim &> /dev/null; then
@@ -28,31 +18,18 @@ else
 fi
 
 if [[ "$TERM" == xterm-kitty ]]; then
-    alias s="kitten ssh"
     alias icat="kitten icat"
-fi
-
-# Load env vars from $HOME/.env
-if [ -r "${HOME}/.env" ]; then
-    export $(cat "${HOME}/.env")
 fi
 
 # Aliases
 alias vi="$EDITOR"
-alias fn="fzf --preview='bat -color=always {}' --bind 'enter:become(neovide {} &)'"
-alias fvim="fzf --preview='bat --color=always {}' --bind 'enter:become(nvim {})'"
-alias fbat="fzf --preview='bat --color=always {}' --bind 'enter:become(bat {})'"
+alias fzfvim="fzf --preview='bat --color=always {}' --bind 'enter:become(nvim {})'"
+alias fzfbat="fzf --preview='bat --color=always {}' --bind 'enter:become(bat {})'"
 
 alias sreload="exec '$SHELL'"
 alias cz="chezmoi"
 alias zz="cd -"
 alias dl="cd ~/Downloads"
-
-alias ls="eza --icons=auto --classify=auto --hyperlink"
-alias ll="eza --long --header --icons=auto --classify=auto --git --smart-group --hyperlink"
-alias la="eza --long --all --header --icons=auto --classify=auto --git --smart-group --hyperlink"
-alias ltree="eza --tree --long --header --icons=auto --classify=auto --hyperlink"
-alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
 
 alias lg="lazygit"
 
@@ -77,9 +54,6 @@ fi
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
-
-alias make-iwuy="make -k CC=include-what-you-use IWUYFLAGS=\"-Xiwyu --error_always\""
-alias iwyu-fix="make-iwuy 2> /tmp/iwyu.out; /usr/bin/env fix_includes.py < /tmp/iwyu.out"
 
 alias bathelp='bat --plain --language=help'
 help() {
