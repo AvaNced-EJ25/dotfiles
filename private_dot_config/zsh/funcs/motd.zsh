@@ -28,9 +28,9 @@ hyfetch_cycle() {
 
     if [ "$ret" = 0 ]; then
         i=$(((i+1) % $count))
+        echo "$i" > $MOTD_STAMP
     fi
 
-    echo "$i" > $MOTD_STAMP
     emulate zsh
     return $ret
 }
