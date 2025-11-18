@@ -43,12 +43,12 @@ fi
 
 alias binbat="bat --nonprintable-notation caret --show-all"
 
-if type xclip &> /dev/null; then
-    alias clip-set="xclip -selection c"
-    alias clip-get="xclip -selection c -o"
-elif type pbcopy &> /dev/null; then
-    alias clip-set="pbcopy"
-    alias clip-get="pbpaste"
+if type kitten &> /dev/null; then
+    alias pbcopy="kitten clipboard --"
+    alias pbpaste="kitten clipboard --get-clipboard --"
+elif type xclip &> /dev/null; then
+    alias pbcopy="xclip -selection c"
+    alias pbpaste="xclip -selection c -o"
 fi
 
 alias grep="grep --color=auto"
