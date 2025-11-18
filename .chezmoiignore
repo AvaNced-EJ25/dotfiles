@@ -1,8 +1,8 @@
 # vim: syntax=gitignore
 README.md
 
-# Light nvim install if a
-{{- if eq .chezmoi.arch "arm64" }}
+# Light nvim install for raspi
+{{- if eq .chezmoi.hostname "shakra" }}
 .zshenv
 .config/zsh
 .config/nvim/after
