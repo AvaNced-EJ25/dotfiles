@@ -40,6 +40,8 @@ vim.o.timeoutlen = 3000
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
+vim.g.markview_cmp_loaded = true;
+
 -- If diff
 if vim.opt.diff:get() then
     vim.o.diffopt = "internal,filler,closeoff,linematch:10,context:20"

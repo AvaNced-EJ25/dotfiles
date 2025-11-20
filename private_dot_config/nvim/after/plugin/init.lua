@@ -60,3 +60,5 @@ keymap.set('n', '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})
 keymap.set({'v', 'o'}, '<leader>cc', '<cmd>:CccPick<cr>', {desc = "Choose Color"})
 
 keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+keymap.set("n", "<leader>m", "<cmd>Markview<cr>", { desc = "Toggle `markview` globally" });

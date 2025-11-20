@@ -48,4 +48,24 @@ return {
         end,
         ft = { "markdown" },
     },
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        opts = {
+            markdown = {
+                enable = true
+            },
+            markdown_inline = {
+                enable = true
+            },
+            typst = {
+
+            },
+            yaml = {
+                enable = true
+            }
+        }
+        -- Completion for `blink.cmp`
+        -- dependencies = { "saghen/blink.cmp" },
+    };
 }
