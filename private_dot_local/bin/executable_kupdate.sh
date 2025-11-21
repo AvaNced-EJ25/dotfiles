@@ -105,7 +105,7 @@ if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/src/keepass.sh ]; 
 
     # TODO: Use systemd mount instead
     if [ ! -z $server_name ]; then
-        eval ~/.local/bin/mount.sh -m "${server_name}" '/mnt/home' 'dietpi/home'
+        eval ~/.local/bin/mount.sh -m "${server_name}" '/mnt/home' 'dietpi'
         mounted=$?
     fi
 
