@@ -12,7 +12,7 @@ hyfetch_cycle() {
     emulate sh
     local ret=0
     local i=0
-    local flags=( "rainbow" "transgender" "lesbian" "demigirl" "transfeminine" "sapphic" "progress" "interprogress" )
+    local flags=( "rainbow" "transgender" "lesbian" "transbian" "demigirl" "transfeminine" "sapphic" "progress" "interprogress" )
     local count=${#flags[@]}
     if [ -r $MOTD_STAMP ]; then
         i=$(cat $MOTD_STAMP)
