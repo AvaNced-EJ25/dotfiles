@@ -1,32 +1,37 @@
 
 $env:PWSH_MOTD_HYFETCH=1
 
-$motd_stamp="$env:HOME/.motd_shown"
+$MOTD_STAMP="$env:HOME/.motd_shown"
 
 function print_header() {
-    New-Item "$motd_stamp" -ErrorAction SilentlyContinue | Out-Null
-    $flag=$(Get-Content $motd_stamp)
-
-    if (-not $flag) {
-        $flag="transgender"
+    $ret=0
+    $i=0
+    $flags=@( "rainbow", "transgender", "lesbian", "transbian", "demigirl", "transfeminine", "sapphic", "progress", "interprogress" )
+    $count=$flags.Count
+    if (Test-Path $MOTD_STAMP) {
+        $i=$(Get-Content $MOTD_STAMP)
     }
 
-    # Custom message
+    if ($i -gt $count) {
+        $i=0
+    }
+
+    $flag=$flags[$i]
     if (Test-Path env:PWSH_MOTD_HYFETCH ) {
         hyfetch -C "${HOME}/.config/hyfetch.json" -p "$flag"
+        $ret=$LASTEXITCODE
     }
 
-    if ("$flag" -eq "transgender" ) {
-        $flag="lesbian" 
-    } else {
-        $flag="transgender"
+    if ($ret -eq 0) {
+        $i=$((($i+1) % $count))
+        Set-Content $MOTD_STAMP -Value "$flag"
     }
 
-    Set-Content $motd_stamp -Value "$flag"
+    return $ret
 }
 
 # PWSH MOTD - once every 3 hours
-if ( (Test-Path env:PWSH_MOTD_ALWAYS) -or ((Get-Item $motd_stamp -ErrorAction SilentlyContinue).LastWriteTime -lt (Get-Date).AddHours(-3)) ) {
+if ( (Test-Path env:PWSH_MOTD_ALWAYS) -or ((Get-Item $MOTD_STAMP -ErrorAction SilentlyContinue).LastWriteTime -lt (Get-Date).AddHours(-3)) ) {
     print_header
 }
 
