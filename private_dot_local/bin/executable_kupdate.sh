@@ -59,10 +59,12 @@ kprintf 'Requesting root privilages...'
 sudo -v &> /dev/null || exit 1
 kprintf 'Done.'
 
-if command -v chezmoi > /dev/null 2>&1; then
-    kprintf 'Ugrading chezmoi...'
-    chezmoi upgrade
-    kprintf 'Done.'
+if command -v chezmoi &> /dev/null; then
+    if chezmoi --help | grep -q upgrade; then
+        kprintf 'Ugrading chezmoi...'
+        chezmoi upgrade
+        kprintf 'Done.'
+    fi
 
     kprintf 'Updating dotfiles...'
     chezmoi update
