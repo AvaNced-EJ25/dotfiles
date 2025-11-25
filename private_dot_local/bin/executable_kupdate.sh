@@ -34,8 +34,8 @@ fi
 kprintf "Running with ${INVOKED_SHELL}"
 
 # If we can invoke this using zsh, then do it
-if command -v zsh > /dev/null 2>&1; then
-    if [ "$INVOKED_SHELL" != zsh ]; then
+if [ "$INVOKED_SHELL" != zsh ]; then
+    if command -v zsh &> /dev/null; then
         zsh $0
         exit $?
     fi
@@ -56,7 +56,7 @@ fi
 
 kprintf 'Requesting root privilages...'
 # Get sudo privileges at the start
-sudo -v > /dev/null 2>&1 || exit 1
+sudo -v &> /dev/null || exit 1
 kprintf 'Done.'
 
 if command -v chezmoi > /dev/null 2>&1; then
@@ -97,7 +97,7 @@ if [ "$INVOKED_SHELL" = zsh ]; then
 fi
 
 # keepass.sh is not in chezmoi
-if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/src/keepass.sh ]; then
+if command -v keepassxc-cli &> /dev/null && [ -x ~/.local/src/keepass.sh ]; then
     kprintf "Syncing keepass database..."
     mounted=false
     server_name=""
@@ -124,7 +124,7 @@ if command -v keepassxc-cli > /dev/null 2>&1 && [ -x ~/.local/src/keepass.sh ]; 
 fi
 
 if [[ $os_name == "Linux" ]]; then
-    if command -v fwupdmgr > /dev/null 2>&1; then
+    if command -v fwupdmgr &> /dev/null; then
         kprintf 'Updating BIOS and Device FW'
         sudo fwupdmgr get-updates && sudo fwupdmgr update -y
         kprintf 'Done.'
@@ -156,7 +156,7 @@ if [[ $os_name == "Linux" ]]; then
         kprintf 'Done.'
     fi
 
-    if command -v flatpak > /dev/null 2>&1; then
+    if command -v flatpak &> /dev/null; then
         kprintf 'Updating flatpak applications...'
         flatpak update -y --user
         sudo flatpak update -y --system
@@ -166,14 +166,14 @@ if [[ $os_name == "Linux" ]]; then
         kprintf 'Done.'
     fi
 
-    if command -v snap > /dev/null 2>&1; then
+    if command -v snap &> /dev/null; then
         kprintf 'Updating snap applications...'
         sudo snap refresh
         kprintf 'Done.'
     fi
 fi
 
-if command -v brew > /dev/null 2>&1; then
+if command -v brew &> /dev/null; then
     kprintf 'Updating brew bottles...'
     brew update
     brew upgrade
@@ -191,7 +191,7 @@ if [ -d "${HOME}/.local/src/neovim" ]; then
     remote_hash=$(git ls-remote origin "refs/tags/${TAG}" | cut -f1)
 
     if [ "${local_hash}" != "${remote_hash}" ]; then
-        git tag -d "${TAG}" > /dev/null 2>&1
+        git tag -d "${TAG}" &> /dev/null
         git fetch origin > /dev/null
         git checkout "${TAG}"
 
@@ -208,25 +208,25 @@ if [ -d "${HOME}/.local/src/neovim" ]; then
     kprintf 'Done.'
 fi
 
-if command -v spicetify > /dev/null 2>&1; then
+if command -v spicetify &> /dev/null; then
     kprintf 'Updating Spicetify...'
     spicetify update
     kprintf 'Done.'
 fi
 
-if command -v pyenv > /dev/null 2>&1; then
+if command -v pyenv &> /dev/null; then
     kprintf 'Updating pyenv...'
     pyenv update
     kprintf 'Done.'
 fi
 
-if command -v rustup > /dev/null 2>&1; then
+if command -v rustup &> /dev/null; then
     kprintf 'Updating rust...'
     rustup update
     kprintf 'Done.'
 fi
 
-if command -v cargo > /dev/null 2>&1; then
+if command -v cargo &> /dev/null; then
     kprintf 'Updating cargo crates...'
     cargo install-update -a
     kprintf 'Done.'
