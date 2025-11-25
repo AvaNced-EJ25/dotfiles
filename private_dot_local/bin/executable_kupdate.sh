@@ -248,7 +248,7 @@ if command -v cargo &> /dev/null; then
     fi
 fi
 
-if command -v kitty > /dev/null 2>&1; then
+if kitty_path=$(command -v kitty) && [[ "$kitty_path" != "/usr/bin/kitty" ]]; then
     latest=$(curl -fsSL https://sw.kovidgoyal.net/kitty/current-version.txt)
     if [[ ! "$(kitty --version)" == *$latest* ]]; then
         kprintf "Updating kitty to $latest"
