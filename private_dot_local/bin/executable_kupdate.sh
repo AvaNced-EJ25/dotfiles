@@ -132,8 +132,16 @@ if [[ $os_name == "Linux" ]]; then
         kprintf 'Done.'
     fi
 
-    if command -v apt > /dev/null 2>&1; then
-        kprintf 'Updating system repositories...'
+    if command -v dnf &> /dev/null; then
+        kprintf 'Updating system packages [dnf]...'
+        sudo dnf upgrade -y
+        kprintf 'Done.'
+    elif command -v yay &> /dev/null; then
+        kprintf 'Updating system packages [yay]...'
+        yay -Syu
+        kprintf 'Done.'
+    elif command -v apt &> /dev/null; then
+        kprintf 'Updating system repositories [apt]...'
 
         i=0
         tput sc
@@ -147,7 +155,7 @@ if [[ $os_name == "Linux" ]]; then
             tput rc
             echo -en "\r[$j] Waiting for other software managers to finish..." 
             sudo -nv
-            sleep 0.5
+            sleep 1
             ((i=i+1))
         done
 
