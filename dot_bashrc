@@ -172,10 +172,8 @@ if type fzf &>/dev/null; then
     export FZF_COMPLETION_TRIGGER='``'
 fi
 
-if [ -d "$HOME/.nvm" ]; then
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if command -v fnm &> /dev/null; then
+    eval "$(fnm env --use-on-cd --shell bash)"
 fi
 
 [ -x "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
