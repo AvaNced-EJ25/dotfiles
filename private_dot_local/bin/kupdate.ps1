@@ -50,6 +50,12 @@ if (Get-Command chezmoi.exe -ErrorAction SilentlyContinue) {
     Write-Host "Done."
 }
 
+if (Get-Command cargo.exe -ErrorAction SilentlyContinue) {
+    Write-Host "Updating cargo crates..."
+    chezmoi install-update --all
+    Write-Host "Done."
+}
+
 if (Get-Command spicetify.exe -ErrorAction SilentlyContinue) {
     Write-Host "Updating spotify..."
 
