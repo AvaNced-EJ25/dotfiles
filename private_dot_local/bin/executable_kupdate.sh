@@ -238,7 +238,7 @@ fi
 
 if command -v cargo &> /dev/null; then
     kprintf 'Updating cargo crates...'
-    cargo install-update -a
+    cargo install-update --all
     kprintf 'Done.'
 
     if [ ! -z "$(cargo install --list | grep 'neovide')" ]; then
