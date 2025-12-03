@@ -3,7 +3,7 @@ $env:PWSH_MOTD_HYFETCH=1
 
 $MOTD_STAMP="$env:HOME/.motd_shown"
 
-function print_header() {
+function hyfetch_cycle() {
     $ret=0
     $i=0
     $flags=@( "rainbow", "transgender", "lesbian", "transbian", "demigirl", "transfeminine", "sapphic", "progress", "interprogress" )
@@ -32,6 +32,6 @@ function print_header() {
 
 # PWSH MOTD - once every 3 hours
 if ( (Test-Path env:PWSH_MOTD_ALWAYS) -or ((Get-Item $MOTD_STAMP -ErrorAction SilentlyContinue).LastWriteTime -lt (Get-Date).AddHours(-3)) ) {
-    print_header
+    hyfetch_cycle
 }
 
