@@ -24,10 +24,8 @@ function hyfetch_cycle() {
 
     if ($ret -eq 0) {
         $i=$((($i+1) % $count))
-        Set-Content $MOTD_STAMP -Value "$flag"
+        Set-Content $MOTD_STAMP -Value "$i"
     }
-
-    return $ret
 }
 
 # PWSH MOTD - once every 3 hours
