@@ -110,6 +110,10 @@ if (Get-Command chezmoi -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (chezmoi completion powershell | Out-String)})
 }
 
+if (Get-Command fnm -ErrorAction SilentlyContinue) {
+    fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+}
+
 if (Test-Path -Path "$PSScriptRoot\functions") {
     Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
         . "$($_.FullName)"
