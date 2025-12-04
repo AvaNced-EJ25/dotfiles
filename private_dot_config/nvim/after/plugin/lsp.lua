@@ -128,7 +128,7 @@ require('mason-lspconfig').setup({
             })
         end,
         ['bashls'] = function()
-            require("lspconfig")['bashls'].setup({
+            vim.lsp.config('bashls', {
                 capabilities = capabilities,
                 filetypes = {
                     "sh",
@@ -143,8 +143,7 @@ require('mason-lspconfig').setup({
 
         end,
         ['lua_ls'] = function ()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup {
+            vim.lsp.config('lua_ls', {
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -152,7 +151,7 @@ require('mason-lspconfig').setup({
                         }
                     }
                 }
-            }
+            })
         end,
         ['harper_ls'] = function ()
             vim.lsp.config('harper_ls', { capabilities = capabilities, autostart = false })
