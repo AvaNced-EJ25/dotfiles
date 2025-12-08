@@ -140,6 +140,9 @@ autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
+zinit ice atload"zpcdreplay" atclone"./zplug.zsh" atpull"%atclone"
+zinit light g-plane/pnpm-shell-completion
+
 zstyle ':omz:plugins:eza' 'dirs-first' yes
 zstyle ':omz:plugins:eza' 'header' yes
 zstyle ':omz:plugins:eza' 'icons' yes
