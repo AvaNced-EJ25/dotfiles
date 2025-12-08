@@ -57,17 +57,9 @@ if (Get-Command cargo.exe -ErrorAction SilentlyContinue) {
 }
 
 if (Get-Command spicetify.exe -ErrorAction SilentlyContinue) {
-    Write-Host "Updating spotify..."
-
-    Stop-Process -Name Spotify
-        winget upgrade spotify
-        Write-Host "Done."
-        winget upgrade spotify
-        Write-Host "Done."
-
-        Write-Host "Updating spicetify..."
-        spicetify update
-        Write-Host "Done."
+    Write-Host "Updating spicetify..."
+    spicetify update
+    Write-Host "Done."
 }
 
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
