@@ -52,7 +52,7 @@ if (Get-Command chezmoi.exe -ErrorAction SilentlyContinue) {
 
 if (Get-Command cargo.exe -ErrorAction SilentlyContinue) {
     Write-Host "Updating cargo crates..."
-    chezmoi install-update --all
+    cargo install-update --all
     Write-Host "Done."
 }
 
