@@ -14,7 +14,6 @@ if (Get-Command bat -ErrorAction SilentlyContinue) {
 }
 
 Remove-Alias -Name ls
-Remove-Alias -Name cat
 Remove-Alias -Name pwd
 
 function eza-ls { eza --icons=auto --classify=auto $args }
@@ -64,7 +63,6 @@ New-Alias -Name tree -Value eza-tree
 New-Alias -Name lg -Value lazygit.exe
 New-Alias -Name cz -Value chezmoi.exe
 
-New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
 New-Alias -Name reboot -Value reboot-func
