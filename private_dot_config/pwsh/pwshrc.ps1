@@ -91,7 +91,6 @@ New-Alias -Name cz -Value chezmoi.exe
 New-Alias -Name cat -Value bat
 New-Alias -Name binbat -Value bin-bat
 
-New-Alias -Name sreload -value refreshenv.cmd
 New-Alias -Name reboot -Value reboot-func
 
 #New-Alias -Name more less.exe
