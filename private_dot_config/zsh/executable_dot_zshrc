@@ -80,7 +80,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light wintermi/zsh-fnm
 
 # OMZ Pluggins
-omzp=( chezmoi docker docker-compose eza fzf git kitty npm rust sudo yarn zoxide )
+omzp=( chezmoi docker docker-compose eza fzf git kitty npm rust sudo uv yarn zoxide )
 
 for plug in $omzp; do
     zinit snippet "OMZP::${plug}/${plug}.plugin.zsh"
