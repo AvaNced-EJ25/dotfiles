@@ -77,7 +77,7 @@ zinit light lukechilds/zsh-better-npm-completion
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light wintermi/zsh-fnm
+zinit light andlebed/zsh-fnm
 
 # OMZ Pluggins
 omzp=( chezmoi docker docker-compose eza fzf git kitty npm rust sudo uv yarn zoxide )
