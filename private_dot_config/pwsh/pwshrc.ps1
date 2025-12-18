@@ -76,7 +76,7 @@ if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
 }
 
 if (Get-Command fnm -ErrorAction SilentlyContinue) {
-    fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+    fnm env --use-on-cd --version-file-strategy=recursive --shell powershell | Out-String | Invoke-Expression
 }
 
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
