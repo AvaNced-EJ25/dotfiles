@@ -99,29 +99,31 @@ if [ "$INVOKED_SHELL" = zsh ]; then
 fi
 
 # keepass.sh is not in chezmoi
-if command -v keepassxc-cli &> /dev/null && [ -x ~/.local/src/keepass.sh ]; then
-    kprintf "Syncing keepass database..."
-    mounted=false
-    server_name=""
-    read -r server_name < ~/.local/src/server
+if command -v keepassxc-cli &> /dev/null || $(flatpak info "org.keepassxc.KeePassXC" &> /dev/null ); then
+    if [ -x ~/.local/src/keepass.sh ]; then
+        kprintf "Syncing keepass database..."
+        mounted=false
+        server_name=""
+        read -r server_name < ~/.local/src/server
 
-    # TODO: Use systemd mount instead
-    if [ ! -z $server_name ]; then
-        eval ~/.local/bin/mount.sh -m "${server_name}" '/mnt/home' 'dietpi'
-        mounted=$?
-    fi
+        # TODO: Use systemd mount instead
+        if [ ! -z $server_name ]; then
+            eval ~/.local/bin/mount.sh -m "${server_name}" '/mnt/home' 'dietpi'
+            mounted=$?
+        fi
 
-    eval "~/.local/src/keepass.sh"
-    ret=$?
+        eval "~/.local/src/keepass.sh"
+        ret=$?
 
-    if [ "$ret" -eq 0 ]; then
-        kprintf "Done."
-    else
-        kprinterr "Keepass database sync failed."
-    fi
+        if [ "$ret" -eq 0 ]; then
+            kprintf "Done."
+        else
+            kprinterr "Keepass database sync failed."
+        fi
 
-    if [ "$mounted" -eq 0 ]; then
-        eval ~/.local/bin/mount.sh -u "${server_name}" '/mnt/home'
+        if [ "$mounted" -eq 0 ]; then
+            eval ~/.local/bin/mount.sh -u "${server_name}" '/mnt/home'
+        fi
     fi
 fi
 

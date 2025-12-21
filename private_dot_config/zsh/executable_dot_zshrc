@@ -99,7 +99,7 @@ fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-alias kee="flatpak run org.keepassxc.KeePassXC cli"
+alias keepassxc-cli="flatpak run org.keepassxc.KeePassXC cli"
 
 # set PATH so it includes spicetify
 if [ -d "$HOME/.spicetify" ]; then
