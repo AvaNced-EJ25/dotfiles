@@ -3,35 +3,18 @@ local M = {
     dependencies = {
         "nvim-treesitter/nvim-treesitter-context",
     },
-    build = function()
-        require("nvim-treesitter.install").update({ with_sync = true })()
-    end,
-
+    build = ':TSUpdate',
     config = function ()
-        require("nvim-treesitter.install").prefer_git = false
-        local configs = require("nvim-treesitter.configs")
-
-        configs.setup({
-            ensure_installed = {
-                "lua", "luadoc", "vim", "vimdoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
-                "json", "jsonc", "markdown", "markdown_inline", "powershell", "regex", "csv",
-                "python", "cpp", "c", "make", "cmake", "comment", "html", "javascript", "typescript", "tsx", "css",
-            },
-            highlight = {
-                enable = true,
-                disable = function(lang, bufnr)
-                    -- check if 'filetype' option includes 'chezmoitmpl'
-                    if string.find(vim.bo.filetype, 'chezmoitmpl') then
-                        return true
-                    end
-                end,
-            },
-            indent = {
-                enable = true
-            }
+        require('nvim-treesitter').install({
+            "lua", "luadoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
+            "json", "jsonc", "markdown", "markdown_inline", "powershell", "regex", "csv",
+            "python", "cpp", "c", "make", "cmake", "comment", "html", "javascript", "typescript", "tsx", "css",
         })
 
-        require("treesitter-context").setup()
+        require("treesitter-context").setup({
+            max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
+            min_window_height = 40, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+        })
     end,
 }
 
