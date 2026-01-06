@@ -69,7 +69,7 @@ require("ibl").setup({
         enabled = true,
     },
     exclude = {
-        filetypes = { 'lspinfo', 'checkhealth', 'help', 'man', 'gitcommit', 'TelescopePrompt', 'TelescopeResults', 'dashboard', },
+        filetypes = { 'lspinfo', 'checkhealth', 'help', 'man', 'gitcommit', 'dashboard', },
         buftypes = { 'terminal', 'nofile', 'quickfix', 'prompt' },
     }
 })

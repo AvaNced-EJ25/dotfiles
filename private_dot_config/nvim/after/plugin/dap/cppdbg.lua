@@ -1,8 +1,6 @@
-local dap, dapui, telescope = require("dap"), require("dapui"), require("telescope")
+local dap, dapui = require("dap"), require("dapui")
 
 dapui.setup()
-
-telescope.load_extension("dap")
 
 if os.name() == "Linux" then
     dap.adapters.cppdbg = {

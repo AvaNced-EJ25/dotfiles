@@ -1,8 +1,7 @@
 return {
     'xvzc/chezmoi.nvim',
     dependencies = {
-        'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
+        'folke/snacks.nvim',
         {
             'alker0/chezmoi.vim',
             lazy = false,

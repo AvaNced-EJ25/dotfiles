@@ -2,8 +2,8 @@ return {
     "linux-cultist/venv-selector.nvim",
     dependencies = {
         "neovim/nvim-lspconfig",
+        'folke/snacks.nvim',
         "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
-        { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
     },
     ft = "python", -- Load when opening Python files
     keys = {
