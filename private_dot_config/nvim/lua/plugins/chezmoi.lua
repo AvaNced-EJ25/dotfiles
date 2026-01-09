@@ -1,6 +1,7 @@
 return {
     'xvzc/chezmoi.nvim',
     dependencies = {
+        'nvim-lua/plenary.nvim',
         'folke/snacks.nvim',
         {
             'alker0/chezmoi.vim',

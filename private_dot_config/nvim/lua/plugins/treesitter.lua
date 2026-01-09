@@ -8,7 +8,7 @@ local M = {
     config = function ()
         require('nvim-treesitter').install({
             "lua", "luadoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
-            "json", "jsonc", "markdown", "markdown_inline", "powershell", "regex", "csv",
+            "json", "markdown", "markdown_inline", "powershell", "regex", "csv",
             "python", "cpp", "c", "make", "cmake", "comment", "html", "javascript", "typescript", "tsx", "css",
         })
 
