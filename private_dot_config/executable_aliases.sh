@@ -55,11 +55,6 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
-alias bathelp='bat --plain --language=help'
-help() {
-    "$@" --help 2>&1 | bathelp
-}
-
 # Function for yazi to change the cwd
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

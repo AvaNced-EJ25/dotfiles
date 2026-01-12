@@ -168,6 +168,11 @@ if type fzf &>/dev/null; then
     export FZF_COMPLETION_TRIGGER='``'
 fi
 
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
+
 if command -v fnm &> /dev/null; then
     eval "$(fnm env --use-on-cd --shell bash)"
 fi
