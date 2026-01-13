@@ -36,4 +36,5 @@ README.md
 
 {{ if .work }}
 .local/bin/discord.sh
+.config/nvim/lua/plugins/cord.lua
 {{ end }}
