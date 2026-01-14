@@ -5,13 +5,17 @@ Set-PSReadLineOption -ViModeIndicator Cursor
 
 Set-PSReadLineKeyHandler -Chord "Ctrl+\" -Function AcceptSuggestion
 
-if (Get-Command rustup -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (rustup completions powershell | Out-String)})
-}
+Invoke-Expression (& { (rustup completions powershell | Out-String)})
 
-if (Get-Command bat -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (bat --completion ps1 | Out-String)})
-}
+Invoke-Expression (& { (bat --completion ps1 | Out-String)})
+
+oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
+
+fnm env --use-on-cd --version-file-strategy=recursive --shell powershell | Out-String | Invoke-Expression
+
+Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
+
+Invoke-Expression (& { (chezmoi completion powershell | Out-String)})
 
 Remove-Alias -Name ls
 Remove-Alias -Name pwd
@@ -71,26 +75,8 @@ New-Alias -Name reboot -Value reboot-func
 $env:PAGER = 'less.exe'
 $env:EDITOR= 'nvim'
 
-if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
-    oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
-}
-
-if (Get-Command fnm -ErrorAction SilentlyContinue) {
-    fnm env --use-on-cd --version-file-strategy=recursive --shell powershell | Out-String | Invoke-Expression
-}
-
-if (Get-Command zoxide -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
-}
-
-if (Get-Command chezmoi -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (chezmoi completion powershell | Out-String)})
-}
-
-if (Test-Path -Path "$PSScriptRoot\functions") {
-    Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
-        . "$($_.FullName)"
-    }
+Get-ChildItem "$PSScriptRoot\functions" -Filter *.ps1 | Foreach-Object {
+    . "$($_.FullName)"
 }
 
 # Function for yazi to change the cwd
