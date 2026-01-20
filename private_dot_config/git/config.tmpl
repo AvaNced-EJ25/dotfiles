@@ -19,6 +19,7 @@ editor = nvim
 excludesfile = {{ .chezmoi.homeDir }}/.config/git/.gitignore
 {{- if eq .chezmoi.os "windows" }}
 sshCommand = C:/Windows/System32/Openssh/ssh.exe
+longPaths = true
 {{- end }}
 
 [branch]
