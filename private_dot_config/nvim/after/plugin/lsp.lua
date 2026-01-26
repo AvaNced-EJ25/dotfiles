@@ -144,10 +144,17 @@ require('mason-lspconfig').setup({
         end,
         ['lua_ls'] = function ()
             vim.lsp.config('lua_ls', {
+                root_markers = {
+                    ".luarc.json",
+                    ".luarc.jsonc",
+                    ".luacheckrc",
+                    ".stylua.toml",
+                    ".git",
+                },
                 settings = {
                     Lua = {
-                        diagnostics = {
-                            globals = { "vim" }
+                        runtime = {
+                            version = 'LuaJIT',
                         }
                     }
                 }
