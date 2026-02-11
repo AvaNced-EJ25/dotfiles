@@ -154,3 +154,14 @@ zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 # Add oh-my-posh prompt
 eval "$(oh-my-posh init zsh --config "${OH_MY_POSH_CONFIG}")"
+
+# pnpm
+if [ -d "${HOME}/.local/share/pnpm" ]; then
+    export PNPM_HOME="${HOME}/.local/share/pnpm"
+
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+fi
+# pnpm end
