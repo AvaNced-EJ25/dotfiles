@@ -21,10 +21,10 @@ if ( $admin.IsPresent ) {
     return
 }
 
-Get-Command -Name "print_header" -ErrorAction SilentlyContinue -ErrorVariable motd | Out-Null
+Get-Command -Name "hyfetch" -ErrorAction SilentlyContinue -ErrorVariable motd | Out-Null
 $motd = ($motd.Capacity -eq 0)
 if ( $motd ) {
-    print_header stop --bar --ahk
+    hyfetch
 }
 
 Get-Command -Name "komorebic" -ErrorAction SilentlyContinue -ErrorVariable komorebic_installed | Out-Null
