@@ -72,6 +72,13 @@ export FZF_DEFAULT_OPTS=" \
 
 export ZOXIDE_CMD_OVERRIDE="cd"
 
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'header' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+zstyle ':omz:plugins:eza' 'color-scale' all
+zstyle ':omz:plugins:eza' 'color-scale-mode' gradient
+zstyle ':omz:plugins:eza' 'hyperlink' yes
+
 # Plugins
 zinit light lukechilds/zsh-better-npm-completion
 zinit light zsh-users/zsh-completions
@@ -142,13 +149,6 @@ bashcompinit
 
 zinit ice atload"zpcdreplay" atclone"./zplug.zsh" atpull"%atclone"
 zinit light g-plane/pnpm-shell-completion
-
-zstyle ':omz:plugins:eza' 'dirs-first' yes
-zstyle ':omz:plugins:eza' 'header' yes
-zstyle ':omz:plugins:eza' 'icons' yes
-zstyle ':omz:plugins:eza' 'color-scale' all
-zstyle ':omz:plugins:eza' 'color-scale-mode' gradient
-zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 # End of lines added by compinstall
 
