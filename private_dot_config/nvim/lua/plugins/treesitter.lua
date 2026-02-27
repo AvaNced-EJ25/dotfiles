@@ -9,7 +9,7 @@ local M = {
         require('nvim-treesitter').install({
             "lua", "luadoc", "bash", "gitignore", "git_config", "ssh_config", "toml", "yaml",
             "json", "markdown", "markdown_inline", "powershell", "regex", "csv",
-            "python", "cpp", "c", "make", "cmake", "comment", "html", "javascript", "typescript", "tsx", "css",
+            "python", "cpp", "c", "make", "cmake", "just", "comment", "html", "javascript", "typescript", "tsx", "css",
         })
 
         require("treesitter-context").setup({
