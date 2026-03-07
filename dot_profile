@@ -24,8 +24,14 @@ if [ -d "$HOME/bin" ] && ! [[ "$PATH" == *"$HOME/bin"* ]]; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] && ! [[ "$PATH" == *"$HOME/.local/bin"* ]]; then
-    PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ]; then
+    case "$PATH" in
+        *"$HOME/.local/bin"*)
+            PATH="$HOME/.local/bin:$PATH"
+            ;;
+        *)
+            ;;
+    esac
 fi
 
 [ -x "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
