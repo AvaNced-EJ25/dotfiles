@@ -13,7 +13,7 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 .config/variety/
 .local/bin/mount.sh
-.local/private_share/desktop-files/
+.local/share/desktop-files/
 {{ end }}
 
 {{- if ne .chezmoi.os "darwin" }}
@@ -27,11 +27,13 @@ README.md
 .config/kitty/
 .config/zsh/
 .zshenv
+.local/share/cursors/linux
 **/*.zsh
 {{- else }}
 .config/komorebi/
 .config/pwsh
 **/*.ps1
+.local/share/cursors/windows
 {{ end }}
 
 {{ if .work }}

@@ -1,0 +1,2 @@
+cursors/linux/* filter=lfs diff=lfs merge=lfs -text
+cursors/windows/*.ani filter=lfs diff=lfs merge=lfs -text
