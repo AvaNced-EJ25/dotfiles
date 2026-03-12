@@ -3,7 +3,6 @@
 {{ $email := promptString "email" -}}
 {{ $work := promptBool "Work System" }}
 {{ $window_decorations := promptBool "Show window decorations" }}
-{{ $window_transparency := promptBool "Enable Transparent Windows" }}
 
 sourceDir = "~/.dotfiles"
 
@@ -17,7 +16,6 @@ command = "C:/Program Files/PowerShell/7/pwsh.exe"
     work = {{ $work }}
     [data.window]
     decorations = {{ $window_decorations }}
-    transparency = {{ $window_transparency }}
 
 [git]
 lfs=true
