@@ -19,6 +19,8 @@ README.md
 .config/skhd/
 .config/sketchybar/
 .config/linearmouse/
+{{- else }}
+.local/share/cursors
 {{ end }}
 
 {{- if eq .chezmoi.os "windows" }}
