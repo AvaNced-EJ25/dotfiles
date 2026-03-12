@@ -3,6 +3,7 @@
 {{ $email := promptString "email" -}}
 {{ $work := promptBool "Work System" }}
 {{ $window_decorations := promptBool "Show window decorations" }}
+{{ $headless := promptBool "Headless system" }}
 
 sourceDir = "~/.dotfiles"
 
@@ -14,6 +15,7 @@ command = "C:/Program Files/PowerShell/7/pwsh.exe"
 [data]
     email = {{ $email | quote }}
     work = {{ $work }}
+    headless = {{ $headless }}
     [data.window]
     decorations = {{ $window_decorations }}
 

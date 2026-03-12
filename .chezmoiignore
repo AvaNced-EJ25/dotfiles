@@ -2,12 +2,10 @@
 README.md
 
 # Light nvim install for raspi
-{{- if eq .chezmoi.hostname "shakra" }}
-.zshenv
-.config/zsh
-.config/nvim/after
-.config/nvim/plugins
-.local/private_share
+{{- if .headless }}
+.local/share/cursors
+.local/share/wallpapers
+.local/share/desktop-files/
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
