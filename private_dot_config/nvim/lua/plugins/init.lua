@@ -59,14 +59,14 @@ return {
         "OXY2DEV/markview.nvim",
         lazy = false,
         opts = {
+            preview = {
+                icon_provider = "devicons", -- "internal" or "mini" or "devicons"
+            },
             markdown = {
                 enable = true
             },
             markdown_inline = {
                 enable = true
-            },
-            typst = {
-
             },
             yaml = {
                 enable = true
