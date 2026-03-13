@@ -22,6 +22,36 @@ return {
             });
         end
     },
+    {
+        'akinsho/bufferline.nvim',
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        after = "catppuccin",
+        config = function()
+            local bufferline = require("bufferline")
+            bufferline.setup({
+                highlights = require("catppuccin.special.bufferline").get_theme(),
+                options = {
+                    mode = "tabs",
+                    diagnostics = "nvim_lsp",
+                    separator_style = "padded_slant",
+                    style_preset = bufferline.style_preset.default,
+                    offsets = {
+                        {
+                            filetype = "snacks_layout_box",
+                            text = "Snacks Explorer" ,
+                            text_align = "center",
+                            separator = true
+                        }
+                    },
+                    hover = {
+                        enabled = true,
+                        delay = 200,
+                        reveal = {'close'}
+                    }
+                }
+            })
+        end
+    },
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     { -- optional completion source for require statements and module annotations
         "hrsh7th/nvim-cmp",
