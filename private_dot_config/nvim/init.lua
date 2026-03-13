@@ -119,7 +119,7 @@ require("lazy").setup({
     -- Configure any other settings here. See the documentation for more details.
     install = {
         missing = true,
-        colorscheme = { "catppuccin" },
+        colorscheme = { "catppuccin-nvim" },
     },
     -- automatically check for plugin updates
     rtp = {
