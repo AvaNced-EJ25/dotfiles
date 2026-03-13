@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazySpec
 return {
     "rcarriga/nvim-dap-ui",
     dependencies = {

@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazySpec
 return {
     "winston0410/range-highlight.nvim",
     dependencies = {
