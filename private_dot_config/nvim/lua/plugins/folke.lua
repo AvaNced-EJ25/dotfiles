@@ -98,7 +98,26 @@ return {
             keymap = { enabled = true },
             lazygit = { enabled = true },
             notifier = { enabled = true },
-            picker = { enabled = true },
+            terminal = { enabled = true },
+            picker = {
+                enabled = true,
+                sources = {
+                    explorer = {
+                        win = {
+                            input = {
+                                keys = {
+                                    ['<C-t>'] = { 'tab', mode = { 'i', 'n' } },
+                                },
+                            },
+                            list = {
+                                keys = {
+                                    ['<C-t>'] = 'tab',
+                                },
+                            }
+                        }
+                    }
+                }
+            },
             quickfile = { enabled = true },
             scope = { enabled = true },
             scroll = { enabled = true },
@@ -108,6 +127,8 @@ return {
         keys = {
             { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit"},
             { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Blame Line"},
+            { "<C-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+            { "<C-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
             -- Top Pickers & Explorer
             { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
             { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -151,6 +172,41 @@ return {
             { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
             { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
         },
+        init = function()
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "VeryLazy",
+                callback = function()
+                    -- Setup some globals for debugging (lazy-loaded)
+                    _G.dd = function(...)
+                        Snacks.debug.inspect(...)
+                    end
+                    _G.bt = function()
+                        Snacks.debug.backtrace()
+                    end
+
+                    -- Override print to use snacks for `:=` command
+                    if vim.fn.has("nvim-0.11") == 1 then
+                        vim._print = function(_, ...)
+                            dd(...)
+                        end
+                    else
+                        vim.print = _G.dd
+                    end
+
+                    -- Create some toggle mappings
+                    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+                    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+                    Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+                    Snacks.toggle.diagnostics():map("<leader>ud")
+                    Snacks.toggle.line_number():map("<leader>ul")
+                    Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+                    Snacks.toggle.treesitter():map("<leader>uT")
+                    Snacks.toggle.inlay_hints():map("<leader>uh")
+                    Snacks.toggle.indent():map("<leader>ug")
+                    Snacks.toggle.dim():map("<leader>uD")
+                end,
+            })
+        end,
     },
     {
         "folke/todo-comments.nvim",
