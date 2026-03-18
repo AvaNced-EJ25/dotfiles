@@ -11,8 +11,6 @@ Invoke-Expression (& { (bat --completion ps1 | Out-String)})
 
 oh-my-posh init pwsh --config "$($env:HOME)/.config/oh-my-posh/catppuccin.omp.toml" | Invoke-Expression
 
-fnm env --use-on-cd --version-file-strategy=recursive --shell powershell | Out-String | Invoke-Expression
-
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 
 Invoke-Expression (& { (chezmoi completion powershell | Out-String)})
