@@ -1,59 +1,65 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
-# Allow override via first arg or env variable
-COVER_PATH="/tmp/cover.jpg"
-MAX_LABEL_LENGTH=32
-truncate_text() {
-    local text="$1"
-    local max_length=$MAX_LABEL_LENGTH
-    if [ ${#text} -le "$max_length" ]; then
-        echo "$text"
-    else
-        echo "${text:0:max_length}" | sed -E 's/\s+[[:alnum:]]*$//' | awk '{$1=$1};1' | sed 's/$/.../'
+# Max number of characters so it fits nicely to the right of the notch
+# MAY NOT WORK WITH NON-ENGLISH CHARACTERS
+
+MAX_LENGTH=32
+
+# Logic starts here, do not modify
+HALF_LENGTH=$(((MAX_LENGTH + 1) / 2))
+
+# Spotify JSON / $INFO comes in malformed, line below sanitizes it
+SPOTIFY_JSON="$INFO"
+
+update_track() {
+
+    if [[ -z $SPOTIFY_JSON ]]; then
+        sketchybar --set $NAME icon.color=0xffeed49f label.drawing=no
+        return
     fi
-}
 
-update() {
-    spotify_open=$(osascript -e 'tell application "System Events" to (name of processes) contains "Spotify"')
+    PLAYER_STATE=$(echo "$SPOTIFY_JSON" | jq -r '.["Player State"]')
 
-    if [ "$spotify_open" == "false" ]; then
-        sketchybar -m \
-            --set spotify.title label.drawing=off \
-            --set spotify.artist_album label.drawing=off \
-            --set spotify.cover background.image.drawing=off
-    else
-        local track artist album cover_url
-        track=$(osascript -e 'tell application "Spotify" to get name of current track')
-        artist=$(osascript -e 'tell application "Spotify" to get artist of current track')
-        album=$(osascript -e 'tell application "Spotify" to get album of current track')
-        cover_url=$(osascript -e 'tell application "Spotify" to get artwork url of current track')
+    if [ $PLAYER_STATE = "Playing" ]; then
+        TRACK="$(echo "$SPOTIFY_JSON" | jq -r .Name)"
+        ARTIST="$(echo "$SPOTIFY_JSON" | jq -r .Artist)"
 
-        # Download cover image with fallback
-        if curl -s --max-time 5 "$cover_url" -o "$COVER_PATH"; then
-            sketchybar -m --set spotify.cover background.image="$COVER_PATH" background.color=0x00000000
-        else
-            # fallback if download fails
-            sketchybar -m --set spotify.cover background.image="" background.color=0x00000000
+        # Calculations so it fits nicely
+        TRACK_LENGTH=${#TRACK}
+        ARTIST_LENGTH=${#ARTIST}
+
+        if [ $((TRACK_LENGTH + ARTIST_LENGTH)) -gt $MAX_LENGTH ]; then
+            # If the total length exceeds the max
+            if [ $TRACK_LENGTH -gt $HALF_LENGTH ] && [ $ARTIST_LENGTH -gt $HALF_LENGTH ]; then
+                # If both the track and artist are too long, cut both at half length - 1
+
+                # If MAX_LENGTH is odd, HALF_LENGTH is calculated with an extra space, so give it an extra char
+                TRACK="${TRACK:0:$((MAX_LENGTH % 2 == 0 ? HALF_LENGTH - 2 : HALF_LENGTH - 1))}…"
+                ARTIST="${ARTIST:0:$((HALF_LENGTH - 2))}…"
+
+            elif [ $TRACK_LENGTH -gt $HALF_LENGTH ]; then
+                # Else if only the track is too long, cut it by the difference of the max length and artist length
+                TRACK="${TRACK:0:$((MAX_LENGTH - ARTIST_LENGTH - 1))}…"
+            elif [ $ARTIST_LENGTH -gt $HALF_LENGTH ]; then
+                ARTIST="${ARTIST:0:$((MAX_LENGTH - TRACK_LENGTH - 1))}…"
+            fi
         fi
+        sketchybar --set $NAME label="${TRACK}  ${ARTIST}" label.drawing=yes icon.color=0xffa6da95
 
-        track=$(truncate_text "$track")
-        artist=$(truncate_text "$artist")
-        album=$(truncate_text "$album")
-
-        sketchybar -m \
-            --set spotify.title label.drawing=on label="$track" \
-            --set spotify.artist_album label.drawing=on label="$artist - $album" \
-            --set spotify.icon drawing=on \
-            --set spotify.cover background.image.drawing=on
+    elif [ $PLAYER_STATE = "Paused" ]; then
+        sketchybar --set $NAME icon.color=0xffeed49f
+    elif [ $PLAYER_STATE = "Stopped" ]; then
+        sketchybar --set $NAME icon.color=0xffeed49f label.drawing=no
+    else
+        sketchybar --set $NAME icon.color=0xffeed49f
     fi
 }
 
 case "$SENDER" in
-    "routine") update
-        ;;
-    "forced") exit 0
-        ;;
-    *) update
-        ;;
+"mouse.clicked")
+    osascript -e 'tell application "Spotify" to playpause'
+    ;;
+*)
+    update_track
+    ;;
 esac
