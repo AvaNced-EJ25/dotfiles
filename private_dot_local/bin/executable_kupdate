@@ -108,7 +108,7 @@ if command -v keepassxc-cli &> /dev/null || $(flatpak info "org.keepassxc.KeePas
 
         # TODO: Use systemd mount instead
         if [ ! -z $server_name ]; then
-            eval ~/.local/bin/mount.sh -m "${server_name}" '/mnt/home' 'dietpi'
+            eval ~/.local/bin/kmount -m "${server_name}" '/mnt/home' 'dietpi'
             mounted=$?
         fi
 
@@ -122,7 +122,7 @@ if command -v keepassxc-cli &> /dev/null || $(flatpak info "org.keepassxc.KeePas
         fi
 
         if [ "$mounted" -eq 0 ]; then
-            eval ~/.local/bin/mount.sh -u "${server_name}" '/mnt/home'
+            eval ~/.local/bin/kmount -u "${server_name}" '/mnt/home'
         fi
     fi
 fi

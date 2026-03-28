@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# args: mount.sh user smb_server server_dir mount_point
+# args: kmount user smb_server server_dir mount_point
 ret=0
 
 if [ $# -ne 3 ] && [ $# -ne 4 ]; then

@@ -10,7 +10,7 @@ README.md
 
 {{- if ne .chezmoi.os "linux" }}
 .config/variety/
-.local/bin/mount.sh
+.local/bin/kmount
 .local/share/desktop-files/
 {{ end }}
 
