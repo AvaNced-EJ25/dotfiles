@@ -27,6 +27,13 @@ if ( $motd ) {
     hyfetch
 }
 
+# Run your code that needs to be elevated here
+if (Get-Command sudo.exe -ErrorAction SilentlyContinue) {
+    sudo -E powershell -NoLogo -File $PSCommandPath -admin
+} else {
+    Write-Warning "Please enable the sudo program and rerun this script"
+}
+
 Get-Command -Name "komorebic" -ErrorAction SilentlyContinue -ErrorVariable komorebic_installed | Out-Null
 $komorebic_installed = ($komorebic_installed.Capacity -eq 0)
 if ( $komorebic_installed ) {
@@ -75,13 +82,6 @@ if (Get-Command spicetify.exe -ErrorAction SilentlyContinue) {
 
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
     rustup up
-}
-
-# Run your code that needs to be elevated here
-if (Get-Command sudo.exe -ErrorAction SilentlyContinue) {
-    sudo -E powershell -NoLogo -File $PSCommandPath -admin
-} else {
-    Write-Warning "Please enable the sudo program and rerun this script"
 }
 
 return
