@@ -105,10 +105,5 @@ return {
         -- Completion for `blink.cmp`
         -- dependencies = { "saghen/blink.cmp" },
     },
-    {
-        'windwp/nvim-autopairs',
-        event = 'InsertEnter',
-        opts = {},
-    },
     { 'Bekaboo/dropbar.nvim' }
 }
