@@ -19,5 +19,28 @@ return {
         end,
     },
     {'mason-org/mason-lspconfig.nvim'},
-    {'mfussenegger/nvim-lint'}
+    {'mfussenegger/nvim-lint'},
+    {
+        'bitwisecook/tcl-lsp',
+        build = function()
+            local python_version = "3.14"
+            local install_path = vim.fn.stdpath("data") .. "/lazy/tcl-lsp"
+            local out = vim.fn.system({ "uv", "python", "install", python_version })
+            if vim.v.shell_error ~= 0 then
+                vim.api.nvim_echo({
+                    { "Failed to install Python " .. python_version .. ":\n", "ErrorMsg" },
+                    { out, "WarningMsg" },
+                    { "\n" },
+                }, true, {})
+            end
+            out = vim.fn.system({ "uv", "sync", "--directory", install_path })
+            if vim.v.shell_error ~= 0 then
+                vim.api.nvim_echo({
+                    { "Failed to install Python " .. python_version .. ":\n", "ErrorMsg" },
+                    { out, "WarningMsg" },
+                    { "\n" },
+                }, true, {})
+            end
+        end
+    }
 }

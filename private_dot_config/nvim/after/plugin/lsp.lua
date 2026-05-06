@@ -166,7 +166,39 @@ require('mason-lspconfig').setup({
     },
 })
 
+local lspconfig = require('lspconfig')
+local configs   = require('lspconfig.configs')
 
+if not configs.tcl_lsp then
+    local install_path = vim.fn.stdpath("data") .. "/lazy/tcl-lsp"
+    configs.tcl_lsp = {
+        default_config = {
+            cmd = { 'uv', 'run', '--directory', install_path, '--no-dev', 'python', '-m', 'lsp' },
+            filetypes = { 'tcl', 'tcl-apl' },
+            root_dir = lspconfig.util.root_pattern('.git'),
+            single_file_support = true,
+        },
+    }
+end
+
+lspconfig.tcl_lsp.setup({
+    settings = {
+        tclLsp = {
+            dialect = 'tcl8.6',       -- tcl8.4 | tcl8.5 | tcl8.6 | tcl9.0 | f5-irules | f5-iapps
+            -- f5-tmsh | f5-bigip | synopsys-eda-tcl | cadence-eda-tcl
+            -- xilinx-eda-tcl | intel-quartus-eda-tcl | mentor-eda-tcl | expect
+            extraCommands = {},
+            libraryPaths = {},
+
+            formatting = {
+                indentSize = 4,
+                indentStyle = 'spaces',   -- spaces | tabs
+                braceStyle = 'k_and_r',
+                maxLineLength = 120,
+            },
+        },
+    },
+})
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')
@@ -216,6 +248,7 @@ local ftMap = {
     python = {'indent'},
     git = ''
 }
+
 require('ufo').setup({
     open_fold_hl_timeout = 150,
     close_fold_kinds_for_ft = {
