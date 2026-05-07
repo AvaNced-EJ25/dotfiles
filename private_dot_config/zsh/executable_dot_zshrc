@@ -105,7 +105,12 @@ fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-alias keepassxc-cli="flatpak run org.keepassxc.KeePassXC cli"
+# Todo only alias if installed this way
+if type flatpak &> /dev/null; then
+    if flatpak list | grep org.keepassxc.KeePassXC &> /dev/null; then
+        alias keepassxc-cli="flatpak run org.keepassxc.KeePassXC cli"
+    fi
+fi
 
 # set PATH so it includes spicetify
 if [ -d "$HOME/.spicetify" ]; then
