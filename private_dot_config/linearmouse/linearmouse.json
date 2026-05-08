@@ -5,40 +5,55 @@
       "buttons" : {
         "universalBackForward" : true
       },
+      "if" : {
+        "device" : {
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "productID" : "0x0",
+          "vendorID" : "0x0",
+          "category" : "trackpad"
+        }
+      },
       "scrolling" : {
-        "speed" : {
-          "vertical" : 0
-        },
-        "modifiers" : {
-          "vertical" : {
-            "command" : {
-              "type" : "preventDefault"
-            },
-            "control" : {
-              "type" : "changeSpeed",
-              "scale" : 3
-            }
-          }
-        },
         "distance" : {
           "vertical" : "auto"
         },
         "acceleration" : {
           "vertical" : 1
-        }
-      },
-      "if" : {
-        "device" : {
-          "category" : "trackpad",
-          "productName" : "Apple Internal Keyboard \/ Trackpad",
-          "vendorID" : "0x0",
-          "productID" : "0x0"
+        },
+        "speed" : {
+          "vertical" : 0
+        },
+        "modifiers" : {
+          "vertical" : {
+            "control" : {
+              "type" : "changeSpeed",
+              "scale" : 3
+            },
+            "command" : {
+              "type" : "preventDefault"
+            }
+          }
         }
       },
       "pointer" : {
         "acceleration" : 0.6875,
         "speed" : 0.0689655172413792768,
         "disableAcceleration" : true
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "vendorID" : "0x46d",
+          "productID" : "0xc547",
+          "category" : "mouse",
+          "productName" : "USB Receiver"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
+        }
       }
     }
   ]
