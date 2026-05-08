@@ -28,6 +28,8 @@ README.md
 .config/zsh/
 .zshenv
 .local/share/cursors/linux
+.local/bin
+!.local/bin/*.ps1
 **/*.zsh
 {{- else }}
 .config/komorebi/
