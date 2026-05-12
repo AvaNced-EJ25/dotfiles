@@ -196,7 +196,7 @@ if [ -d "${HOME}/.local/src/neovim" ]; then
     kprintf 'Updating local build of neovim...'
     pushd "${HOME}/.local/src/neovim"
 
-    local TAG="stable"
+    TAG="stable"
     git fetch --tags --force
 
     local_hash=$(git rev-parse HEAD)
