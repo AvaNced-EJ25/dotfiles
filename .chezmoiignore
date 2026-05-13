@@ -42,3 +42,8 @@ README.md
 .local/bin/discord.sh
 .config/nvim/lua/plugins/cord.lua
 {{ end }}
+
+# Only need rgp config on glados
+{{ if ne .chezmoi.hostname "glados" }}
+.config/OpenRGB
+{{ end }}
