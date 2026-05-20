@@ -1,0 +1,25 @@
+gui:
+  theme:
+    activeBorderColor:
+      - '#f5bde6'
+      - bold
+    inactiveBorderColor:
+      - '#a5adcb'
+    selectedLineBgColor:
+      - '#363a4f'
+    optionsTextColor:
+      - '#8aadf4'
+stats:
+  graphs:
+    - caption: CPU (%)
+      statPath: DerivedStats.CPUPercentage
+      color: '#8aadf4'
+    - caption: Memory (%)
+      statPath: DerivedStats.MemoryPercentage
+      color: '#a6da95'
+customCommands:
+  containers:
+    - name: bash
+      attach: true
+      command: 'docker exec -it {{ .Container.ID }} bash'
+      serviceNames: []
