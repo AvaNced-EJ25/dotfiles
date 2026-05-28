@@ -36,6 +36,10 @@ fi
 
 fpath+=${ZDOTDIR:-~}/.zsh_completions
 
+if type niri &> /dev/null; then
+    eval "$(niri completions zsh)"
+fi
+
 # Load aliases file (need brew in the path first)
 source "${HOME}/.config/aliases.sh"
 
