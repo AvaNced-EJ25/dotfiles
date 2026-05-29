@@ -241,4 +241,4 @@ selected_border_color = "#f5bde6"
 widget_title = {color = "#f0c6c6"}
 text = {color = "#cad3f5"}
 selected_text = {color = "#181926", bg_color = "#c6a0f6"}
-disabled_text = {color = "#24273a"}
+disabled_text = {color = "#6e738d"}
