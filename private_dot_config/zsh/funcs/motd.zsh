@@ -48,7 +48,7 @@ if [ -d /etc/update-motd.d ] && [ ! -e "$HOME/.hushlogin" ] && [ -z "$MOTD_SHOWN
     if [ $ret -eq 0 ]; then
         export MOTD_SHOWN=update-motd
     fi
-# ZSH MOTD - once every 3 hours
-elif [ ! -z ${ZSH_MOTD_ALWAYS+x} ] || ! find $MOTD_STAMP -mmin -179 2> /dev/null | grep -q -m 1 '.'; then
+# ZSH MOTD - once every hour
+elif [ ! -z ${ZSH_MOTD_ALWAYS+x} ] || ! find $MOTD_STAMP -mmin -59 2> /dev/null | grep -q -m 1 '.'; then
     hyfetch_cycle
 fi
