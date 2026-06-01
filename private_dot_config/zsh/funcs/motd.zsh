@@ -4,8 +4,24 @@
 
 MOTD_STAMP="$HOME/.motd_shown"
 
+# shella gay :3
+# https://old.reddit.com/r/traaaaaaaaaaaansbians/comments/1tsjo2j/anyone_else_here_make_their_shell_gay
+transbian_clrblk() {
+    if ! command -v clrblk &> /dev/null; then
+        return 1
+    fi
+
+    clrblk d42a00 5bcefa -f
+    clrblk fe9954 f5a9b8 -f
+    clrblk ffffff -f
+    clrblk d261a3 f5a9b8 -f
+    clrblk a20061 5bcefa -f
+
+    return 0
+}
+
 hyfetch_cycle() {
-    if ! command -v hyfetch > /dev/null 2>&1; then
+    if ! command -v hyfetch &> /dev/null; then
         return 0
     fi
 
@@ -44,6 +60,7 @@ if [ -d /etc/update-motd.d ] && [ ! -e "$HOME/.hushlogin" ] && [ -z "$MOTD_SHOWN
 
     hyfetch_cycle
     ret=$?
+    echo ""
 
     if [ $ret -eq 0 ]; then
         export MOTD_SHOWN=update-motd
@@ -51,4 +68,7 @@ if [ -d /etc/update-motd.d ] && [ ! -e "$HOME/.hushlogin" ] && [ -z "$MOTD_SHOWN
 # ZSH MOTD - once every hour
 elif [ ! -z ${ZSH_MOTD_ALWAYS+x} ] || ! find $MOTD_STAMP -mmin -59 2> /dev/null | grep -q -m 1 '.'; then
     hyfetch_cycle
+    echo ""
 fi
+
+transbian_clrblk

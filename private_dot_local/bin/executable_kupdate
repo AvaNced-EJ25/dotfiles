@@ -245,7 +245,13 @@ if command -v cargo &> /dev/null; then
 
     if [ ! -z "$(cargo install --list | grep 'neovide')" ]; then
         kprintf 'Updating neovide...'
-        cargo install --git https://github.com/neovide/neovide
+        cargo install --git 'https://github.com/neovide/neovide'
+        kprintf 'Done.'
+    fi
+
+    if [ ! -z "$(cargo install --list | grep 'clrblk')" ]; then
+        kprintf 'Updating neovide...'
+        cargo +nightly install --git 'https://gitlab.com/ashe.sterling/clrblk.git'
         kprintf 'Done.'
     fi
 fi
@@ -257,6 +263,14 @@ if kitty_path=$(command -v kitty) && [[ "$kitty_path" != "/usr/bin/kitty" ]]; th
         curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
         kprintf 'Done.'
     fi
+fi
+
+if command -v clrblk &> /dev/null; then
+    clrblk d42a00 5bcefa -f
+    clrblk fe9954 f5a9b8 -f
+    clrblk ffffff -f
+    clrblk d261a3 f5a9b8 -f
+    clrblk a20061 5bcefa -f
 fi
 
 exit 0
