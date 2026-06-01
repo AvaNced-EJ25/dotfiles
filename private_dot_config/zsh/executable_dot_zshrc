@@ -68,6 +68,11 @@ for plug in $omzp; do
     zinit snippet "OMZP::${plug}/${plug}.plugin.zsh"
 done
 
+# Load all zsh files
+for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
+    zinit snippet $z
+done
+
 alias ltree="eza --tree --long --header --icons=auto --classify=auto --hyperlink"
 alias tree="eza --tree --icons=auto --classify=auto --hyperlink"
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
@@ -98,11 +103,6 @@ export MANPAGER='nvim +Man!'
 
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_AUTO_UPDATE_SECS='86400'
-
-# Source all zsh files
-for z in ${ZDOTDIR:-~}/funcs/*.zsh; do
-    source $z
-done
 
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/histfile
