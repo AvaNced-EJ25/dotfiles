@@ -1,6 +1,10 @@
 # Setup fzf
 # ---------
 
+if type fzf &> /dev/null; then
+    export FZF_BASE="$(which fzf)"
+fi
+
 # Preview file content using bat (https://github.com/sharkdp/bat)
 export FZF_CTRL_T_OPTS="
     --walker-skip .git,node_modules,target
