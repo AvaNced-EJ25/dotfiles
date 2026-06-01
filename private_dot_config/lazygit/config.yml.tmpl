@@ -1,4 +1,5 @@
-# vim: syntax=yaml
+# vim: filetype=yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 
 gui:
   authorColors:
@@ -13,7 +14,7 @@ gui:
     'master': '#c6a0f6'
     'main': '#c6a0f6'
 
-  nerdFontsVersion: 3
+  nerdFontsVersion: "3"
   scrollOffMargin: 4
   scrollOffBehavior: margin
   expandFocusedSidePanel: true
@@ -21,23 +22,21 @@ gui:
 services:
     {{- if .work }}
     'bitbucket.wdc.com': 'bitbucketServer:bitbucket.wdc.com'
-    {{- else }}
-    'github.com': 'github:gitservicework.com'
     {{- end }}
+    'github.com': 'github:gitservicework.com'
 
 git:
+  parseEmoji: true
+  {{ if .work -}}
+  branchPrefix: "koman/"
+  {{- end }}
   pagers:
-    - parseEmoji: true
-      {{- if eq .chezmoi.os "windows" }}
-      externalDiffCommand: difft --color=always --display=inline
-      {{- else }}
-      colorArg: always
-      pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      {{- if ne .chezmoi.os "windows" }}
+      - pager: delta --paging=never --line-numbers
+        colorArg: always
       {{- end }}
+      - externalDiffCommand: difft --color=always --display=inline
 
-      {{ if .work -}}
-      branchPrefix: "koman/"
-      {{- end }}
 
 os:
   editPreset: 'nvim'
