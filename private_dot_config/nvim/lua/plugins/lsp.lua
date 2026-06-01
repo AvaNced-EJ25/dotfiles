@@ -4,21 +4,51 @@ return {
     {'neovim/nvim-lspconfig'},
     {'hrsh7th/cmp-nvim-lsp'},
     {'L3MON4D3/LuaSnip'},
-
     {
-        'mason-org/mason.nvim',
+        "mason-org/mason-lspconfig.nvim",
+        opts = {
+        },
         config = function()
-            if os.name() == "Linux" then
-                MASON_PATH = os.getenv("HOME") .. "/.local/share/nvim/mason"
-            elseif os.name() == "Windows" then
-                MASON_PATH = os.getenv("LOCALAPPDATA") .. "\\nvim-data\\mason"
-            end
-            if not os.file_exists(MASON_PATH) then
-                MASON_PATH = ""
-            end
+            require('mason').setup({
+                firewall = {
+                    enabled = true,
+                },
+                pip = {
+                    upgrade_pip = true,
+                },
+                ui = {
+                    icons = {
+                        package_installed = "󰄬",
+                        package_pending = "",
+                        package_uninstalled = ""
+                    }
+                }
+            })
+            require('mason-lspconfig').setup({
+                automatic_enable = {
+                    exclude = {
+                        'harper_ls',
+                    }
+                },
+            })
         end,
+        dependencies = {
+            {
+                "mason-org/mason.nvim",
+                config = function()
+                    if os.name() == "Linux" then
+                        MASON_PATH = os.getenv("HOME") .. "/.local/share/nvim/mason"
+                    elseif os.name() == "Windows" then
+                        MASON_PATH = os.getenv("LOCALAPPDATA") .. "\\nvim-data\\mason"
+                    end
+                    if not os.file_exists(MASON_PATH) then
+                        MASON_PATH = ""
+                    end
+                end
+            },
+            "neovim/nvim-lspconfig",
+        },
     },
-    {'mason-org/mason-lspconfig.nvim'},
     {'mfussenegger/nvim-lint'},
     {
         'bitwisecook/tcl-lsp',

@@ -74,23 +74,6 @@ vim.api.nvim_create_autocmd("LspProgress", {
     end,
 })
 
---- if you want to know more about mason.nvim
---- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
-require('mason').setup(
-    {
-        pip = {
-            upgrade_pip = true,
-        },
-        ui = {
-            icons = {
-                package_installed = "✓",
-                package_pending = "➜",
-                package_uninstalled = "✗"
-            }
-        }
-    }
-)
-
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.foldingRange = {
@@ -98,90 +81,65 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true
 }
 
-local noop = function() end
+-- local noop = function() end
 
 -- Enable language servers with the additional completion capabilities offered by nvim-cmp
-require('mason-lspconfig').setup({
-    automatic_enable = true,
-    handlers = {
-        function(server_name)
-            -- print("Auto Install LSP: " .. server_name)
-            vim.lsp.config(server_name, { capabilities = capabilities })
-        end,
-        ['clangd'] = function()
-            vim.lsp.config('clangd', {
-                capabilities = capabilities,
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "-j=12",
-                    "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
-                    "--clang-tidy",
-                    "--clang-tidy-checks=*",
-                    "--all-scopes-completion",
-                    "--cross-file-rename",
-                    "--completion-style=detailed",
-                    "--header-insertion-decorators",
-                    "--header-insertion=iwyu",
-                    "--pch-storage=memory",
-                }
-            })
-        end,
-        ['bashls'] = function()
-            vim.lsp.config('bashls', {
-                capabilities = capabilities,
-                filetypes = {
-                    "sh",
-                    "zsh",
-                },
-                settings = {
-                    bashIde = {
-                        globPattern = "*@(.sh|.inc|.bash|.command)"
-                    }
-                }
-            })
-
-        end,
-        ['lua_ls'] = function ()
-            vim.lsp.config('lua_ls', {
-                root_markers = {
-                    ".luarc.json",
-                    ".luarc.jsonc",
-                    ".luacheckrc",
-                    ".stylua.toml",
-                    ".git",
-                },
-                settings = {
-                    Lua = {
-                        runtime = {
-                            version = 'LuaJIT',
-                        }
-                    }
-                }
-            })
-        end,
-        ['harper_ls'] = function ()
-            vim.lsp.config('harper_ls', { capabilities = capabilities, autostart = false })
-        end,
-    },
+vim.lsp.config('clangd', {
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--background-index",
+        "-j=12",
+        "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
+        "--clang-tidy",
+        "--clang-tidy-checks=*",
+        "--all-scopes-completion",
+        "--cross-file-rename",
+        "--completion-style=detailed",
+        "--header-insertion-decorators",
+        "--header-insertion=iwyu",
+        "--pch-storage=memory",
+    }
 })
 
-local lspconfig = require('lspconfig')
-local configs   = require('lspconfig.configs')
-
-if not configs.tcl_lsp then
-    local install_path = vim.fn.stdpath("data") .. "/lazy/tcl-lsp"
-    configs.tcl_lsp = {
-        default_config = {
-            cmd = { 'uv', 'run', '--directory', install_path, '--no-dev', 'python', '-m', 'lsp' },
-            filetypes = { 'tcl', 'tcl-apl' },
-            root_dir = lspconfig.util.root_pattern('.git'),
-            single_file_support = true,
-        },
+vim.lsp.config('bashls', {
+    capabilities = capabilities,
+    filetypes = {
+        "sh",
+        "zsh",
+    },
+    settings = {
+        bashIde = {
+            globPattern = "*@(.sh|.inc|.bash|.command)"
+        }
     }
-end
+})
 
-lspconfig.tcl_lsp.setup({
+vim.lsp.config('lua_ls', {
+    root_markers = {
+        ".luarc.json",
+        ".luarc.jsonc",
+        ".luacheckrc",
+        ".stylua.toml",
+        ".git",
+    },
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            }
+        }
+    }
+})
+
+vim.lsp.config('harper_ls', { capabilities = capabilities, autostart = false })
+
+local install_path = vim.fn.stdpath("data") .. "/lazy/tcl-lsp"
+vim.lsp.config['tcl_lsp'] = {
+    cmd = { 'uv', 'run', '--directory', install_path, '--no-dev', 'tcl-lsp' },
+    filetypes = { 'tcl' },
+    single_file_support = true,
+    root_markers = { '.git' },
     settings = {
         tclLsp = {
             dialect = 'tcl8.6',       -- tcl8.4 | tcl8.5 | tcl8.6 | tcl9.0 | f5-irules | f5-iapps
@@ -198,7 +156,9 @@ lspconfig.tcl_lsp.setup({
             },
         },
     },
-})
+}
+
+vim.lsp.enable('tcl_lsp')
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')
