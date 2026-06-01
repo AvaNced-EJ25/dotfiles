@@ -28,7 +28,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Download the Catppuccin theme for zsh if needed
-CATPPUCCIN_THEME="${ZDOTDIR:-~}/funcs/catppuccin_macchiato-zsh-syntax-highlighting.zsh"
+CATPPUCCIN_THEME="${ZDOTDIR:-~}/.catppuccin_macchiato-zsh-syntax-highlighting.zsh"
 
 if [ ! -f $CATPPUCCIN_THEME ]; then
     wget --output-document="${CATPPUCCIN_THEME}" https://github.com/catppuccin/zsh-syntax-highlighting/raw/main/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
@@ -84,10 +84,10 @@ zstyle ':omz:plugins:eza' 'color-scale-mode' gradient
 zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 # Plugins
-zinit light lukechilds/zsh-better-npm-completion
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
+zinit light lukechilds/zsh-better-npm-completion
 
 # OMZ Pluggins
 omzp=( chezmoi docker docker-compose eza fzf git kitty npm nvm rust sudo tailscale uv zoxide )
